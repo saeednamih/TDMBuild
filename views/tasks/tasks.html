@@ -1,0 +1,17 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="tasksCtrl as tasks">
+    <div class="row" ng-show="tasks.pageDisplay == 'tasksTable'">
+        <tasks-table-directive content="tasks.tasksData"></tasks-table-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'task'">
+        <task-directive content="tasks.taskData"></task-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'taskSummary'">
+        <task-summary-directive content="tasks.taskData"></task-summary-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'newTask'">
+        <new-task-directive content="tasks.taskData"></new-task-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'taskStats'">
+        <task-stats-directive content="tasks.taskData"></task-stats-directive>
+    </div>
+</div>

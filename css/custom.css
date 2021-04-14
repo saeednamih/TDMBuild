@@ -1,0 +1,411 @@
+.logo {
+    width: 195px;
+    height: 33px;
+    vertical-align: bottom;
+    padding-right: 13px;
+    padding-left: 12px;
+}
+
+.btn-primary {
+    background-color: #51B3C3;
+    border-color: #51B3C3;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+    background-color: #51B3C3;
+    border-color: #51B3C3;
+    color: #FFFFFF;
+}
+
+.pace .pace-progress {
+    background: #51B3C3;
+}
+
+.nav-fourth-level li {
+    border-bottom: none !important;
+}
+
+.nav-fourth-level li a {
+    padding-left: 62px;
+}
+
+/*.breadcrumb {*/
+/*background-color: transparent;*/
+/*padding: 0;*/
+/*margin: 17px 5px 5px 20px;*/
+/*font-size: 17px;*/
+/*}*/
+
+body.mini-navbar .nav-header {
+    padding: 0;
+    background-color: transparent;
+}
+
+.progress-bar {
+    background-color: #51B3C3;
+}
+
+.localytics-chosen {
+    display: block !important;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    height: 29px;
+}
+
+.group-conditions {
+    margin-top: 4px;
+}
+
+.alert.group {
+    margin-top: 4px;
+}
+
+table .form-control {
+    width: 100% !important;
+}
+
+.btn.btn-disabled {
+    cursor: default;
+}
+
+.ajax-loader {
+    padding-left: 39%;
+}
+
+.form-control:focus,
+.single-line:focus {
+    border-color: #51B3C3 !important;
+}
+
+body {
+    background-color: #2f4050;
+}
+
+.highcharts-background {
+    fill: transparent !important;
+}
+
+.highcharts-credits {
+    display: none;
+}
+
+.fa-play:before {
+    padding-left: 3px;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.dataTables_wrapper {
+    overflow-x: auto;
+}
+
+.progress {
+    margin-bottom: 0px;
+}
+
+.wizard, .tabcontrol {
+    overflow: initial !important;
+}
+
+.wizard > .content {
+    overflow: initial !important;
+}
+
+.popover {
+    max-width: 650px;
+}
+
+.chosen-container .chosen-results {
+    max-height: 160px;
+}
+
+.placeTop .chosen-drop {
+    top: inherit;
+    bottom: 100%;
+}
+
+.permissionsLabels .icheckbox_square-green, .permissionsLabelsNew .icheckbox_square-green {
+    margin-right: 10px;
+}
+
+.multiChoiceContainer .chosen-container-multi {
+    width: 100% !important;
+    margin-bottom: 15px;
+}
+
+.alignCreateButtons {
+    margin-right: 7px;
+}
+
+.nav-tabs > li > a {
+    border: solid 1px #dddddd;
+}
+
+.permissionsLabels, permissionsLabelsNew {
+    min-width: 150px;
+    width: 85%;
+}
+
+.permissionsLabels > div:first-child {
+    float: left;
+}
+
+.permissionsLabelsNew > div:first-child {
+    float: left;
+    width: 100%;
+}
+
+.requestedEntitiesAlert {
+    border: none;
+    background: transparent;
+}
+
+.requestedEntitiesErrors {
+    text-align: left;
+    font-weight: bolder;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.ibox-title h2 {
+    display: inline-block;
+    margin: 0 0 7px;
+    padding: 0;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.dataTables_filter label {
+    margin-right: 0px;
+}
+
+.new-object-title {
+    margin-right: 5px;
+}
+
+.k2vBottomImage {
+    bottom: 50px;
+    right: 16px;
+    position: absolute;
+}
+
+.homeScreenTitle {
+    color: #51B3C3;
+    font-size: 80px;
+    text-align: center;
+}
+
+.rotateEjectAwesome {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(90deg);
+
+}
+
+.buttonTaskAction {
+    /*background-color: green !*#00FF00*!;*/
+    color: black;
+    margin-left: 4px;
+    width: 20px;
+    height: 20px;
+    padding: 4px 0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.428571429;
+}
+
+.taskExecutionStatsTitles {
+    color: #51B3C3;
+    text-align: center;
+    font-size: 26px;
+}
+
+.taskExecutionStatisticsTabs :first-child {
+    color: #51B3C3;
+    font-size: 21px;
+}
+
+.taskExecutionStatisticsTabs :last-child {
+    color: black;
+    font-size: 21px;
+}
+
+.taskExecTitle {
+    text-align: center;
+    font-size: 23px;
+}
+
+.executeStatsRedIcon {
+    background-color: red;
+    color: black;
+
+}
+
+.executeStatsGreenIcon {
+    background-color: #00e500;
+    color: white;
+}
+
+.executeStatesBlueIcon {
+    background-color: #1c84c6;
+    color: white;
+    border-color: #1c84c6;
+}
+
+.executeStatesWhiteIcon {
+    background-color: white;
+    color: grey;
+    border-color:grey;
+}
+
+.nav-tabs.stats li.active > a {
+
+    border-bottom: 1px white solid;
+}
+.tab-pane.active {
+    padding-top:5px;
+}
+
+.taskExecutionButton {
+    vertical-align: super;
+    padding-right: 1px;
+    padding-top: 0;
+}
+
+.taskExecutionHistoryButton{
+    vertical-align: super;
+    margin-left: -1px;
+}
+
+.taskExecutionHoldButton{
+    vertical-align: initial;
+    font-size: 10px;
+    padding-top: 1px;
+    margin-right: -2px;
+}
+
+.tasksTableHistory td:last-child{
+    min-width: 80px !important;
+    max-width: 80px !important;
+}
+
+.tasksTableHistory th:last-child{
+    min-width: 40px !important;
+    max-width: 40px !important;
+}
+.tasksTable td:last-child{
+    min-width: 70px !important;
+    max-width: 70px !important;
+}
+
+.tasksTable th:last-child{
+    min-width: 70px !important;
+    max-width: 70px !important;
+}
+
+.navbar-default .nav > li.active{
+    border-left: 4px solid #51B3C3;
+}
+
+.breadcrumb{
+    margin-top: 18px;
+}
+
+
+.modal-modal-lg{
+    width: 900px;
+}
+
+.modal-modal-x-lg{
+    width: 1200px;
+}
+
+.sidebar-collapse .nav > li.active > a{
+    margin-left: -4px;
+}
+
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus{
+    background-color: transparent;
+}
+
+.deleteIcon{
+    margin-top: -17px !important;
+}
+
+.editIcon{
+    margin-top: -17px !important;
+}
+
+.requestedParameters .marginLeft{
+    margin-left: 11px;
+}
+
+new-task-directive .chosen-container-active .chosen-single,
+task-directive .chosen-container-active .chosen-single{
+    border: 1px solid #1ab394;
+}
+
+.requestedEntitiesErrors .text-danger {
+    color: darkred;
+}
+
+new-task-directive .dataTables_filter{
+    display: none;
+}
+
+task-directive .dataTables_filter{
+    display: none;
+}
+
+new-task-directive ins{
+    position: relative;
+}
+
+task-directive ins{
+    position: relative;
+}
+
+.wizard > .steps > ul > li{
+    flex: auto;
+}
+
+.modal.taskGlobals  .modal-dialog{
+    width: 800px;
+}
+
+.LogicalUnitWindow .modal-dialog{
+    width: 1000px;
+}
+
+.taskHistoryRef .modal-dialog{
+    width: 900px;
+}
+
+a.toggleVersions{
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.toggleVersions > .fa.arrow {
+    transform: rotate(270deg);
+}
+
+a.active.toggleVersions > .fa.arrow {
+    transform: rotate(90deg);
+}

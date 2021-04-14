@@ -1,0 +1,13 @@
+{
+	"name": "ngIpAddress Demo",
+	"description": "Demo for ng-ip-address directive",
+	"ignore": [
+		"bower_components",
+		"build",
+		"node_modules"
+	],
+	"dependencies": {
+		"angular": ">=1.4.0"
+	},
+	"private": true
+}

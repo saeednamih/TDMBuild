@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <button type="button" ng-click="newLogicalUnitsCtrl.close();" class="close" data-dismiss="modal"><span
+            aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h3 class="modal-title">{{"ADD_LOGICAL_UNITS" | translate}}</h3>
+</div>
+<div class="modal-body" ng-init="newLogicalUnitsCtrl.chooseOption = 'custom'">
+    <img ng-show="!newLogicalUnitsCtrl.logicalUnits" src="img/ajax-loader.gif" class="ajax-loader">
+    <div class="row" ng-show="newLogicalUnitsCtrl.logicalUnits">
+        <div class="col-lg-12 form-group">
+            <label>
+                <input icheck type="radio" ng-value="'all'" name="beLU" ng-model="newLogicalUnitsCtrl.chooseOption"> All Logical Units
+            </label>
+        </div>
+        <div class="col-lg-12 form-group">
+            <label>
+                <input icheck type="radio" ng-value="'custom'" name="beLU" ng-model="newLogicalUnitsCtrl.chooseOption"> Select :
+            </label>
+        </div>
+        <form role="form" ng-submit="newLogicalUnitsCtrl.addLogicalUnits()" ng-show="newLogicalUnitsCtrl.logicalUnits">
+            <div class="col-lg-12">
+                <div class="row" ng-if="newLogicalUnitsCtrl.chooseOption == 'all'">
+                    <div class="col-lg-12">
+                        <span ng-repeat="logcalUnit in newLogicalUnitsCtrl.logicalUnits">
+                            {{logcalUnit.logical_unit}} <span ng-show="!$last">,</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row" ng-if="newLogicalUnitsCtrl.chooseOption == 'custom'">
+                    <div class="col-lg-10">
+                        <div class="col-lg-3">
+                            <label class="control-label">{{"LOGICAL_UNIT" | translate}} <span
+                                style="color: red">*</span></label>
+                        </div>
+                        <div class="col-lg-3">
+                                <label class="control-label">{{"LOGICAL_UNIT_DESCRIPTION" | translate}}</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="control-label">{{"LOGICAL_UNIT_PARENT" | translate}}</label>
+                        </div>
+                        <!-- <div class="col-lg-1">
+                            <label class="control-label">{{"LAST_EXECUTED_LU" | translate}}</label>
+                        </div> -->
+                        <div class="col-lg-3">
+                            <label class="control-label">Data Center</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row" ng-repeat="logcalUnit in newLogicalUnitsCtrl.addLogicalUnits"> -->
+                <div class="row" ng-if="newLogicalUnitsCtrl.chooseOption == 'custom'" ng-repeat="logcalUnit in newLogicalUnitsCtrl.newLogicalUnits" style="margin-top: 15px;">
+                    <div class="col-lg-10">
+                            <div class="col-lg-3">
+                                <select class="form-control" ng-model="logcalUnit.lu_name" required
+                                        ng-options="option.logical_unit as option.logical_unit for option in (newLogicalUnitsCtrl.logicalUnits | getAvailableLogicalUnits:newLogicalUnitsCtrl.newLogicalUnits:logcalUnit.lu_name)">
+                                        <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <input class="form-control" ng-model="logcalUnit.lu_description">
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="form-control" ng-model="logcalUnit.lu_parent" ng-disabled="!logcalUnit.lu_name"
+                                    ng-options="option as option.logical_unit for option in (newLogicalUnitsCtrl.parentLogicalUnits | getAvailableParentLogicalUnits:newLogicalUnitsCtrl.newLogicalUnits:$index)">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <!-- <div class="col-lg-1">
+                                <input class="form-control" icheck style="width: 100%" type="checkbox"
+                                ng-model="logcalUnit.last_executed_lu">
+                            </div> -->
+                            <div class="col-lg-3">
+                                <select class="form-control" ng-model="logcalUnit.lu_dc_name" ng-disabled="!logcalUnit.lu_name"
+                                    ng-options="option.dc as option.dc for option in newLogicalUnitsCtrl.dataCenters">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a class="col-lg-6" ng-click="newLogicalUnitsCtrl.deleteLogicalUnit($index)" ng-show="newLogicalUnitsCtrl.newLogicalUnits.length > 1">
+                                    <i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a ng-click="newLogicalUnitsCtrl.addLogicalUnit()" ng-show="$last && newLogicalUnitsCtrl.logicalUnits.length > newLogicalUnitsCtrl.newLogicalUnits.length">
+                                    <i class="fa fa-plus fa-2x" style="color: #51B3C3" aria-hidden="true"></i>
+                                </a>
+                            </div>      
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-lg-10">
+                        <uib-alert ng-if="newLogicalUnitsCtrl.logicalUnitAlert"
+                                   type="{{newLogicalUnitsCtrl.logicalUnitAlert.type}}"
+                                   close="newLogicalUnitsCtrl.closeAlert()">{{newLogicalUnitsCtrl.logicalUnitAlert.msg}}
+                        </uib-alert>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-primary pull-right" type="submit">{{"ADD_LOGICAL_UNITS" |
+                            translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

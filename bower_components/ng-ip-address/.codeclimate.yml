@@ -1,0 +1,11 @@
+languages:
+  JavaScript: true
+engines:
+  duplication:
+    enabled: false
+ratings:
+  paths:
+    - "src/ngIpAddress.js"
+    - "src/ngIpAddress.vanilla.js"
+    - "ngIpAddress.min.js"
+    - "ngIpAddress.vanilla.min.js"

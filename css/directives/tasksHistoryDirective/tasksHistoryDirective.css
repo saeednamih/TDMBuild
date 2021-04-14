@@ -1,0 +1,7 @@
+task-history-directive button.btn.stop-execution{
+  margin:0;background-color: white
+}
+
+task-history-directive div.copied-failed {
+  align-items: center;display: flex
+}

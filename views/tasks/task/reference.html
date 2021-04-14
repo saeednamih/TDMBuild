@@ -1,0 +1,11 @@
+<fieldset class="animated fadeInRightBig">
+    <h2>Reference Tables</h2>
+    <div style="margin-bottom: 10px;color: red;">{{taskCtrl.referenceTabError}}</div>
+    <div class="row">
+        <div class="form-group col-lg-12">
+            <reference-task task-data="taskCtrl.taskData" logical-unit="taskCtrl.logicalUnit" logical-units="taskCtrl.logicalUnits"></reference-task>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="taskCtrl.openStep(1,'back')">Back</button>
+    <button type="submit" class="btn btn-primary">Next</button>
+</fieldset>
