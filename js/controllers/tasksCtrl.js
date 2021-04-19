@@ -126,7 +126,7 @@ function tasksCtrl ($scope, $rootScope, AuthService, BreadCrumbsService,$timeout
       }, 500);
     }
 
-    $scope.$on('refreshPage', reloadPage);
+    $rootScope.$on('refreshPage', reloadPage);
 
     tasksCtrl.tasksData = {
         openTask : tasksCtrl.openTask,

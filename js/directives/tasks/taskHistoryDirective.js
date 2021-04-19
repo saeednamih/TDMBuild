@@ -401,7 +401,7 @@ function taskHistoryDirective($interval) {
             $scope.buildHtml = function(title,data){
                 $http({
                     method: 'GET',
-                    url: '/views/staticHtmls/'+ title +'.html'
+                    url: 'views/staticHtmls/'+ title +'.html'
                   }).then(function successCallback(response) {
                         var htmlData = response.data;
                         htmlData = htmlData.replaceAll("{{migration}}",data.migrateId ? 'block' : 'none');
@@ -508,7 +508,7 @@ function taskHistoryDirective($interval) {
             $scope.buildSummaryHtml = function(data){
                 $http({
                     method: 'GET',
-                    url: '/views/staticHtmls/summary.html'
+                    url: 'views/staticHtmls/summary.html'
                   }).then(function successCallback(response) {
                         var htmlData = response.data;
                         htmlData = htmlData.replaceAll("{{migrateId}}",data.migrateId);
@@ -837,7 +837,7 @@ function taskHistoryDirective($interval) {
                 }
                 else{
                     taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'S\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')" style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" type="button" title="Download Summary Report"><i class="fa fa-download"></i> </a>';
-                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'D\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Detailed Report"><img style="width: 13px;" src="/img/download_seq.jpg"> </a>';
+                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'D\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Detailed Report"><img style="width: 13px;" src="img/download_seq.jpg"> </a>';
                 }
                 return taskHistoryActions;
             }

@@ -2,7 +2,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$transla
 
     $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get("$state");
-        $state.go("dashboard");
+        $state.go("dataCenters");
     });
 
     $ocLazyLoadProvider.config({
@@ -11,84 +11,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$transla
     });
 
     $stateProvider
-        .state('dashboard', {
-            url: "/dashboard",
-            templateUrl: "views/dashboard/dashboard.html",
-            data: { pageTitle: 'Dashboard' , authorizedRoles: [USER_ROLES.admin,USER_ROLES.user]},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            name: 'angles',
-                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
-                        },
-                        {
-                            name: 'angular-peity',
-                            files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'angular-flot',
-                            files: [ 'js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
-                        },
-                        {
-                              serie: true,
-                            files: ['css/plugins/c3/c3.min.css', 'js/plugins/d3/d3.min.js', 'js/plugins/c3/c3.min.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'gridshore.c3js.chart',
-                            files: ['js/plugins/c3/c3-angular.min.js']
-                        },
-                        {
-                            files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
-                        },
-                        {
-                            name: 'oitozero.ngSweetAlert',
-                            files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
-                        },
-                        {
-                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
-                        },
-                        {
-                            insertBefore: '#loadBefore',
-                            name: 'localytics.directives',
-                            files: ['css/plugins/chosen/bootstrap-chosen.css','js/plugins/chosen/chosen.jquery.js','js/plugins/chosen/chosen.js']
-                        },
-                        {
-                            serie: true,
-                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
-                        },
-                        {
-                            serie: true,
-                            files: ['js/plugins/dataTables/dataTables.responsive.min.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables',
-                            files: ['js/plugins/dataTables/angular-datatables.min.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables.buttons',
-                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js','js/plugins/dataTables/buttons.colvis.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables.light-columnfilter',
-                            files: ['js/plugins/dataTables/dataTables.lightColumnFilter.min.js','js/plugins/dataTables/angular-datatables.light-columnfilter.min.js']
-                        },
-                        {
-                            name: 'datePicker',
-                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js', 'bower_components/moment/min/moment.min.js']
-                        },
-                        {
-                            files: ['css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css']
-                        }
-                    ]);
-                }
-            }
-        })
         .state('environments', {
             url: "/environments",
             templateUrl: "views/environments/environments.html",
@@ -166,14 +88,76 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$transla
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
+                        {
+                            name: 'angles',
+                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+                        },
+                        {
+                            name: 'angular-peity',
+                            files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'angular-flot',
+                            files: [ 'js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
+                        },
+                        {
+                              serie: true,
+                            files: ['css/plugins/c3/c3.min.css', 'js/plugins/d3/d3.min.js', 'js/plugins/c3/c3.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'gridshore.c3js.chart',
+                            files: ['js/plugins/c3/c3-angular.min.js']
+                        },
+                        {
+                            files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
+                        },
+                        {
+                            name: 'oitozero.ngSweetAlert',
+                            files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'localytics.directives',
+                            files: ['css/plugins/chosen/bootstrap-chosen.css','js/plugins/chosen/chosen.jquery.js','js/plugins/chosen/chosen.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/dataTables.responsive.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js','js/plugins/dataTables/buttons.colvis.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.light-columnfilter',
+                            files: ['js/plugins/dataTables/dataTables.lightColumnFilter.min.js','js/plugins/dataTables/angular-datatables.light-columnfilter.min.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js', 'bower_components/moment/min/moment.min.js']
+                        },
+                        {
+                            files: ['css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css']
+                        }
                     ]);
                 }
             }
-        })
-        .state('login', {
-            url: "/login",
-            templateUrl: "views/login.html",
-            data: { pageTitle: 'Login', specialClass: 'gray-bg' }
         });
 
     RestangularProvider.setResponseExtractor(function (response, operation) {

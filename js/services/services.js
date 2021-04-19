@@ -10,10 +10,23 @@ angular.module("TDM-FE").service("Session", function () {
 angular
   .module("TDM-FE")
 
-  .factory("TDMService", function (Restangular, $sessionStorage) {
+  .factory("TDMService", function (Restangular, $sessionStorage, $rootScope) {
+
+    var invokeFabricWebServiceWrapper = (path, body, method) => {
+      return new Promise((resolve,reject) => {
+        window.k2api.invokeFabricWebService(path, body, method).then(resp => {
+          resolve(resp);
+        }).catch(err => {
+          reject(err);
+        }).finally(() =>{
+          $rootScope.$apply();  
+        })
+      });
+    };
+
     var getSupportedDbTypes = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           "supportedDbTypes",
           null,
           "GET"
@@ -33,7 +46,7 @@ angular
 
     var getEnvironments = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("environments", null, "get");
+        return invokeFabricWebServiceWrapper("environments", null, "get");
       } else {
         return Restangular.all("environments").get("");
       }
@@ -41,7 +54,7 @@ angular
 
     var getEnvironment = function (id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${id}`,
           null,
           "GET"
@@ -53,7 +66,7 @@ angular
 
     var getProducts = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("products", null, "get");
+        return invokeFabricWebServiceWrapper("products", null, "get");
       } else {
         return Restangular.all("products").get("");
       }
@@ -61,7 +74,7 @@ angular
 
     var getProductsWithLUs = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           "productsWithLUs",
           null,
           "GET"
@@ -73,7 +86,7 @@ angular
 
     var getProduct = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}`,
           null,
           "get"
@@ -85,7 +98,7 @@ angular
 
     var updateEnvironment = function (environmentId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentId}`,
           data,
           "PUT"
@@ -97,7 +110,7 @@ angular
 
     var addEnvironment = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("environment", data, "POST");
+        return invokeFabricWebServiceWrapper("environment", data, "POST");
       } else {
         return Restangular.all("environment").post(data);
       }
@@ -105,7 +118,7 @@ angular
 
     var deleteEnvironment = function (environmentID, environmentName) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/envname/${environmentName}`,
           null,
           "DELETE"
@@ -119,7 +132,7 @@ angular
 
     var updateProduct = function (productId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}`,
           data,
           "PUT"
@@ -131,7 +144,7 @@ angular
 
     var createProduct = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("product", data, "POST");
+        return invokeFabricWebServiceWrapper("product", data, "POST");
       } else {
         return Restangular.all("product").post(data);
       }
@@ -139,7 +152,7 @@ angular
 
     var deleteProduct = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}`,
           null,
           "DELETE"
@@ -151,7 +164,7 @@ angular
 
     var createDataCenter = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`datacenter`, data, "POST");
+        return invokeFabricWebServiceWrapper(`datacenter`, data, "POST");
       } else {
         return Restangular.all("datacenter").post(data);
       }
@@ -159,7 +172,7 @@ angular
 
     var getDataCenters = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("dataCenters", null, "get");
+        return invokeFabricWebServiceWrapper("dataCenters", null, "get");
       } else {
         return Restangular.all("datacenters").get("");
       }
@@ -167,7 +180,7 @@ angular
 
     var updateDataCenter = function (data_center_id, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `dataCenters/${data_center_id}`,
           data,
           "PUT"
@@ -179,7 +192,7 @@ angular
 
     var deleteDataCenter = function (data_center_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `dataCenters/${data_center_id}`,
           null,
           "DELETE"
@@ -191,7 +204,7 @@ angular
 
     var getProductInterfaces = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/interfaces`,
           null,
           "GET"
@@ -203,7 +216,7 @@ angular
 
     var postProductInterface = function (productId, productName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/productname/${productName}/interface`,
           data,
           "POST"
@@ -223,7 +236,7 @@ angular
       data
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/productname/${productName}/interface/${interface_id}`,
           data,
           "PUT"
@@ -245,7 +258,7 @@ angular
       envCount
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/productname/${productName}/interface/${interface_id}/interfacename/${interface_name}/envcount/${envCount}`,
           null,
           "DELETE"
@@ -261,9 +274,9 @@ angular
       }
     };
 
-    var getLogicalUnits = function (productId) {
+    var getLogicalUnits = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("logicalunits", null, "GET");
+        return invokeFabricWebServiceWrapper("logicalunits", null, "GET");
       } else {
         return Restangular.all("logicalunits").get("");
       }
@@ -271,7 +284,7 @@ angular
 
     var getProductLogicalUnits = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/logicalunits`,
           null,
           "GET"
@@ -285,7 +298,7 @@ angular
 
     var getBELogicalUnits = function (beId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/logicalunits`,
           null,
           "GET"
@@ -299,7 +312,7 @@ angular
 
     var getLogicalUnitsWithoutProduct = function (beId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `logicalunitswithoutproduct`,
           null,
           "GET"
@@ -311,7 +324,7 @@ angular
 
     var postLogicalUnits = function (beId, beName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/bename/${beName}/logicalunits`,
           data,
           "POST"
@@ -326,7 +339,7 @@ angular
 
     var putLogicalUnit = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${data.be_id}/logicalunit/${data.lu_id}`,
           {logicalUnit: data},
           "PUT"
@@ -340,7 +353,7 @@ angular
 
     var putLogicalUnits = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${data.be_id}/logicalunits`,
           data,
           "PUT"
@@ -354,7 +367,7 @@ angular
 
     var deleteLogicalUnit = function (beId, beName, luId, luName) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/bename/${beName}/logicalunit/${luId}/luname/${luName}`,
           null,
           "DELETE"
@@ -370,7 +383,7 @@ angular
 
     var getBusinessEntities = function (productId, lu_name) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           "businessentities",
           null,
           "get"
@@ -382,7 +395,7 @@ angular
 
     var createBusinessEntity = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           "businessentity",
           data,
           "POST"
@@ -394,7 +407,7 @@ angular
 
     var updateBusinessEntity = function (beId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}`,
           data,
           "PUT"
@@ -406,7 +419,7 @@ angular
 
     var deleteBusinessEntity = function (beId, beName) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}`,
           null,
           "DELETE"
@@ -418,7 +431,7 @@ angular
 
     var getTasks = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("tasks", null, "GET");
+        return invokeFabricWebServiceWrapper("tasks", null, "GET");
       } else {
         return Restangular.all("tasks").get("");
       }
@@ -426,7 +439,7 @@ angular
 
     var createTask = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService("task", data, "POST");
+        return invokeFabricWebServiceWrapper("task", data, "POST");
       } else {
         return Restangular.all("task").post(data);
       }
@@ -434,7 +447,7 @@ angular
 
     var updateTask = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${data.task_id}`,
           data,
           "PUT"
@@ -446,7 +459,7 @@ angular
 
     var deleteTask = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${data.task_id}/taskname/${data.task_title}`,
           null,
           "DELETE"
@@ -460,7 +473,7 @@ angular
 
     var getEnvironmentRoles = function (environmentID) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/roles`,
           null,
           "GET"
@@ -474,7 +487,7 @@ angular
 
     var postEnvironmentRole = function (environmentID, environmentName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/envname/${environmentName}/role`,
           data,
           "POST"
@@ -494,7 +507,7 @@ angular
       data
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/envname/${environmentName}/role/${roleID}`,
           data,
           "PUT"
@@ -514,7 +527,7 @@ angular
       roleName
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/envname/${environmentName}/role/${roleID}/rolename/${roleName}`,
           null,
           "DELETE"
@@ -530,7 +543,7 @@ angular
 
     var getTesters = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/testers`,
           null,
           "GET"
@@ -542,7 +555,7 @@ angular
 
     var getOwners = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`owners`, null, "GET");
+        return invokeFabricWebServiceWrapper(`owners`, null, "GET");
       } else {
         return Restangular.all("owners").get("");
       }
@@ -550,7 +563,7 @@ angular
 
     var getProductsForBusinessEntityAndEnv = function (be_id, environment_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${be_id}/environment/${environment_id}/products`,
           null,
           "GET"
@@ -568,7 +581,7 @@ angular
       environment_id
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${be_id}/environment/${environment_id}/logicalunits`,
           null,
           "GET"
@@ -583,7 +596,7 @@ angular
 
     var getTaskProducts = function (task_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/products`,
           null,
           "GET"
@@ -595,7 +608,7 @@ angular
 
     var getTaskLogicalUnits = function (task_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/logicalunits`,
           null,
           "GET"
@@ -607,7 +620,7 @@ angular
 
     var getTaskPostExecutionProcesses = function (task_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/postexecutionprocess`,
           null,
           "GET"
@@ -621,7 +634,7 @@ angular
 
     var postTaskProducts = function (taskId, taskName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/taskname/${taskName}/products`,
           data,
           "POST"
@@ -636,7 +649,7 @@ angular
 
     var postTaskLogicalUnits = function (taskId, taskName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${taskId}/taskname/${taskName}/logicalUnits`,
           data,
           "POST"
@@ -651,7 +664,7 @@ angular
 
     var postTaskPostExecutionProcess = function (taskId, taskName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${taskId}/taskname/${taskName}/postexecutionprocesses`,
           data,
           "POST"
@@ -666,7 +679,7 @@ angular
 
     var getRoleForUserInEnv = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/userRole`,
           null,
           "GET"
@@ -678,7 +691,7 @@ angular
 
     var getEnvProducts = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/products`,
           null,
           "GET"
@@ -690,7 +703,7 @@ angular
 
     var getEnvGlobals = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/globals`,
           null,
           "GET"
@@ -702,7 +715,7 @@ angular
 
     var getAllGlobals = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/getAllGlobals`,
           null,
           "GET"
@@ -716,7 +729,7 @@ angular
 
     var postEnvProduct = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/product`,
           data,
           "POST"
@@ -731,7 +744,7 @@ angular
 
     var postEnvGlobal = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/global`,
           data,
           "POST"
@@ -746,7 +759,7 @@ angular
 
     var putEnvGlobal = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/global`,
           data,
           "PUT"
@@ -761,7 +774,7 @@ angular
 
     var deleteEnvGlobal = function (envId, envName, global_name) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/global/${global_name}`,
           null,
           "DELETE"
@@ -776,7 +789,7 @@ angular
 
     var putEnvProduct = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/product`,
           data,
           "PUT"
@@ -791,7 +804,7 @@ angular
 
     var deleteEnvProduct = function (envId, envName, productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envname/${envName}/product/${productId}`,
           null,
           "DELETE"
@@ -806,7 +819,7 @@ angular
 
     var getEnvironmentRoleTesters = function (environmentID, roleID) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/role/${roleID}/users`,
           null,
           "GET"
@@ -827,9 +840,9 @@ angular
       data
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/envname/${environmentName}/role/${roleID}/rolename/${roleName}/users`,
-          data,
+          {users: data},
           "POST"
         );
       } else {
@@ -844,7 +857,7 @@ angular
 
     var getEnvironmentOwners = function (environmentID) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${environmentID}/owners`,
           null,
           "GET"
@@ -858,7 +871,7 @@ angular
 
     var getEnvironmentsForUser = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environmentsbyuser`,
           null,
           "GET"
@@ -870,7 +883,7 @@ angular
 
     var getBusinessEntityParameters = function (beID) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beID}/parameters`,
           null,
           "GET"
@@ -884,7 +897,7 @@ angular
 
     var getAnalysisCount = function (beID, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beID}/analysiscount`,
           data,
           "POST"
@@ -898,7 +911,7 @@ angular
 
     var getSummaryTaskHistory = function (taskId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${taskId}/summary`,
           null,
           "GET"
@@ -910,7 +923,7 @@ angular
 
     var getTaskHistory = function (taskId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${taskId}/history`,
           null,
           "GET"
@@ -922,7 +935,7 @@ angular
 
     var getActivities = function (interval) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `activities/${interval}`,
           null,
           "GET"
@@ -934,7 +947,7 @@ angular
 
     var getNumOfTasksPerMonth = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numoftaskspermonth`,
           null,
           "GET"
@@ -946,7 +959,7 @@ angular
 
     var getNumOfCopiedEntitiesPerMonth = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numofcopiedentitiespermonth`,
           null,
           "GET"
@@ -958,7 +971,7 @@ angular
 
     var getNumOfTaskExecutionsPerMonth = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numoftaskexecutionspermonth`,
           null,
           "GET"
@@ -970,7 +983,7 @@ angular
 
     var getNumOfProcessedEntitiesPerEnv = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numofprocessedentitiesperenv`,
           null,
           "GET"
@@ -982,7 +995,7 @@ angular
 
     var getNumOfTasksPerEnv = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numoftasksperenv`,
           null,
           "GET"
@@ -994,7 +1007,7 @@ angular
 
     var getBusinessEntitiesForEnvProducts = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/businessEntitiesForEnvProducts`,
           null,
           "GET"
@@ -1008,7 +1021,7 @@ angular
 
     var executeTask = function (taskID, forced) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${taskID}/forced/${forced || false}/startTask`,
           null,
           "GET"
@@ -1023,7 +1036,7 @@ angular
 
     var getProductEnvCount = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `product/${productId}/envcount`,
           null,
           "GET"
@@ -1035,7 +1048,7 @@ angular
 
     var getEnvTaskCount = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/taskCount`,
           null,
           "GET"
@@ -1045,21 +1058,9 @@ angular
       }
     };
 
-    var getTasksStatus = function (interval) {
-      if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
-          `tasksStatus/${interval}`,
-          null,
-          "GET"
-        );
-      } else {
-        return Restangular.one("tasksStatus", interval).get("");
-      }
-    };
-
     var getTasksExecutionsStatus = function (interval) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `tasksExecutionsStatus/${interval}`,
           null,
           "GET"
@@ -1071,7 +1072,7 @@ angular
 
     var getTasksPerBE = function (interval) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `tasksPerBE/${interval}`,
           null,
           "GET"
@@ -1083,7 +1084,7 @@ angular
 
     var getDataCenterEnvironmentCount = function (data_center_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `datacenter/${data_center_id}/envcount`,
           null,
           "GET"
@@ -1097,7 +1098,7 @@ angular
 
     var holdTask = function (task_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/holdTask`,
           null,
           "PUT"
@@ -1108,7 +1109,7 @@ angular
     };
     var activateTask = function (task_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/${task_id}/activateTask`,
           null,
           "PUT"
@@ -1122,7 +1123,7 @@ angular
 
     var getBEProductCount = function (be_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${be_id}/productCount`,
           null,
           "GET"
@@ -1136,7 +1137,7 @@ angular
 
     var getEnvironmentSummary = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/summary/Month`,
           null,
           "GET"
@@ -1151,7 +1152,7 @@ angular
 
     var getTaskMonitor = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `task/summary/Month`,
           data,
           "POST"
@@ -1163,7 +1164,7 @@ angular
 
     var stopExecution = function (execution) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `taskexecution/stopexecution`,
           execution,
           "POST"
@@ -1177,7 +1178,7 @@ angular
 
     var getTimeZone = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`dbtimezone`, null, "GET");
+        return invokeFabricWebServiceWrapper(`dbtimezone`, null, "GET");
       } else {
         return Restangular.all("dbtimezone").get("");
       }
@@ -1185,7 +1186,7 @@ angular
 
     var getNumProcessedCopiedFailedEntities = function (interval) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numofprocessedcopiedfailedentities/${interval}`,
           null,
           "GET"
@@ -1200,7 +1201,7 @@ angular
 
     var getNumCopiedFailedEntitiesPerLU = function (interval) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `numofcopiedfailedentitiesperlu/${interval}`,
           null,
           "GET"
@@ -1214,7 +1215,7 @@ angular
 
     var deleteTaskForBE = function (be_id) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${be_id}/task`,
           null,
           "DELETE"
@@ -1228,7 +1229,7 @@ angular
 
     var getEnvExclusionLists = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/exclusionLists`,
           null,
           "GET"
@@ -1242,7 +1243,7 @@ angular
 
     var getEnvExclusionList = function (envId, elId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/exclusionLists/${elId}`,
           null,
           "GET"
@@ -1256,7 +1257,7 @@ angular
 
     var postEnvExclusionList = function (envId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/exclusionLists/`,
           data,
           "POST"
@@ -1270,7 +1271,7 @@ angular
 
     var putEnvExclusionList = function (envId, elId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/exclusionLists/${elId}`,
           data,
           "PUT"
@@ -1284,10 +1285,10 @@ angular
 
     var deleteEnvExclusionList = function (envId, elId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/exclusionLists/${elId}`,
           null,
-          "DELET"
+          "DELETE"
         );
       } else {
         return Restangular.one("environment", envId)
@@ -1298,7 +1299,7 @@ angular
 
     var postEnvExclusionListValidateRequestedBy = function (envId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/validateRequestedBy`,
           data,
           "POST"
@@ -1312,7 +1313,7 @@ angular
 
     var postEnvExclusionListValidateList = function (envId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/validateList`,
           data,
           "POST"
@@ -1326,7 +1327,7 @@ angular
 
     var postEnvExclusionListValidateListBeforeUpdate = function (envId, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/validateListBeforeUpdate`,
           data,
           "POST"
@@ -1340,7 +1341,7 @@ angular
 
     var getEnvTesters = function (envId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/${envId}/envTesters`,
           null,
           "GET"
@@ -1352,7 +1353,7 @@ angular
 
     var getAdmins = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`getAdmins`, null, "GET");
+        return invokeFabricWebServiceWrapper(`getAdmins`, null, "GET");
       } else {
         return Restangular.all("getAdmins").get("");
       }
@@ -1360,7 +1361,7 @@ angular
 
     var getTDMStats = function (body) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`taskStats`, body, "POST");
+        return invokeFabricWebServiceWrapper(`taskStats`, body, "POST");
       } else {
         return Restangular.all("taskStats").post(body);
       }
@@ -1368,7 +1369,7 @@ angular
 
     var getLuTree = function (body) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`luTree`, body, "POST");
+        return invokeFabricWebServiceWrapper(`luTree`, body, "POST");
       } else {
         return Restangular.all("luTree").post(body);
       }
@@ -1376,7 +1377,7 @@ angular
 
     var getLUChildren = function (body) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`luChildren`, body, "POST");
+        return invokeFabricWebServiceWrapper(`luChildren`, body, "POST");
       } else {
         return Restangular.all("luChildren").post(body);
       }
@@ -1384,7 +1385,7 @@ angular
 
     var getRunningTasks = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(`runningTasks`, null, "GET");
+        return invokeFabricWebServiceWrapper(`runningTasks`, null, "GET");
       } else {
         return Restangular.all("runningTasks").get("");
       }
@@ -1392,7 +1393,7 @@ angular
 
     var getDbInterfacesByProductLUs = function (productId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `environment/product/${productId}/dbInterfaces`,
           null,
           "GET"
@@ -1407,7 +1408,7 @@ angular
 
     var testInterfaceDbConnection = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `testDbConnection`,
           data,
           "POST"
@@ -1419,7 +1420,7 @@ angular
 
     var postExecutionProcess = function (beId, beName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/bename/${beName}/postexecutionprocess`,
           data,
           "POST"
@@ -1434,7 +1435,7 @@ angular
 
     var putExecutionProcess = function (beId, beName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/bename/${beName}/postexecutionprocess/${data.process_id}`,
           data,
           "PUT"
@@ -1454,7 +1455,7 @@ angular
       process_name
     ) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/bename/${beName}/postexecutionprocess/${process_id}/${process_name}`,
           null,
           "DELETE"
@@ -1470,7 +1471,7 @@ angular
 
     var getBEPostExecutionProcess = function (beId) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `businessentity/${beId}/postexecutionprocess`,
           null,
           "GET"
@@ -1484,7 +1485,7 @@ angular
 
     var testInterfaceDbConnection = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `testDbConnection`,
           data,
           "POST"
@@ -1496,7 +1497,7 @@ angular
 
     var decryptInterfacePassword = function (data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
+        return invokeFabricWebServiceWrapper(
           `decryptInterfacePassword`,
           data,
           "POST"
@@ -1508,9 +1509,12 @@ angular
 
     var getSummaryReport = function (executionId, luName) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(
-          `taskSummaryReport/${executionId}/luName/${luName}`,
-          null,
+        return invokeFabricWebServiceWrapper(
+          `wsExecutionSummaryReport`,
+          {
+            i_taskExecutionId: executionId,
+            i_luName: luName,
+          },
           "GET"
         );
       } else {
@@ -1522,7 +1526,7 @@ angular
 
     var getGenericAPI = function (url) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(url, null, "GET");
+        return invokeFabricWebServiceWrapper(url, null, "GET");
       } else {
         return Restangular.all(url).get("");
       }
@@ -1530,7 +1534,7 @@ angular
 
     var postGenericAPI = function (url, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(url, data, "POST");
+        return invokeFabricWebServiceWrapper(url, data, "POST");
       } else {
         return Restangular.all(url).post(data);
       }
@@ -1538,7 +1542,7 @@ angular
 
     var putGenericAPI = function (url, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(url, data, "PUT");
+        return invokeFabricWebServiceWrapper(url, data, "PUT");
       } else {
         return Restangular.all(url).customPUT(data);
       }
@@ -1546,7 +1550,7 @@ angular
 
     var deleteGenericAPI = function (url, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return window.k2api.invokeFabricWebService(url, data, "DELETE");
+        return invokeFabricWebServiceWrapper(url, data, "DELETE");
       } else {
         return Restangular.all(url).customDELETE(data);
       }
@@ -1641,7 +1645,6 @@ angular
       executeTask: executeTask,
       getProductEnvCount: getProductEnvCount,
       getEnvTaskCount: getEnvTaskCount,
-      getTasksStatus: getTasksStatus,
       getTasksExecutionsStatus: getTasksExecutionsStatus,
       getTasksPerBE: getTasksPerBE,
       getDataCenterEnvironmentCount: getDataCenterEnvironmentCount,

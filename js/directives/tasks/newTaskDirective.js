@@ -372,6 +372,7 @@ function newTaskDirective() {
                             max_value: value.PARAM_TYPE == 'number' ? parseFloat(value['MAX_VALUE']) : 0
                         }
                     });
+                    console.log(1111);
                     if (cb) {
                         cb.apply();
                     }
@@ -606,7 +607,10 @@ function newTaskDirective() {
                         }, 300);
                     });
                     if (newTaskCtrl.postExecutionProcesses.length > 0) {
-                        TDMService.postTaskPostExecutionProcess(response.result.id, newTaskCtrl.taskData.task_title, _.filter(newTaskCtrl.allPostExecutionProcess, v => newTaskCtrl.postExecutionProcesses.indexOf(v.process_id) >= 0)).then(function (response) {
+                        TDMService.postTaskPostExecutionProcess(
+                            response.result.id, 
+                            newTaskCtrl.taskData.task_title, 
+                            {postexecutionprocesses : _.filter(newTaskCtrl.allPostExecutionProcess, v => newTaskCtrl.postExecutionProcesses.indexOf(v.process_id) >= 0)}).then(function (response) {
                             if (response.errorCode !== "SUCCESS") {
                                 toastr.error("Task # " + createTaskResult.id, " Failed to Update Post Execution Processes: " + response.message);
                             }
@@ -1495,7 +1499,8 @@ function newTaskDirective() {
                     source_env_name: newTaskCtrl.taskData.source_env_name,
                     be_id : newTaskCtrl.taskData.be_id,
                 }).then(function (response) {
-                    if (response.errorCode == "SUCCESS") {
+                      
+                      if (response.errorCode == "SUCCESS") {
 
                         let overrideRootIndicators = data => {
                             executionIdsSet = new Set();

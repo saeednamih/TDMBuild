@@ -1,10 +1,6 @@
 
 const navigationMenu = [
   {
-    name: "Home",
-    path: "/dashboard",
-  },
-  {
     name: "Data Centers",
     path: "/dataCenters",
   },

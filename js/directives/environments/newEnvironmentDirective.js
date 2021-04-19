@@ -78,7 +78,6 @@ function newEnvironmentDirective() {
                 if (response.errorCode == "SUCCESS") {
                     TDMService.getEnvironment(response.result.id).then(function (response) {
                         $timeout(function () {
-                            debugger;
                             response.result[0].owners = [];
                             response.result[0].user_name = null;
                             $scope.content.openEnvironment(response.result[0]);

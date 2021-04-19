@@ -781,7 +781,10 @@ function taskDirective() {
                         }
                     });
                     if (taskCtrl.postExecutionProcesses.length > 0) {
-                        TDMService.postTaskPostExecutionProcess(response.result.id, taskCtrl.taskData.task_title, _.filter(taskCtrl.allPostExecutionProcess, v => taskCtrl.postExecutionProcesses.indexOf(v.process_id) >= 0)).then(function (response) {
+                        TDMService.postTaskPostExecutionProcess(
+                            response.result.id, 
+                            taskCtrl.taskData.task_title, 
+                            {postexecutionprocesses :_.filter(taskCtrl.allPostExecutionProcess, v => taskCtrl.postExecutionProcesses.indexOf(v.process_id) >= 0)}).then(function (response) {
                             if (response.errorCode !== "SUCCESS") {
                                 toastr.error("Task # " + createTaskResult.id, " Failed to Update Post Execution Processes: " + response.message);
                             }

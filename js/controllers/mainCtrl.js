@@ -22,7 +22,7 @@ function MainCtrl($scope,$rootScope, $state, TDMService, BreadCrumbsService, $ti
 
     mainCtrl.refreshPage = function(){
         console.log('reload page');
-        $scope.$broadcast('refreshPage',true);
+        $rootScope.$broadcast('refreshPage',true);
     };
 
     mainCtrl.openEnvironments = function () {
@@ -44,7 +44,7 @@ function MainCtrl($scope,$rootScope, $state, TDMService, BreadCrumbsService, $ti
     };
 
     mainCtrl.openMain = function () {
-        $state.go("dashboard")
+        $state.go("dataCenters")
     };
 
     mainCtrl.updateBreadCrumb = function (breadCrumb) {
