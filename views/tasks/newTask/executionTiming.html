@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-lg-4 form-group">
             <label>
-                <input icheck type="radio" ng-value="'immediate'" name="scheduleRadio" ng-model="newTaskCtrl.selectSchedule"> {{"IMMEDIATE_EXECUTION" | translate}}
+                <input  type="radio" ng-value="'immediate'" name="scheduleRadio" ng-model="newTaskCtrl.selectSchedule"> {{"IMMEDIATE_EXECUTION" | translate}}
             </label>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-3 form-group">
             <label ng-style="newTaskCtrl.userRole.allowed_task_scheduling == false && {'padding-left' : '25px'}">
-                <input ng-if="newTaskCtrl.userRole.allowed_task_scheduling == true" icheck type="radio" ng-value="'schedule'" name="scheduleRadio" ng-model="newTaskCtrl.selectSchedule"> {{"SCHEDULING_PARAMETERS" | translate}}
+                <input ng-if="newTaskCtrl.userRole.allowed_task_scheduling == true"  type="radio" ng-value="'schedule'" name="scheduleRadio" ng-model="newTaskCtrl.selectSchedule"> {{"SCHEDULING_PARAMETERS" | translate}}
             </label>
         </div>
         <div class="form-group col-lg-9" ng-if="newTaskCtrl.selectSchedule == 'schedule'">
@@ -29,7 +29,7 @@
                         <!-- newTaskCtrl.taskData.scheduling_end_date -->
                     <div ng-init="newTaskCtrl.scheduleEndBy = 'endBy'">
                         <label style="vertical-align: top; margin-top: 7px;">
-                            <input icheck type="radio" ng-value="'endBy'" name="scheduleEndRadio" ng-model="newTaskCtrl.scheduleEndBy"> End By :
+                            <input  type="radio" ng-value="'endBy'" name="scheduleEndRadio" ng-model="newTaskCtrl.scheduleEndBy"> End By :
                         </label>
                         <div ng-show="newTaskCtrl.scheduleEndBy == 'endBy'" class="input-group date" style="display: inline-table;width: 300px;margin-left: 50px;">  
                             <span class="input-group-addon"><i class="fa fa-calendar" ></i></span>
@@ -40,13 +40,13 @@
                     </div>
                     <div style="margin-top: 7px;">
                         <label>
-                            <input icheck type="radio" ng-value="'noEndBy'" name="scheduleEndRadio" ng-model="newTaskCtrl.scheduleEndBy"> No end date
+                            <input  type="radio" ng-value="'noEndBy'" name="scheduleEndRadio" ng-model="newTaskCtrl.scheduleEndBy"> No end date
                         </label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" ng-click="newTaskCtrl.openStep(3,'back')">Back</button>
-    <button type="submit" class="btn btn-primary">Finish</button>
+    <button type="button" class="btn k2-primary-btn" ng-click="newTaskCtrl.openStep(3,'back')">Back</button>
+    <button type="submit" class="btn k2-primary-btn">Finish</button>
 </div>

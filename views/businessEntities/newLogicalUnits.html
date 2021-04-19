@@ -4,16 +4,44 @@
     <h3 class="modal-title">{{"ADD_LOGICAL_UNITS" | translate}}</h3>
 </div>
 <div class="modal-body" ng-init="newLogicalUnitsCtrl.chooseOption = 'custom'">
-    <img ng-show="!newLogicalUnitsCtrl.logicalUnits" src="img/ajax-loader.gif" class="ajax-loader">
+     <!-- <img ng-show="!newLogicalUnitsCtrl.logicalUnits" src="img/ajax-loader.gif">  -->
+     <div class="ajax-loader">
+        <div class="k2-loader " ng-show="!newLogicalUnitsCtrl.logicalUnits"></div>
+     </div>
+   
+ 
     <div class="row" ng-show="newLogicalUnitsCtrl.logicalUnits">
         <div class="col-lg-12 form-group">
             <label>
-                <input icheck type="radio" ng-value="'all'" name="beLU" ng-model="newLogicalUnitsCtrl.chooseOption"> All Logical Units
+                <input  
+                type="radio"
+                ng-value="'all'"
+                name="beLU"
+                ng-model="newLogicalUnitsCtrl.chooseOption"
+                style="position: absolute;
+                top: -5px;
+                left: 0px;"
+                > 
+                <span style="margin-left: 15px;">
+                    All Logical Units
+                </span>
             </label>
         </div>
         <div class="col-lg-12 form-group">
             <label>
-                <input icheck type="radio" ng-value="'custom'" name="beLU" ng-model="newLogicalUnitsCtrl.chooseOption"> Select :
+                <input  type="radio" 
+                ng-value="'custom'"
+                 name="beLU" 
+                 ng-model="newLogicalUnitsCtrl.chooseOption" 
+                style="
+                position: absolute;
+                top: -5px;
+                left: 0px;"
+                >  
+                <span  style="margin-left: 15px;">
+                    Select :
+                </span>
+                
             </label>
         </div>
         <form role="form" ng-submit="newLogicalUnitsCtrl.addLogicalUnits()" ng-show="newLogicalUnitsCtrl.logicalUnits">
@@ -83,7 +111,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <a ng-click="newLogicalUnitsCtrl.addLogicalUnit()" ng-show="$last && newLogicalUnitsCtrl.logicalUnits.length > newLogicalUnitsCtrl.newLogicalUnits.length">
-                                    <i class="fa fa-plus fa-2x" style="color: #51B3C3" aria-hidden="true"></i>
+                                    <i class="fa fa-plus fa-2x" style="color:var(--primary-color);" aria-hidden="true"></i>
                                 </a>
                             </div>      
                         </div>
@@ -98,7 +126,7 @@
                         </uib-alert>
                     </div>
                     <div class="col-lg-2">
-                        <button class="btn btn-primary pull-right" type="submit">{{"ADD_LOGICAL_UNITS" |
+                        <button class="k2-primary-btn pull-right" type="submit">{{"ADD_LOGICAL_UNITS" |
                             translate}}
                         </button>
                     </div>

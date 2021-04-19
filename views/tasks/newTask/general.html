@@ -18,12 +18,12 @@
                     <label>Task Type</label>
                     <div> 
                         <input ng-value="'LOAD'" ng-change="newTaskCtrl.taskModeChange(true)" 
-                        name="operationMode" style="width: 100%" icheck type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
+                        name="operationMode"   type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
                         <label>Load</label>
                     </div>
                     <div>
                         <input ng-value="'EXTRACT'" ng-change="newTaskCtrl.taskModeChange(true)" 
-                         name="operationMode" style="width: 100%" icheck type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
+                         name="operationMode"   type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
                         <label>Extract</label>
                     </div>
                 </div>    
@@ -197,5 +197,5 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Next</button>
+    <button type="submit" class="btn k2-primary-btn">Next</button>
 </div>

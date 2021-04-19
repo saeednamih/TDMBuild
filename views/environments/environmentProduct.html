@@ -74,7 +74,7 @@
                                 ng-if="environmentCtrl.productData.status == 'Active' && 
                                        (interface.interface_status == 'Active' || interface.env_product_interface_status == 'Active') && 
                                        !environmentCtrl.disableChangeProduct"
-                                   ng-click="environmentCtrl.openEnvProductInterfaceEdit($index)" class="pull-right btn btn-xs btn-primary btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">
+                                   ng-click="environmentCtrl.openEnvProductInterfaceEdit($index)" class="pull-right btn btn-xs k2-primary-btn btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">
                                     <!-- {{interface.status == false ? "UPDATE" : "EDIT" | translate}}    -->
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
@@ -106,11 +106,11 @@
                                     on-cancel="cancelClicked = true"
                                     confirm-button-type="danger"
                                     cancel-button-type="default">
-                                    <button class="btn btn-primary pull-left"  type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}</button>
+                                    <button class="btn k2-primary-btn pull-left"  type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}</button>
 
                                     </a>
 
-                            <button class="btn btn-primary pull-left" ng-if="!environmentCtrl.addProductWarning && !environmentCtrl.disableChangeProduct" type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}</button>
+                            <button class="btn k2-primary-btn pull-left" ng-if="!environmentCtrl.addProductWarning && !environmentCtrl.disableChangeProduct" type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}</button>
                             <a 	uib-tooltip="Close Product Editor"
                                   tooltip-placement="left"
                                   type="button"
@@ -127,7 +127,7 @@
                                   confirm-button-type="danger"
                                   cancel-button-type="default">
 
-                                <button class="btn btn-primary pull-right" type="button">{{"CLOSE" | translate}}</button>
+                                <button class="btn k2-primary-btn pull-right" type="button">{{"CLOSE" | translate}}</button>
                             </a>
                         </div>
                     </div>

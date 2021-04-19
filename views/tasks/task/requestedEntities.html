@@ -5,7 +5,7 @@
             <div class="col-lg-4" style="padding-left: 0">
                 <div ng-if="!taskCtrl.taskData.selectAllEntites" class="form-group i-checks col-lg-12">
                     <label>
-                        <input ng-disabled="taskCtrl.disableChange" icheck type="radio" ng-value="'given'"
+                        <input ng-disabled="taskCtrl.disableChange"  type="radio" ng-value="'given'"
                                name="connectionRadio" ng-model="taskCtrl.selectFieldType"> {{"ENTITIES_LIST" |
                         translate}}
                     </label>
@@ -15,7 +15,7 @@
                      style="{{taskCtrl.userRole.allowed_random_entity_selection == false ? 'padding-left : 25px' : ''}}">
                     <label>
                         <input ng-disabled="taskCtrl.disableChange"
-                               ng-if="taskCtrl.userRole.allowed_random_entity_selection == true" icheck type="radio"
+                               ng-if="taskCtrl.userRole.allowed_random_entity_selection == true"  type="radio"
                                ng-value="'random'" name="connectionRadio" ng-model="taskCtrl.selectFieldType">
                         {{"RANDOM_SELECTION" | translate}}
                         <small ng-show="!taskCtrl.userRole.allowed_random_entity_selection">(Not Allowed)</small>
@@ -25,7 +25,7 @@
                      class="form-group i-checks col-lg-12">
                     <label style="{{taskCtrl.userRole.allowed_creation_of_synthetic_data == false ? 'padding-left : 25px' : ''}}">
                         <input ng-disabled="taskCtrl.disableChange"
-                               ng-if="taskCtrl.userRole.allowed_creation_of_synthetic_data == true" icheck type="radio"
+                               ng-if="taskCtrl.userRole.allowed_creation_of_synthetic_data == true"  type="radio"
                                ng-value="'synthetic'" name="connectionRadio" ng-model="taskCtrl.selectFieldType">
                         {{"CREATE_SYNTHETIC_ENTITIES" | translate}}
                         <small ng-show="!taskCtrl.userRole.allowed_creation_of_synthetic_data">(Not Allowed)</small>
@@ -34,7 +34,7 @@
                 <div ng-if="taskCtrl.taskData.task_type == 'LOAD' && !taskCtrl.taskData.version_ind && !taskCtrl.adi_only"
                      class="form-group i-checks col-lg-12">
                     <label>
-                        <input ng-disabled="taskCtrl.disableChange" icheck type="radio" ng-value="'parameters'"
+                        <input ng-disabled="taskCtrl.disableChange"  type="radio" ng-value="'parameters'"
                                name="connectionRadio" ng-model="taskCtrl.selectFieldType"> {{"SELECT_PARAMETERS" |
                         translate}}
                     </label>
@@ -209,8 +209,8 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" ng-click="taskCtrl.openStep(1,'back')">Back</button>
-    <button type="submit" class="btn btn-primary">Next</button>
+    <button type="button" class="btn k2-primary-btn" ng-click="taskCtrl.openStep(1,'back')">Back</button>
+    <button type="submit" class="btn k2-primary-btn">Next</button>
 
     <div class="m-t-xs" ng-show="requestedEntitiesForm.$invalid">
         <small ng-if="requestedEntitiesForm.$error.missingParent" class="text-danger">

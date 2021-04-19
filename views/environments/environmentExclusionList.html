@@ -60,7 +60,11 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <button ng-disabled="environmentCtrl.exclusionListRequestedByIsNotValid" ng-if="!environmentCtrl.disableChangeExclusionList" class="btn btn-primary pull-left" type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}</button>
+                            <button ng-disabled="environmentCtrl.exclusionListRequestedByIsNotValid"
+                            ng-if="!environmentCtrl.disableChangeExclusionList"
+                            class="btn k2-primary-btn pull-left" 
+                            type="submit" role-handler role="1">
+                            {{"SAVE_CHANGES" | translate}}</button>
                             <a 	uib-tooltip="Close Exclusion List Editor"
                                   tooltip-placement="left"
                                   ng-if="!environmentCtrl.disableChangeExclusionList"
@@ -77,7 +81,7 @@
                                   confirm-button-type="danger"
                                   cancel-button-type="default">
 
-                                <button class="btn btn-primary pull-right" type="button">{{"CLOSE" | translate}}</button>
+                                <button class="btn k2-primary-btn pull-right" type="button">{{"CLOSE" | translate}}</button>
                             </a>
                         </div>
                     </div>

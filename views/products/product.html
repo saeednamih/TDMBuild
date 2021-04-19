@@ -61,7 +61,7 @@
                                         popover-title="'Add version'"
                                         popover-is-open="productCtrl.isOpen"
                                         ng-click="productCtrl.initAddVersionPopup()" type="button"
-                                        class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                        class="btn k2-secondary-btn"><i class="fa fa-plus"></i></button>
                                 <script type="text/ng-template" id="addProductVersionTemplate.html">
                                     <div>
                                         <div class="row">
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <button type="button" class="btn btn-block btn-primary" ng-click="productCtrl.addVersion(productCtrl.versionToAdd)">Add</button>
+                                                <button type="button" class="btn btn-block k2-primary-btn" ng-click="productCtrl.addVersion(productCtrl.versionToAdd)">Add</button>
                                             </div>
                                             <div class="col-xs-6">
                                                 <button type="button" class="btn btn-block" ng-click="productCtrl.isOpen = false">Cancel</button>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group col-lg-6"></div>
                         <div class="form-group col-lg-6" style="padding-right: 30px;">
-                            <button class="btn btn-primary pull-right" style="margin-top:5px;" role-handler role="0"
+                            <button class="btn k2-primary-btn  pull-right" style="margin-top:5px;" role-handler role="0"
                                     ng-if="!productCtrl.disableChange" type="submit">{{"SAVE_CHANGES" | translate}}
                             </button>
                         </div>
@@ -131,7 +131,7 @@
             <a uib-tooltip="Add Logical Unit" tooltip-placement="left" role-handler role="0"
                ng-if="!productCtrl.disableChange"
                class="pull-right" ng-click="productCtrl.addLogicalUnit()">
-                <i class="fa fa-plus fa-2x" style="color:  #51B3C3" aria-hidden="true"></i>
+                <i class="fa fa-plus fa-2x"style="color:var(--primary-color);" aria-hidden="true"></i>
             </a>
         </div>
         <div class="ibox-content">

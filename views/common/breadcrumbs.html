@@ -1,7 +1,7 @@
-<div class="row page-heading ng-scope">
-    <div class="col-lg-6">
+<div class="page-heading ng-scope">
+    <div >
         <!-- <h2 ng-if="main.BreadCrumbs.length > 0">{{main.BreadCrumbs[main.BreadCrumbs.length - 1].name | translate:main.BreadCrumbs[main.BreadCrumbs.length - 1].translationData}}</h2> -->
-        <ul class="k2-breadcrumb">
+        <ul class="k2-breadcrumb" style="margin-bottom: 0px;">
             <li ng-repeat="breadCrumb in main.BreadCrumbs">
                 <a ng-click="main.updateBreadCrumb(breadCrumb)" ng-if="$last == false">{{ breadCrumb.name | translate:breadCrumb.translationData }}</a>
                     <span style="font-size: 15px;" ng-if="$last == true">{{ breadCrumb.name | translate:breadCrumb.translationData }}</span>

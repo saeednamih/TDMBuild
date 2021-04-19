@@ -354,6 +354,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 .nav.nav-tabs li {
   background: none;
   border: none;
+  padding: 0;
 }
 body.fixed-nav #wrapper .navbar-static-side,
 body.fixed-nav #wrapper #page-wrapper {
@@ -1640,12 +1641,22 @@ a.list-group-item.active:focus {
   position: relative;
 }
 /* DATATABLES */
-table.dataTable thead .sorting,
+table.dataTable thead .sorting:after {
+  opacity: 0.8 !important;
+  color: #a6a6a6;
+}
 table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
-  background: transparent;
+  color: white;
+  opacity: 1 !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: transparent;
+}
+.table-hover > tbody > tr:hover {
+  background-color: var(--primary-color-hover);
 }
 .dataTables_wrapper {
   padding-bottom: 30px;
@@ -1905,6 +1916,7 @@ div.dt-button-info {
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
   font-size: 14px;
+  appearance: auto;
 }
 .form-control:focus,
 .single-line:focus {
@@ -3680,8 +3692,8 @@ body.body-small .footer.fixed {
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
-  background-color: #f5f5f6;
-  border-bottom-width: 1px;
+  background-color: header-bg-color !important;
+  border-bottom-width: 0px;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -3689,15 +3701,36 @@ body.body-small .footer.fixed {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--light-border-color);
 }
 .table > thead > tr > th {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 0;
   vertical-align: bottom;
 }
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
-.table > tfoot > tr > th,
+.table > tfoot > tr > th {
+  border-top: 0;
+  line-height: 1.42857;
+  padding: 8px;
+  vertical-align: top;
+}
+.table-bordered > thead > tr > th > input {
+  height: 20px;
+  min-width: 152px;
+  color: #000;
+}
+.table-bordered > thead > tr > th > select {
+  height: 20px;
+  min-width: 152px;
+  color: #000;
+  background-color: #ffffff;
+}
+.pagination > li {
+  padding: 0;
+}
+
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {

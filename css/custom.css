@@ -1,15 +1,15 @@
 .logo {
-    width: 195px;
-    height: 33px;
-    vertical-align: bottom;
-    padding-right: 13px;
-    padding-left: 12px;
+  width: 195px;
+  height: 33px;
+  vertical-align: bottom;
+  padding-right: 13px;
+  padding-left: 12px;
 }
 
 .btn-primary {
-    background-color: #51B3C3;
-    border-color: #51B3C3;
-    color: #FFFFFF;
+  background-color: #51b3c3;
+  border-color: #51b3c3;
+  color: #ffffff;
 }
 
 .btn-primary:hover,
@@ -21,21 +21,21 @@
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-    background-color: #51B3C3;
-    border-color: #51B3C3;
-    color: #FFFFFF;
+  background-color: #51b3c3;
+  border-color: #51b3c3;
+  color: #ffffff;
 }
 
 .pace .pace-progress {
-    background: #51B3C3;
+  background: #51b3c3;
 }
 
 .nav-fourth-level li {
-    border-bottom: none !important;
+  border-bottom: none !important;
 }
 
 .nav-fourth-level li a {
-    padding-left: 62px;
+  padding-left: 62px;
 }
 
 /*.breadcrumb {*/
@@ -46,366 +46,372 @@
 /*}*/
 
 body.mini-navbar .nav-header {
-    padding: 0;
-    background-color: transparent;
+  padding: 0;
+  background-color: transparent;
 }
 
 .progress-bar {
-    background-color: #51B3C3;
+  background-color: #51b3c3;
 }
 
 .localytics-chosen {
-    display: block !important;
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-    height: 29px;
+  display: block !important;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  height: 29px;
 }
 
 .group-conditions {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 .alert.group {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 table .form-control {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .btn.btn-disabled {
-    cursor: default;
+  cursor: default;
 }
 
 .ajax-loader {
-    padding-left: 39%;
+  padding-left: 39%;
 }
 
 .form-control:focus,
 .single-line:focus {
-    border-color: #51B3C3 !important;
+  border-color: #51b3c3 !important;
 }
 
 body {
-    background-color: #2f4050;
+  background-color: #2f4050;
 }
 
 .highcharts-background {
-    fill: transparent !important;
+  fill: transparent !important;
 }
 
 .highcharts-credits {
-    display: none;
+  display: none;
 }
 
 .fa-play:before {
-    padding-left: 3px;
+  padding-left: 3px;
 }
 
 .form-horizontal .control-label {
-    text-align: left;
+  text-align: left;
+  display: block;
+  margin-left: 0;
 }
 
 .dataTables_wrapper {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 
 .progress {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-.wizard, .tabcontrol {
-    overflow: initial !important;
+.wizard,
+.tabcontrol {
+  overflow: initial !important;
 }
 
 .wizard > .content {
-    overflow: initial !important;
+  overflow: initial !important;
 }
 
 .popover {
-    max-width: 650px;
+  max-width: 650px;
 }
 
 .chosen-container .chosen-results {
-    max-height: 160px;
+  max-height: 160px;
+}
+.chosen-choices {
+  display: block;
 }
 
 .placeTop .chosen-drop {
-    top: inherit;
-    bottom: 100%;
+  top: inherit;
+  bottom: 100%;
 }
 
-.permissionsLabels .icheckbox_square-green, .permissionsLabelsNew .icheckbox_square-green {
-    margin-right: 10px;
+.permissionsLabels .icheckbox_square-green,
+.permissionsLabelsNew .icheckbox_square-green {
+  margin-right: 10px;
 }
 
 .multiChoiceContainer .chosen-container-multi {
-    width: 100% !important;
-    margin-bottom: 15px;
+  width: 100% !important;
+  margin-bottom: 15px;
 }
 
 .alignCreateButtons {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
 .nav-tabs > li > a {
-    border: solid 1px #dddddd;
+  /* border: solid 1px #dddddd; */
+  border: none;
 }
 
-.permissionsLabels, permissionsLabelsNew {
-    min-width: 150px;
-    width: 85%;
+.permissionsLabels,
+permissionsLabelsNew {
+  min-width: 150px;
+  width: 85%;
 }
 
 .permissionsLabels > div:first-child {
-    float: left;
+  float: left;
 }
 
 .permissionsLabelsNew > div:first-child {
-    float: left;
-    width: 100%;
+  float: left;
+  width: 100%;
 }
 
 .requestedEntitiesAlert {
-    border: none;
-    background: transparent;
+  border: none;
+  background: transparent;
 }
 
 .requestedEntitiesErrors {
-    text-align: left;
-    font-weight: bolder;
-    display: inline-block;
-    margin-left: 4px;
+  text-align: left;
+  font-weight: bolder;
+  display: inline-block;
+  margin-left: 4px;
 }
 
 .ibox-title h2 {
-    display: inline-block;
-    margin: 0 0 7px;
-    padding: 0;
-    text-overflow: ellipsis;
-    float: left;
+  display: inline-block;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+  float: left;
 }
 
 .dataTables_filter label {
-    margin-right: 0px;
+  margin-right: 0px;
 }
 
 .new-object-title {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .k2vBottomImage {
-    bottom: 50px;
-    right: 16px;
-    position: absolute;
+  bottom: 50px;
+  right: 16px;
+  position: absolute;
 }
 
 .homeScreenTitle {
-    color: #51B3C3;
-    font-size: 80px;
-    text-align: center;
+  color: #51b3c3;
+  font-size: 80px;
+  text-align: center;
 }
 
 .rotateEjectAwesome {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(90deg);
-
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 
 .buttonTaskAction {
-    /*background-color: green !*#00FF00*!;*/
-    color: black;
-    margin-left: 4px;
-    width: 20px;
-    height: 20px;
-    padding: 4px 0;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 9px;
-    line-height: 1.428571429;
+  /*background-color: green !*#00FF00*!;*/
+  color: black;
+  margin-left: 4px;
+  width: 20px;
+  height: 20px;
+  padding: 4px 0;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 9px;
+  line-height: 1.428571429;
 }
 
 .taskExecutionStatsTitles {
-    color: #51B3C3;
-    text-align: center;
-    font-size: 26px;
+  color: #51b3c3;
+  text-align: center;
+  font-size: 26px;
 }
 
 .taskExecutionStatisticsTabs :first-child {
-    color: #51B3C3;
-    font-size: 21px;
+  color: #51b3c3;
+  font-size: 21px;
 }
 
 .taskExecutionStatisticsTabs :last-child {
-    color: black;
-    font-size: 21px;
+  color: black;
+  font-size: 21px;
 }
 
 .taskExecTitle {
-    text-align: center;
-    font-size: 23px;
+  text-align: center;
+  font-size: 23px;
 }
 
 .executeStatsRedIcon {
-    background-color: red;
-    color: black;
-
+  background-color: red;
+  color: black;
 }
 
 .executeStatsGreenIcon {
-    background-color: #00e500;
-    color: white;
+  background-color: #00e500;
+  color: white;
 }
 
 .executeStatesBlueIcon {
-    background-color: #1c84c6;
-    color: white;
-    border-color: #1c84c6;
+  background-color: #1c84c6;
+  color: white;
+  border-color: #1c84c6;
 }
 
 .executeStatesWhiteIcon {
-    background-color: white;
-    color: grey;
-    border-color:grey;
+  background-color: white;
+  color: grey;
+  border-color: grey;
 }
 
 .nav-tabs.stats li.active > a {
-
-    border-bottom: 1px white solid;
+  border-bottom: 1px white solid;
 }
 .tab-pane.active {
-    padding-top:5px;
+  padding-top: 5px;
 }
 
 .taskExecutionButton {
-    vertical-align: super;
-    padding-right: 1px;
-    padding-top: 0;
+  vertical-align: super;
+  padding-right: 1px;
+  padding-top: 0;
 }
 
-.taskExecutionHistoryButton{
-    vertical-align: super;
-    margin-left: -1px;
+.taskExecutionHistoryButton {
+  vertical-align: super;
+  margin-left: -1px;
 }
 
-.taskExecutionHoldButton{
-    vertical-align: initial;
-    font-size: 10px;
-    padding-top: 1px;
-    margin-right: -2px;
+.taskExecutionHoldButton {
+  vertical-align: initial;
+  font-size: 10px;
+  padding-top: 1px;
+  margin-right: -2px;
 }
 
-.tasksTableHistory td:last-child{
-    min-width: 80px !important;
-    max-width: 80px !important;
+.tasksTableHistory td:last-child {
+  min-width: 80px !important;
+  max-width: 80px !important;
 }
 
-.tasksTableHistory th:last-child{
-    min-width: 40px !important;
-    max-width: 40px !important;
+.tasksTableHistory th:last-child {
+  min-width: 40px !important;
+  max-width: 40px !important;
 }
-.tasksTable td:last-child{
-    min-width: 70px !important;
-    max-width: 70px !important;
-}
-
-.tasksTable th:last-child{
-    min-width: 70px !important;
-    max-width: 70px !important;
+.tasksTable td:last-child {
+  min-width: 70px !important;
+  max-width: 70px !important;
 }
 
-.navbar-default .nav > li.active{
-    border-left: 4px solid #51B3C3;
+.tasksTable th:last-child {
+  min-width: 70px !important;
+  max-width: 70px !important;
 }
 
-.breadcrumb{
-    margin-top: 18px;
+.navbar-default .nav > li.active {
+  border-left: 4px solid #51b3c3;
 }
 
-
-.modal-modal-lg{
-    width: 900px;
+.breadcrumb {
+  margin-top: 18px;
 }
 
-.modal-modal-x-lg{
-    width: 1200px;
+.modal-modal-lg {
+  width: 900px;
 }
 
-.sidebar-collapse .nav > li.active > a{
-    margin-left: -4px;
+.modal-modal-x-lg {
+  width: 1200px;
 }
 
-.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus{
-    background-color: transparent;
+.sidebar-collapse .nav > li.active > a {
+  margin-left: -4px;
 }
 
-.deleteIcon{
-    margin-top: -17px !important;
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus {
+  background-color: transparent;
 }
 
-.editIcon{
-    margin-top: -17px !important;
+.deleteIcon {
+  margin-top: -17px !important;
 }
 
-.requestedParameters .marginLeft{
-    margin-left: 11px;
+.editIcon {
+  margin-top: -17px !important;
+}
+
+.requestedParameters .marginLeft {
+  margin-left: 11px;
 }
 
 new-task-directive .chosen-container-active .chosen-single,
-task-directive .chosen-container-active .chosen-single{
-    border: 1px solid #1ab394;
+task-directive .chosen-container-active .chosen-single {
+  border: 1px solid #1ab394;
 }
 
 .requestedEntitiesErrors .text-danger {
-    color: darkred;
+  color: darkred;
 }
 
-new-task-directive .dataTables_filter{
-    display: none;
+new-task-directive .dataTables_filter {
+  display: none;
 }
 
-task-directive .dataTables_filter{
-    display: none;
+task-directive .dataTables_filter {
+  display: none;
 }
 
-new-task-directive ins{
-    position: relative;
+new-task-directive ins {
+  position: relative;
 }
 
-task-directive ins{
-    position: relative;
+task-directive ins {
+  position: relative;
 }
 
-.wizard > .steps > ul > li{
-    flex: auto;
+.wizard > .steps > ul > li {
+  flex: auto;
 }
 
-.modal.taskGlobals  .modal-dialog{
-    width: 800px;
+.modal.taskGlobals .modal-dialog {
+  width: 800px;
 }
 
-.LogicalUnitWindow .modal-dialog{
-    width: 1000px;
+.LogicalUnitWindow .modal-dialog {
+  width: 1000px;
 }
 
-.taskHistoryRef .modal-dialog{
-    width: 900px;
+.taskHistoryRef .modal-dialog {
+  width: 900px;
 }
 
-a.toggleVersions{
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+a.toggleVersions {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a.toggleVersions > .fa.arrow {
-    transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 a.active.toggleVersions > .fa.arrow {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }

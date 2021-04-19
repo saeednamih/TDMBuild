@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group col-lg-12">
                             <button role-handler role="1" ng-if="!sourceEnvironmentCtrl.disableChange"
-                                    class="btn btn-primary pull-right" type="submit">{{ "SAVE_CHANGES" | translate}}
+                                    class="btn k2-primary-btn pull-right" type="submit">{{ "SAVE_CHANGES" | translate}}
                             </button>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs">
                         <span  ng-show="tab == 1" class="pull-right">
-                            <button class="btn btn-primary pull-right" type="button" role-handler role="0" ng-click="sourceEnvironmentCtrl.openRole(0)">&nbsp;&nbsp;<span class="bold">{{ "EDIT_ROLE" | translate}}</span></button>
+                            <button class="btn k2-primary-btn pull-right" type="button" role-handler role="0" ng-click="sourceEnvironmentCtrl.openRole(0)">&nbsp;&nbsp;<span class="bold">{{ "EDIT_ROLE" | translate}}</span></button>
                         </span>
                         <li ng-class="{'active' : tab == 1}">
 							<a ng-click="tab = (sourceEnvironmentCtrl.tabClicked(1) || sourceEnvironmentCtrl.newTab)" ng-init="tab = 1">

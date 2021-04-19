@@ -16,12 +16,12 @@
                     <label>Task Type</label>
                     <div> 
                         <input ng-value="'LOAD'" ng-change="taskCtrl.taskModeChange(false,true)" 
-                        name="operationMode" style="width: 100%" icheck type="radio" ng-model="taskCtrl.taskData.task_type"/>
+                        name="operationMode"   type="radio" ng-model="taskCtrl.taskData.task_type"/>
                         <label>Load</label>
                     </div>
                     <div>
                         <input ng-value="'EXTRACT'" ng-change="taskCtrl.taskModeChange(false,true)" 
-                            name="operationMode" style="width: 100%" icheck type="radio" ng-model="taskCtrl.taskData.task_type"/>
+                            name="operationMode"   type="radio" ng-model="taskCtrl.taskData.task_type"/>
                         <label>Extract</label>
                     </div>
                 </div>    
@@ -29,14 +29,14 @@
                     <label>Entity Versioning</label>
                     <div>
                         <input ng-disabled="!(taskCtrl.userRoleType == 'admin' || taskCtrl.sourceEnvOwner && taskCtrl.targetEnvOwner) && 
-                        !taskCtrl.allowed_entity_versioning" ng-change="taskCtrl.taskModeChange()" style="width: 100%" icheck type="checkbox" 
+                        !taskCtrl.allowed_entity_versioning" ng-change="taskCtrl.taskModeChange()" style="width: 100%"  type="checkbox" 
                         ng-model="taskCtrl.taskData.version_ind"/>
                     </div>
                 </div>   
                 <div class="form-group col-lg-4">
                     <label>Set Global Variables</label>
                     <div>
-                        <input style="width: 100%" icheck type="checkbox" ng-model="taskCtrl.taskData.task_globals"/>
+                        <input style="width: 100%"  type="checkbox" ng-model="taskCtrl.taskData.task_globals"/>
                     </div>
                 </div>     
             </div>
@@ -56,7 +56,7 @@
         <div ng-show="taskCtrl.userRoleType == 'admin' || taskCtrl.sourceEnvOwner && taskCtrl.targetEnvOwner" class="form-group col-lg-1" ng-if="!(taskCtrl.taskData.task_type == 'LOAD' && !taskCtrl.taskData.version_ind)"> 
             <label>Select All Entities</label>
             <div>   
-                <input ng-disabled="taskCtrl.taskData.reference == 'refernceOnly'" style="width: 100%" icheck type="checkbox"class="form-control" ng-model="taskCtrl.taskData.selectAllEntites">
+                <input ng-disabled="taskCtrl.taskData.reference == 'refernceOnly'"  type="checkbox"class="form-control" ng-model="taskCtrl.taskData.selectAllEntites">
             </div>
         </div>
         <div class="form-group" 
@@ -203,5 +203,5 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Next</button>
+    <button type="submit" class="btn k2-primary-btn">Next</button>
 </div>

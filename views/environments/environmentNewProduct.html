@@ -1,5 +1,5 @@
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
+<div class="ibox float-e-margins k2-card">
+    <div class="ibox-title" style="border: none;">
         <h5>{{ 'NEW_PRODUCT' | translate }}</h5>
     </div>
     <div class="ibox-content">
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input style="width: 100%" icheck type="checkbox" ng-init="environmentCtrl.showAllInterfaces = false;" ng-model="environmentCtrl.showAllInterfaces"/>
+                                    <input style="width: 100%"  type="checkbox" ng-init="environmentCtrl.showAllInterfaces = false;" ng-model="environmentCtrl.showAllInterfaces"/>
                                     <label class="control-label">Display Full Interface List</label>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     <i class="fa fa-trash fa-2x"  style="color: #ec4758" aria-hidden="true"></i>
                                 </a>
                                 <a tooltip-class="editIcon" uib-tooltip="{{interface.status == false ? 'ADD_INTERFACE' : 'EDIT_INTERFACE' | translate}}" ng-click="environmentCtrl.openEnvProductInterfaceEdit($index)" 
-                                    class="pull-right btn btn-xs btn-primary btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">
+                                    class="pull-right btn btn-xs k2-primary-btn btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
                                 <input ng-if="interface.status == false && !interface.deleted" ng-model="interface.myTest" class="form-control" style="height:0px; padding: 0" ng-required="!environmentCtrl.adi_only">
@@ -80,10 +80,10 @@
                             on-cancel="cancelClicked = true"
                             confirm-button-type="danger"
                             cancel-button-type="default">
-                                <button class="btn btn-primary pull-left" type="submit">{{"ADD" | translate}}</button>
+                                <button class="btn k2-primary-btn pull-left" type="submit">{{"ADD" | translate}}</button>
                             </a>
                             <button ng-if="!environmentCtrl.addProductWarning" 
-                                    class="btn btn-primary pull-left" type="submit">{{"ADD" | translate}}</button>
+                                    class="btn k2-primary-btn pull-left" type="submit">{{"ADD" | translate}}</button>
                             <a uib-tooltip="Close Product Editor"
                                   tooltip-placement="left"
                                   type="button"
@@ -100,7 +100,7 @@
                                   confirm-button-type="danger"
                                   cancel-button-type="default">
 
-                                <button class="btn btn-primary pull-right" type="button">{{"CLOSE" | translate}}</button>
+                                <button class="btn k2-primary-btn pull-right" type="button">{{"CLOSE" | translate}}</button>
                             </a>                        </div>
                     </div>
                 </div>
