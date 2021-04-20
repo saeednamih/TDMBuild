@@ -140,24 +140,26 @@
                             {{"TASK_SCHEDULING" | translate}}
                         </label>
                     </div>
-                    <div class="form-group col-lg-12 permissionsLabels" ng-if="!environmentCtrl.hideUsersInput" ng-show="environmentCtrl.roleData.allow_write">
+                    <div class="form-group col-lg-12 permissionsLabels" ng-if="!environmentCtrl.hideUsersInput"
+                        ng-show="environmentCtrl.roleData.allow_write">
                         <div>
-                            <input ng-disabled="environmentCtrl.disableChangeRole"
-                                   type="checkbox" ng-model="environmentCtrl.roleData.allowed_replace_sequences"/>
+                            <input ng-disabled="environmentCtrl.disableChangeRole" type="checkbox"
+                                ng-model="environmentCtrl.roleData.allowed_replace_sequences" />
                         </div>
                         <label>
                             {{"REPLACE_SEQUENCES" | translate}}
                         </label>
                     </div>
-                    <div class="form-group col-lg-12 permissionsLabels" ng-if="!environmentCtrl.hideUsersInput" ng-if="environmentCtrl.isFluxMode">
+                    <div class="form-group col-lg-12 permissionsLabels" ng-if="!environmentCtrl.hideUsersInput"
+                        ng-if="environmentCtrl.isFluxMode">
                         <div>
-                            <label>
-                                <input 
-                                ng-disabled="environmentCtrl.disableChangeRole" 
-                                type="checkbox" ng-model="environmentCtrl.roleData.allowed_entity_versioning"/>
-                                Entity Versioning
-                            </label>
+                            <input ng-disabled="environmentCtrl.disableChangeRole" type="checkbox"
+                                ng-model="environmentCtrl.roleData.allowed_entity_versioning" />
                         </div>
+                        <label>
+                            Entity Versioning
+                        </label>
+                    
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">

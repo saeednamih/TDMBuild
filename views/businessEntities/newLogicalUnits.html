@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body" ng-init="newLogicalUnitsCtrl.chooseOption = 'custom'">
      <!-- <img ng-show="!newLogicalUnitsCtrl.logicalUnits" src="img/ajax-loader.gif">  -->
-     <div class="ajax-loader">
+     <div  ng-show="!newLogicalUnitsCtrl.logicalUnits" class="ajax-loader">
         <div class="k2-loader " ng-show="!newLogicalUnitsCtrl.logicalUnits"></div>
      </div>
    

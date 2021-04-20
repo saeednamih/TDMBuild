@@ -348,14 +348,35 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   border-image: none;
   border-style: solid;
   border-width: 1px;
-  color: #555555;
+  color: var(--primary-color);
   cursor: default;
+  padding-top: 10px;
 }
 .nav.nav-tabs li {
   background: none;
   border: none;
   padding: 0;
 }
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none;
+  border-color: #dddddd #dddddd rgba(0, 0, 0, 0);
+  border-bottom: #f3f3f4;
+  color: var(--primary-color);
+  cursor: default;
+}
+.nav.nav-pills li {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 body.fixed-nav #wrapper .navbar-static-side,
 body.fixed-nav #wrapper #page-wrapper {
   margin-top: 60px;
@@ -1659,7 +1680,7 @@ table.dataTable thead .sorting_desc_disabled {
   background-color: var(--primary-color-hover);
 }
 .dataTables_wrapper {
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
 }
 .dataTables_length {
   float: left;
@@ -3704,25 +3725,20 @@ body.body-small .footer.fixed {
   border: 1px solid var(--light-border-color);
 }
 .table > thead > tr > th {
-  border-bottom: 0;
   vertical-align: bottom;
 }
 
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th {
-  border-top: 0;
   line-height: 1.42857;
   padding: 8px;
   vertical-align: top;
 }
 .table-bordered > thead > tr > th > input {
-  height: 20px;
-  min-width: 152px;
   color: #000;
 }
 .table-bordered > thead > tr > th > select {
-  height: 20px;
   min-width: 152px;
   color: #000;
   background-color: #ffffff;

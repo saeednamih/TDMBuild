@@ -140,6 +140,9 @@ body {
   top: inherit;
   bottom: 100%;
 }
+label {
+  align-items: start;
+}
 
 .permissionsLabels .icheckbox_square-green,
 .permissionsLabelsNew .icheckbox_square-green {
@@ -159,11 +162,17 @@ body {
   /* border: solid 1px #dddddd; */
   border: none;
 }
+.nav-pills > li > a {
+  /* border: solid 1px #dddddd; */
+  border: none;
+}
 
 .permissionsLabels,
 permissionsLabelsNew {
   min-width: 150px;
   width: 85%;
+  display: flex;
+  align-items: center;
 }
 
 .permissionsLabels > div:first-child {
@@ -197,6 +206,12 @@ permissionsLabelsNew {
 
 .dataTables_filter label {
   margin-right: 0px;
+}
+.dataTables_filter {
+  padding-bottom: 15px;
+}
+.paging_simple_numbers {
+  padding-top: 8px;
 }
 
 .new-object-title {

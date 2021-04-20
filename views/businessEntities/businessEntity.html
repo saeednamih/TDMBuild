@@ -1,9 +1,9 @@
 <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
+    <div class="k2-card">
+        <div class="k2-header">
             <div class="row">
                 <div class="col-lg-10">
-                    <h2>{{ 'BUSINESS_ENTITY' | translate }} {{businessEntityCtrl.businessEntityData.be_name}}</h2>
+                    <span class="k2-card-title">{{ 'BUSINESS_ENTITY' | translate }} {{businessEntityCtrl.businessEntityData.be_name}}</span>
                     <h5 style="padding-left:1em;font-weight: 300;" ng-if="businessEntityCtrl.businessEntityData.be_status == 'Inactive'">{{ 'INACTIVE' | translate }}</h5>
                 </div>
                 <div class="col-lg-2 pull-right">
@@ -17,7 +17,8 @@
                 </div>
             </div>
         </div>
-        <div class="ibox-content">
+        <hr>
+        <div class="k2-body">
             <form role="form" ng-submit="businessEntityCtrl.saveChanges()">
                 <div class="row">
                     <div class="col-lg-6 form-horizontal">
@@ -46,8 +47,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div style="padding-top: 5px;background-color: white">
-                <ul class="nav nav-tabs" style="padding: 0px 15px; display: block;">
+            <div class="k2-card" style="margin-top: 25px;">
+            <div style="background-color: white;">
+                <ul class="nav nav-pills" style="display: block;">
                     <span  ng-show="tab == 1" class="pull-right">
                         <button uib-tooltip="Attach Logical Unit" tooltip-placement="left" 
                                 role-handler role="0" ng-if="!businessEntityCtrl.disableChange"
@@ -76,16 +78,19 @@
                         </button>
                     </span>
                     <li ng-class="{'active' : tab == 1}">
-                        <a ng-click="tab = 1" ng-init="tab = 1">
-                            <i class="fa fa-user"></i>
-                            Logical Units
-                        </a>
+                            <a ng-click="tab = 1" ng-init="tab = 1">
+                                <i class="fa fa-user"></i>
+                                Logical Units
+                            </a>
+                       
                     </li>
-                    <li ng-class="{'active' : tab == 2}">
-                        <a ng-click="tab = 2">
-                            <i class="fa fa-briefcase"></i>
-                            Post Execution Processes
-                        </a>
+                    <li ng-class=" {'active' : tab == 2}">
+                       
+                            <a ng-click="tab = 2">
+                                <i class="fa fa-briefcase"></i>
+                                Post Execution Processes
+                            </a>
+                     
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -108,6 +113,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
