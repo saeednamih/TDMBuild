@@ -107,7 +107,7 @@
                             <a style="font-size: 16px;padding-left: 2px;" ng-click="getEntitesCount()"><i class="fa fa-refresh"></i></a>
                             <label style="padding-left: 6px;">{{"PARAMETERS_COUNT" | translate}} =
                                 <span ng-show="newTaskCtrl.parametersCount == 'inprogress'">
-                                    <img src="/img/loading.gif">
+                                    <img src="img/loading.gif">
                                 </span>
                                 <span ng-show="newTaskCtrl.parametersCount !== 'inprogress'">{{newTaskCtrl.parametersCount}}</span>
                             </label>
@@ -155,7 +155,7 @@
                         <div ng-init="newTaskCtrl.getVersionsForLoad()">
                             <a style="font-size: 16px;padding-left: 2px;" ng-show="!newTaskCtrl.loadingTableVersions" ng-click="newTaskCtrl.getVersionsForLoad()"><i class="fa fa-refresh"></i></a>
                             <span ng-show="newTaskCtrl.loadingTableVersions">
-                                <img src="/img/loading.gif">
+                                <img src="img/loading.gif">
                             </span>
                         </div>
                         <table style="display: table; width: 100%" datatable="" dt-options="newTaskCtrl.dtOptionsVersions" dt-columns="newTaskCtrl.dtColumnsVersions"  dt-instance="newTaskCtrl.dtInstanceVersions" class="table table-striped table-bordered table-hover">

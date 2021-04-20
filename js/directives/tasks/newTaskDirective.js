@@ -539,7 +539,7 @@ function newTaskDirective() {
                     newTaskCtrl.createTaskInProgress = false;
                     return;
                 } else {
-                    var selectedVersionToLoad = _.find(newTaskCtrl.taskData.refLoadVersions, {task_execution_id: newTaskCtrl.taskData.selectedRefVersionToLoad});
+                    var selectedVersionToLoad = _.find(newTaskCtrl.taskData.refLoadVersions, {task_execution_id: parseInt(newTaskCtrl.taskData.selectedRefVersionToLoad)});
                     if (selectedVersionToLoad) {
                         newTaskCtrl.taskData.selected_ref_version_task_name = selectedVersionToLoad.version_name;
                         var version_datetime = new Date(selectedVersionToLoad.version_datetime);
@@ -768,7 +768,7 @@ function newTaskDirective() {
             var luNames = "";
             if (selectedVersionToLoad) {
                 taskExecutionId = selectedVersionToLoad.task_execution_id;
-                luNames = selectedVersionToLoad.lu_names;
+                luNames = selectedVersionToLoad.lu_name;
             }
             var version_datetime = new Date(selectedVersionToLoad.version_datetime);
             var localTimeZone = version_datetime.getTimezoneOffset();
@@ -1033,7 +1033,7 @@ function newTaskDirective() {
                 return;
             }
             newTaskCtrl.referenceTabError = '';
-            if (newTaskCtrl.taskData.task_type == 'LOAD' && newTaskCtrl.taskData.version_ind && !_.find(newTaskCtrl.taskData.refLoadVersions, {task_execution_id: newTaskCtrl.taskData.selectedRefVersionToLoad})) {
+            if (newTaskCtrl.taskData.task_type == 'LOAD' && newTaskCtrl.taskData.version_ind && !_.find(newTaskCtrl.taskData.refLoadVersions, {task_execution_id: parseInt(newTaskCtrl.taskData.selectedRefVersionToLoad)})) {
                 return;
             }
             if (newTaskCtrl.taskData.reference !== 'refernceOnly') {

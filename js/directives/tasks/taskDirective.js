@@ -698,7 +698,7 @@ function taskDirective() {
                     taskCtrl.createTaskInProgress = false;
                     return;
                 } else {
-                    var selectedVersionToLoad = _.find(taskCtrl.taskData.refLoadVersions, {task_execution_id: taskCtrl.taskData.selectedRefVersionToLoad});
+                    var selectedVersionToLoad = _.find(taskCtrl.taskData.refLoadVersions, {task_execution_id: parseInt(taskCtrl.taskData.selectedRefVersionToLoad)});
                     if (selectedVersionToLoad) {
                         taskCtrl.taskData.selected_ref_version_task_name = selectedVersionToLoad.version_name;
                         var version_datetime = new Date(selectedVersionToLoad.version_datetime);
@@ -949,7 +949,7 @@ function taskDirective() {
             var luNames = "";
             if (selectedVersionToLoad) {
                 taskExecutionId = selectedVersionToLoad.task_execution_id;
-                luNames = selectedVersionToLoad.lu_names;
+                luNames = selectedVersionToLoad.lu_name;
             }
             var version_datetime = new Date(selectedVersionToLoad.version_datetime);
             var localTimeZone = version_datetime.getTimezoneOffset();

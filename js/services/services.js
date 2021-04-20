@@ -1369,7 +1369,58 @@ angular
 
     var getLuTree = function (body) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
-        return invokeFabricWebServiceWrapper(`luTree`, body, "POST");
+        return new Promise((resolve,reject) => {
+           invokeFabricWebServiceWrapper(`wsGetTaskExeStatsForEntity`, body, "GET").then(resp => {
+              if (resp && resp.errorCode === 'FAIL') {
+                return reject({
+                  errorCode: "FAIL",
+                  message: resp.message
+                });
+              }
+              var data = (resp && resp.result !== undefined) ? resp.result : [];
+              var treeIterateWithMap = function(current,rootLU){
+                current.lu_name = current.luName;
+                current.lu_status = current.luStatus || 'completed';
+                delete current.entityStatus;
+                delete current.luStatus;
+                delete current.luName;
+                current.collapsed = true;
+                if (!current.isRoot){
+                    current.parentRootLuName = rootLU;
+                }
+                current.count = current.children && current.children.length || 0;
+                current.hasChildren = current.children && current.children.length > 0 || false;
+                if (!current.children || current.children.length == 0){
+                    if (current.isRoot){
+                        current.lu_status = current.luStatus || 'completed';
+                    }
+                    current.children = [];
+                    return;
+                }
+                for (var i = 0, len = current.children.length; i < len; i++) {
+                    treeIterateWithMap(current.children[i],rootLU);
+                }
+              };
+              var tree = [];
+              for (var key in data){
+                  data[key].isRoot = true;
+                  data[key].errorInPath = data[key].luStatus === 'failed';
+                  tree.push(data[key]);
+                  treeIterateWithMap(data[key],data[key].luName);
+              }
+              resolve({
+                  errorCode: "SUCCESS",
+                  message: null,
+                  result: tree
+              });
+           }).catch(err => {
+             reject({
+              errorCode: "FAIL",
+                message: err
+            });
+           });
+        });
+        // return invokeFabricWebServiceWrapper(`luTree`, body, "POST");
       } else {
         return Restangular.all("luTree").post(body);
       }

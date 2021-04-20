@@ -144,7 +144,7 @@
                                     class="fa fa-refresh"></i></a>
                             <label style="padding-left: 6px;">{{"PARAMETERS_COUNT" | translate}} =
                                 <span ng-show="taskCtrl.parametersCount == 'inprogress'">
-                                <img src="/img/loading.gif">
+                                <img src="img/loading.gif">
                                 </span>
                                 <span ng-show="taskCtrl.parametersCount !== 'inprogress'">{{taskCtrl.parametersCount}}</span>
                             </label>
@@ -197,7 +197,7 @@
                         <a style="font-size: 16px;padding-left: 2px;" ng-show="!taskCtrl.loadingTableVersions"
                            ng-click="taskCtrl.getVersionsForLoad()"><i class="fa fa-refresh"></i></a>
                         <span ng-show="taskCtrl.loadingTableVersions">
-                                <img src="/img/loading.gif">
+                                <img src="img/loading.gif">
                             </span>
                     </div>
                     <table style="display: table; width: 100%" datatable="" dt-options="taskCtrl.dtOptionsVersions"
