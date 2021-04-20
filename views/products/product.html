@@ -62,7 +62,7 @@
                                         popover-title="'Add version'"
                                         popover-is-open="productCtrl.isOpen"
                                         ng-click="productCtrl.initAddVersionPopup()" type="button"
-                                        class="btn k2-secondary-btn"><i class="fa fa-plus"></i></button>
+                                        class="btn k2-primary-btn"><i class="fa fa-plus"></i></button>
                                 <script type="text/ng-template" id="addProductVersionTemplate.html">
                                     <div>
                                         <div class="row">
@@ -132,10 +132,13 @@
             <a uib-tooltip="Add Logical Unit" tooltip-placement="left" role-handler role="0"
                ng-if="!productCtrl.disableChange"
                class="pull-right" ng-click="productCtrl.addLogicalUnit()">
-                <i class="fa fa-plus fa-2x"style="color:var(--primary-color);" aria-hidden="true"></i>
+               <div class="k2-secondary-icon-btn" style="border: 1px solid;">
+                    <div class="fa fa-plus"></div>
+
+               </div>
             </a>
         </div>
-        <hr>
+        <hr style="margin-bottom: 0;">
         <div class="k2-body">
             <div class="row">
                 <div class="col-lg-12">
