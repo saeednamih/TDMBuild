@@ -1,0 +1,17 @@
+<div class="wrapper  animated fadeInRight" ng-controller="permissionGroupsCtrl as permissionGroups">
+    <div class="row" ng-show="permissionGroups.pageDisplay == 'permissionGroupsTable'">
+        <permission-groups-table-directive content="tasks.tasksData"></permission-groups-table-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'task'">
+        <task-directive content="tasks.taskData"></task-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'taskSummary'">
+        <task-summary-directive content="tasks.taskData"></task-summary-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'newTask'">
+        <new-task-directive content="tasks.taskData"></new-task-directive>
+    </div>
+    <div class="row" ng-if="tasks.pageDisplay == 'taskStats'">
+        <task-stats-directive content="tasks.taskData"></task-stats-directive>
+    </div>
+</div>

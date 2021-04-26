@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="ibox-content">
-            <div class="wizard">
+            <div class="wizard ">
                 <div class="steps clearfix">
                     <ul style="display: flex;">
                         <li class="pull-left" ng-class="{current : newTaskCtrl.step == 1}">
@@ -38,37 +38,37 @@
                 <div class="wizard">
                     <div  class="content" ng-show="newTaskCtrl.step == 1">
                         <form name="generalForm" role="form" novalidate ng-init="newTaskCtrl.initGeneral(generalForm)"
-                              ng-submit="newTaskCtrl.generalNext(generalForm)" class="p-lg">
+                              ng-submit="newTaskCtrl.generalNext(generalForm)">
                             <div ng-include="'views/tasks/newTask/general.html'"></div>
                         </form>
                     </div>
                     <div  class="content" ng-show="newTaskCtrl.step == 2">
                         <form name="requestedEntitiesForm" role="form"  novalidate
-                              ng-submit="newTaskCtrl.requestedEntitiesNext(requestedEntitiesForm)" class="p-lg">
+                              ng-submit="newTaskCtrl.requestedEntitiesNext(requestedEntitiesForm)" >
                             <div ng-include="'views/tasks/newTask/requestedEntities.html'"></div>
                         </form>
                     </div>
                     <div  class="content" ng-show="newTaskCtrl.step == 3">
                         <form name="requestParametersForm" role="form" novalidate
-                              ng-submit="newTaskCtrl.requestParametersNext(requestParametersForm)" class="p-lg">
+                              ng-submit="newTaskCtrl.requestParametersNext(requestParametersForm)">
                             <div ng-include="'views/tasks/newTask/requestParameters.html'"></div>
                         </form>
                     </div>
                     <div  class="content" ng-show="newTaskCtrl.step == 4">
                         <form name="executionTimingForm" role="form" novalidate
-                              ng-submit="newTaskCtrl.executionTimingFinish(executionTimingForm)" class="p-lg">
+                              ng-submit="newTaskCtrl.executionTimingFinish(executionTimingForm)" >
                             <div ng-include="'views/tasks/newTask/executionTiming.html'"></div>
                         </form>
                     </div>
                     <div  class="content" ng-show="newTaskCtrl.step == 5">
                         <form name="AddGlobalForm" role="form" novalidate
-                              ng-submit="newTaskCtrl.globalsNext()" class="p-lg">
+                              ng-submit="newTaskCtrl.globalsNext()" >
                             <div ng-include="'views/tasks/newTask/addGlobal.html'"></div>
                         </form>
                     </div>
                     <div  class="content" ng-if="newTaskCtrl.step == 6">
                         <form name="ReferenceForm" role="form" novalidate
-                              ng-submit="newTaskCtrl.referenceNext()" class="p-lg">
+                              ng-submit="newTaskCtrl.referenceNext()">
                             <div ng-include="'views/tasks/newTask/reference.html'"></div>
                         </form>
                     </div>

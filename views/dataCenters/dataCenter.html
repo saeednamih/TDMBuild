@@ -13,7 +13,7 @@
                        : 'Data Center  ' + dataCenterCtrl.dataCenterData.data_center_name + ' is attached to testing environments. If you remove this data center, product attached to this data center will be removed from environments. Tasks for this product will be also deleted. Are you sure you want to delete it?'}}"
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
                        on-confirm="dataCenterCtrl.deleteDataCenter()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default">
-                        <i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i></a>
+                        <i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

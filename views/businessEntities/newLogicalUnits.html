@@ -106,13 +106,16 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <a class="col-lg-6" ng-click="newLogicalUnitsCtrl.deleteLogicalUnit($index)" ng-show="newLogicalUnitsCtrl.newLogicalUnits.length > 1">
-                                    <i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i>
+                                    <i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div class="col-lg-6">
                                 <a ng-click="newLogicalUnitsCtrl.addLogicalUnit()" ng-show="$last && newLogicalUnitsCtrl.logicalUnits.length > newLogicalUnitsCtrl.newLogicalUnits.length">
-                                    <i class="fa fa-plus fa-2x" style="color:var(--primary-color);" aria-hidden="true"></i>
-                                </a>
+                                    <div class="k2-secondary-icon-btn" style="border: 1px solid;">
+                                        <div class="fa fa-plus"></div>
+                    
+                                   </div>
+                                 </a>
                             </div>      
                         </div>
                         

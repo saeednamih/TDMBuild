@@ -31,13 +31,13 @@
 
 <body ng-app="TDM-FE">
 
-<div ng-controller="MainCtrl as main">
+<div ng-controller="MainCtrl as main" ng-if="allowed">
     <div ng-include="'views/common/breadcrumbs.html'">
     </div>
 </div>
 
 <!-- Main view  -->
-<div ui-view></div>
+<div ng-if="allowed" ui-view></div>
 
 <!-- jQuery and Bootstrap -->
 <script src="js/plugins/jquery/jquery.min.js"></script>
@@ -126,6 +126,7 @@
 <script src="js/directives/tasks/referenceVersionsTaskTableDirective.js"></script>
 <script src="js/directives/tree.js"></script>
 <script src="js/directives/tasks/taskStatsModal.js"></script>
+<script src="js/directives/permissionGroups//permissionGroupsTable.js"></script>
 
 <!-- components-->
 <script src="js/components/postExecutionProcess/postExecutionProcess.js"></script>
@@ -139,6 +140,7 @@
 <script src="js/controllers/businessEntitiesCtrl.js"></script>
 <script src="js/controllers/tasksCtrl.js"></script>
 <script src="js/controllers/sourceEnvironmentsCtrl.js"></script>
+<script src="js/controllers/permissionGroupsCtrl.js"></script>
 
 <!-- filters-->
 <script src="js/filters/filters.js"></script>

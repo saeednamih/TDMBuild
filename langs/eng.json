@@ -177,5 +177,7 @@
   "FAILED_REF_TABLES": "Failed Reference Tables",
   "COPIED": "Copied",
   "LIST": "List",
-  "FAILED": "Failed"
+  "FAILED": "Failed",
+  "PERMISSION_GROUPS": "Permission Groups",
+  "NEW_PERMISSION_GROUP": "New Permission Groups"
 }

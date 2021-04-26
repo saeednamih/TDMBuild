@@ -13,7 +13,7 @@
                        ng-if="!environmentCtrl.disableChange" class="pull-right"
                        mwl-confirm message="{{environmentCtrl.tasksCount == true ? 'Environment is attached to Active tasks. Active tasks may be set to Inactive. ' : ''}} Are you sure you want to delete Environment?"
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
-                       on-confirm="environmentCtrl.deleteEnvironment()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i></a>
+                       on-confirm="environmentCtrl.deleteEnvironment()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -103,26 +103,37 @@
                         </span>
                         <li ng-class="{'active' : tab == 1}">
 							<a ng-click="tab = (environmentCtrl.tabClicked(1) || environmentCtrl.newTab)" ng-init="tab = 1">
-								<i class="fa fa-user"></i>
-								Roles
+                                <span ng-class="{'tab-title' : tab == 1}">
+                                    <i class="fa fa-user"></i>
+                                    Roles
+                                    </span>
+								
 							</a>
 						</li>
                         <li ng-class="{'active' : tab == 2}">
 							<a ng-click="tab = (environmentCtrl.tabClicked(2) || environmentCtrl.newTab)">
-								<i class="fa fa-briefcase"></i>
-								Products
+                                <span ng-class="{'tab-title' : tab == 2}">
+                                    <i class="fa fa-briefcase"></i>
+                                    Products
+                                    </span>
+								
 							</a>
 						</li>
                         <li ng-class="{'active' : tab == 3}">
 							<a ng-click="tab = (environmentCtrl.tabClicked(3) || environmentCtrl.newTab)">
-								<i class="fa fa-list"></i>
-								Environment Globals
+                                <span ng-class="{'tab-title' : tab == 3}">
+                                    <i class="fa fa-list"></i>
+                                    Environment Globals
+                                    </span>
 							</a>
 						</li>
                         <li ng-class="{'active' : tab == 4}">
                             <a ng-click="tab = (environmentCtrl.tabClicked(4) || environmentCtrl.newTab);environmentCtrl.refreshBusnisEntities();">
-                                <i class="fa fa-list-alt"></i>
-                                Exclusion Lists
+                                <span ng-class="{'tab-title' : tab == 4}">
+                                    <i class="fa fa-list-alt"></i>
+                                    Exclusion Lists
+                                    </span>
+                                
                             </a>
                         </li>
                     </ul>

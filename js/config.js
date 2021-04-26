@@ -81,6 +81,24 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$transla
                 }
             }
         })
+        .state('permissionGroups', {
+            url: "/permissionGroups",
+            templateUrl: "views/permissionGroups/permissionGroup.html",
+            data: { pageTitle: 'Permission Groups' , authorizedRoles: [USER_ROLES.admin]},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/steps/jquery.steps.css']
+                        },
+                        {
+                            name: 'angular-cron-jobs',
+                            files: ['js/plugins/angular-cron-jobs/dist/angular-cron-jobs.css', 'js/plugins/angular-cron-jobs/dist/angular-cron-jobs.js']
+                        }
+                    ]);
+                }
+            }
+        })
         .state('dataCenters', {
             url: "/dataCenters",
             templateUrl: "views/dataCenters/dataCenters.html",

@@ -856,10 +856,10 @@ function environmentDirective() {
                     TDMService.getTesters(environmentCtrl.environmentData.environment_id).then(function (response) {
                         if (response.errorCode == "SUCCESS") {
                             environmentCtrl.allTesters = response.result;
-                            environmentCtrl.allTesters.unshift({
-                                user_id : -1,
-                                username : "ALL"
-                            });
+                            // environmentCtrl.allTesters.unshift({
+                            //     user_id : -1,
+                            //     username : "ALL"
+                            // });
                             _.remove(environmentCtrl.allTesters,function(tester){
                                 if (_.find(environmentCtrl.environmentData.owners,{user_id: tester.user_id})){
                                     return true;
@@ -888,10 +888,10 @@ function environmentDirective() {
                     TDMService.getTesters(environmentCtrl.environmentData.environment_id).then(function (response) {
                         if (response.errorCode == "SUCCESS") {
                             environmentCtrl.allTesters = response.result;
-                            environmentCtrl.allTesters.unshift({
-                                user_id : -1,
-                                username : "ALL"
-                            });
+                            // environmentCtrl.allTesters.unshift({
+                            //     user_id : -1,
+                            //     username : "ALL"
+                            // });
                             _.remove(environmentCtrl.allTesters,function(tester){
                                 if (_.find(environmentCtrl.environmentData.owners,{user_id: tester.user_id})){
                                     return true;
@@ -976,10 +976,10 @@ function environmentDirective() {
                             TDMService.getTesters(environmentCtrl.environmentData.environment_id).then(function (response) {
                                 if (response.errorCode == "SUCCESS") {
                                     environmentCtrl.allTesters = response.result;
-                                    environmentCtrl.allTesters.unshift({
-                                        user_id : -1,
-                                        username : "ALL"
-                                    });
+                                    // environmentCtrl.allTesters.unshift({
+                                    //     user_id : -1,
+                                    //     username : "ALL"
+                                    // });
                                     _.remove(environmentCtrl.allTesters,function(tester){
                                         if (_.find(environmentCtrl.environmentData.owners,{user_id: tester.user_id})){
                                             return true;

@@ -24,6 +24,32 @@ angular
       });
     };
 
+    var getUserRole = () => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return new Promise((resolve, reject) => {
+          resolve({
+            result:  'admin',
+            errorCode: "SUCCESS",
+          });
+        });
+        return invokeFabricWebServiceWrapper(
+          "wsGetUserPermissionGroup",
+          null,
+          "GET"
+        );
+      }
+    };
+
+    var getPermissionGroups = () => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return invokeFabricWebServiceWrapper(
+          "wsGetPermissionGroupMappings",
+          null,
+          "GET"
+        );
+      }
+    };
+
     var getSupportedDbTypes = function () {
       if (window.k2api && window.k2api.invokeFabricWebService) {
         return invokeFabricWebServiceWrapper(
@@ -1727,62 +1753,67 @@ angular
       putExecutionProcess: putExecutionProcess,
       deleteExecutionProcess: deleteExecutionProcess,
       getBEPostExecutionProcess: getBEPostExecutionProcess,
+      getUserRole: getUserRole,
+      getPermissionGroups: getPermissionGroups,
     };
   })
   .factory(
     "AuthService",
-    function (Restangular, $sessionStorage, USER_ROLES, Session) {
-      var userAuth = {
-        accessToken: "tdm-WS",
-        userName: "Admin",
-        displayName: "Admin",
-        userRole: {
-          type: "admin",
-          id: 0,
-        },
-        userID: "admin",
-        tdmReprotsUrl: "http://[etlIpAddress]:3510/tdm_reports/",
-        fluxMode: true,
-        retentionPeriod: {
-          maxRetentionPeriod: 90,
-          defaultPeriod: {
-            unit: "Days",
-            value: 5,
+    function (Restangular, $sessionStorage, USER_ROLES, Session,TDMService,$rootScope) {
+      var userAuth = null;
+      TDMService.getUserRole().then((resp) => {
+        if (resp.errorCode !== 'SUCCESS' || !resp.result || ['admin','owner','tester'].indexOf(resp.result) < 0) {
+          return;
+        }
+        $rootScope.allowed = true;
+        const roleObj = {
+          type: resp.result,
+          id: resp.result === 'admin' ? 0 : 1,
+        }
+        userAuth = {
+          accessToken: "tdm-WS",
+          userName: "Admin",
+          displayName: "Admin",
+          userRole: roleObj,
+          userID: "admin",
+          tdmReprotsUrl: "http://[etlIpAddress]:3510/tdm_reports/",
+          fluxMode: true,
+          retentionPeriod: {
+            maxRetentionPeriod: 90,
+            defaultPeriod: {
+              unit: "Days",
+              value: 5,
+            },
+            availableOptions: [
+              {
+                name: "Minutes",
+                units: 0.0006944444444444445,
+              },
+              {
+                name: "Hours",
+                units: 0.041666666666666664,
+              },
+              {
+                name: "Days",
+                units: 1,
+              },
+              {
+                name: "Weeks",
+                units: 7,
+              },
+              {
+                name: "Years",
+                units: 365,
+              },
+            ],
           },
-          availableOptions: [
-            {
-              name: "Minutes",
-              units: 0.0006944444444444445,
-            },
-            {
-              name: "Hours",
-              units: 0.041666666666666664,
-            },
-            {
-              name: "Days",
-              units: 1,
-            },
-            {
-              name: "Weeks",
-              units: 7,
-            },
-            {
-              name: "Years",
-              units: 365,
-            },
-          ],
-        },
-        timezone: 0,
-      };
-      $sessionStorage.userAuthenticated = userAuth;
-      Session.create(userAuth);
-      headers = {
-        Authorization: `Bearer ${userAuth.accessToken}`,
-        accept: "application/json",
-        "Content-Type": "application/json",
-      };
-      Restangular.setDefaultHeaders(headers);
+          timezone: 0,
+        };
+        $sessionStorage.userAuthenticated = userAuth;
+        Session.create(userAuth);
+      }).catch(err => {
 
+      });
       var getDisplayName = function () {
         if (userAuth && userAuth.displayName) return userAuth.displayName;
         return "Unknown User";
@@ -1819,6 +1850,7 @@ angular
       };
 
       var getRole = function () {
+        console.log(222);
         return userAuth.userRole;
       };
 

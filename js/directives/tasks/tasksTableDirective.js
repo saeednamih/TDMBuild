@@ -180,7 +180,7 @@ function tasksTableDirective($interval, TASK) {
                 tasksTableCtrl.hideColumns = $sessionStorage.taskTableHideColumns;
             }
             else {
-                tasksTableCtrl.hideColumns = [12, 13, 14, 15, 16, 17 , 18 , 19 , 20, 21,22,23, 24];
+                tasksTableCtrl.hideColumns = [ 13, 14, 15, 16, 17 , 18 , 19 , 20, 21,22,23, 24, 25];
             }
             for (var i = 0; i < tasksTableCtrl.hideColumns.length; i++) {
                 var hideColumn = DTColumnDefBuilder.newColumnDef(tasksTableCtrl.hideColumns[i])
@@ -298,7 +298,7 @@ function tasksTableDirective($interval, TASK) {
                 }
             }
 
-            tasksTableCtrl.dtColumns.push(DTColumnBuilder.newColumn('taskActions').withTitle('').renderWith(taskActions));
+            tasksTableCtrl.dtColumns.unshift(DTColumnBuilder.newColumn('taskActions').withTitle('').renderWith(taskActions));
             //try to comment out the line below
 
             var getTableData = function () {
@@ -329,12 +329,12 @@ function tasksTableDirective($interval, TASK) {
                     $compile(angular.element(row).contents())($scope);
                 })
                 .withOption('scrollX', false)
-                .withOption('aaSorting', [[10,'asc']])
+                .withOption('aaSorting', [[11,'asc']])
                 .withButtons([
                     {
                         extend: 'colvis',
                         text: 'Show/Hide columns',
-                        columns: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17,18,19,20,21,22,23, 24],
+                        columns: [7, 8, 9, 10, 11, 12, 13, 14, 15,16,17,18,19,20,21,22,23, 24, 25],
                         callback: function (columnIdx, visible) {
                             if (visible == true) {
                                 var index = tasksTableCtrl.hideColumns.indexOf(columnIdx);
@@ -359,46 +359,46 @@ function tasksTableDirective($interval, TASK) {
                 .withOption("fixedColumns", false);
                 if (tasksTableCtrl.tasksData && tasksTableCtrl.tasksData.length > 0){
                     tasksTableCtrl.dtOptions.withLightColumnFilter({
-                        0: {
-                            type: 'text',
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(0) >= 0 ? true : false)
-                        },
                         1: {
-                            type: 'select',
-                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'task_type')), function (el) {
-                                return {value: el, label: el}
-                            }),
+                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(1) >= 0 ? true : false)
                         },
                         2: {
                             type: 'select',
-                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'version_ind')), function (el) {
+                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'task_type')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(2) >= 0 ? true : false)
                         },
                         3: {
                             type: 'select',
-                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'be_name')), function (el) {
+                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'version_ind')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(3) >= 0 ? true : false)
                         },
                         4: {
                             type: 'select',
-                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'source_env_name')), function (el) {
+                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'be_name')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(4) >= 0 ? true : false)
                         },
                         5: {
                             type: 'select',
-                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'environment_name')), function (el) {
+                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'source_env_name')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(5) >= 0 ? true : false)
                         },
                         6: {
+                            type: 'select',
+                            values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'environment_name')), function (el) {
+                                return {value: el, label: el}
+                            }),
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(6) >= 0 ? true : false)
+                        },
+                        7: {
                             type: 'select',
                             values: [
                                 {
@@ -426,24 +426,24 @@ function tasksTableDirective($interval, TASK) {
                                     label: "Reference only"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(6) >= 0 ? true : false)
-                        },
-                        7: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(7) >= 0 ? true : false)
                         },
                         8: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(8) >= 0 ? true : false)
+                        },
+                        9: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'task_last_updated_by')), function (el) {
                                 return {value: el, label: el}
                             }),
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(8) >= 0 ? true : false)
-                        },
-                        9: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(9) >= 0 ? true : false)
                         },
                         10: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(10) >= 0 ? true : false)
+                        },
+                        11: {
                             type: 'select',
                             values: [
                                 {
@@ -455,9 +455,9 @@ function tasksTableDirective($interval, TASK) {
                                     label: "Active"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(10) >= 0 ? true : false)
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(11) >= 0 ? true : false)
                         },
-                        11: {
+                        12: {
                             type: 'select',
                             values: [
                                 {
@@ -469,10 +469,6 @@ function tasksTableDirective($interval, TASK) {
                                     label: "onHold"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(11) >= 0 ? true : false)
-                        },
-                        12: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(12) >= 0 ? true : false)
                         },
                         13: {
@@ -480,17 +476,21 @@ function tasksTableDirective($interval, TASK) {
                             hidden: (tasksTableCtrl.hideColumns.indexOf(13) >= 0 ? true : false)
                         },
                         14: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(14) >= 0 ? true : false)
+                        },
+                        15: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'retention_period_type')), function (el) {
                                 return {value: el, label: el}
                             }),
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(14) >= 0 ? true : false)
-                        },
-                        15: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(15) >= 0 ? true : false)
                         },
                         16: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(16) >= 0 ? true : false)
+                        },
+                        17: {
                             type: 'select',
                             values: [
                                 {
@@ -502,16 +502,16 @@ function tasksTableDirective($interval, TASK) {
                                     label: "false"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(16) >= 0 ? true : false)
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(17) >= 0 ? true : false)
                         },
-                        17: {
+                        18: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'sync_mode')), function (el) {
                                 return {value: el, label: el}
                             }),
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(17) >= 0 ? true : false)
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(18) >= 0 ? true : false)
                         },
-                        18: {
+                        19: {
                             type: 'select',
                             values: [
                                 {
@@ -527,9 +527,9 @@ function tasksTableDirective($interval, TASK) {
                                     label: "Delete entity without load"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(18) >= 0 ? true : false)
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(19) >= 0 ? true : false)
                         },
-                        19: {
+                        20: {
                             type: 'select',
                             values: [
                                 {
@@ -541,33 +541,33 @@ function tasksTableDirective($interval, TASK) {
                                     label: "false"
                                 }
                             ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(19) >= 0 ? true : false)
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(20) >= 0 ? true : false)
                         },
-                        20: {
+                        21: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'selected_version_task_name')), function (el) {
                                 return {value: el, label: el}
                             }),
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(20) >= 0 ? true : false)
-                        },
-                        21: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(21) >= 0 ? true : false)
                         },
                         22: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(22) >= 0 ? true : false)
+                        },
+                        23: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'selected_ref_version_task_name')), function (el) {
                                 return {value: el, label: el}
                             }),
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(22) >= 0 ? true : false)
-                        },
-                        23: {
-                            type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(23) >= 0 ? true : false)
                         },
                         24: {
                             type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(24) >= 0 ? true : false)
+                        },
+                        25: {
+                            type: 'text',
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(25) >= 0 ? true : false)
                         }
                     });
                 }

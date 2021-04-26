@@ -5,6 +5,10 @@ const navigationMenu = [
     path: "/dataCenters",
   },
   {
+    name: "Permission Groups",
+    path: "/permissionGroups",
+  },
+  {
     name: "Business Entities",
     path: "/businessEntities",
   },

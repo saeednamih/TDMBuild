@@ -48,7 +48,7 @@
                                     uib-tooltip="{{'DELETE_INTERFACE' | translate}}" 
                                     style="margin-top: -2px;margin-left: 10px;" 
                                     ng-if="(environmentCtrl.productData.interfaces | atLeastOneInterface ) && !interface.deleted || environmentCtrl.adi_only" class="pull-right">
-                                    <i class="fa fa-trash fa-2x"  style="color: #ec4758" aria-hidden="true"></i>
+                                    <i class="fa fa-trash fa-2x"  style="color: var(--secondary-text-color)" aria-hidden="true"></i>
                                 </a>
                                 <a tooltip-class="editIcon" uib-tooltip="{{interface.status == false ? 'ADD_INTERFACE' : 'EDIT_INTERFACE' | translate}}" ng-click="environmentCtrl.openEnvProductInterfaceEdit($index)" 
                                     class="pull-right btn btn-xs k2-primary-btn btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">

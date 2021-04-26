@@ -1,6 +1,11 @@
-<div class="animated fadeInRightBig">
-    <h2>General</h2>
-    <div class="row" style="min-height: 95px">
+<div class="animated fadeInRightBig k2-card">
+    <div class="k2-header">
+        <span class="k2-card-title" style="color:var(--secondary-text-color)">General</span>
+
+    </div>
+    <hr >
+
+    <div class="row k2-body" style="min-height: 95px">
         <div class="form-group" 
             ng-class="{'col-lg-6' : !newTaskCtrl.isFluxMode,'col-lg-3' : newTaskCtrl.isFluxMode}">
             <label>{{"TASK_TITLE" |  translate}} <span style="color: red">*</span></label>
@@ -15,29 +20,37 @@
         <div class="form-group col-lg-3" ng-if="newTaskCtrl.isFluxMode">
             <div class="row">
                 <div class="col-lg-4">
-                    <label>Task Type</label>
-                    <div> 
+                    <label >
+                Task Type
+                </label>
+                    <div
+                     style="display: flex;
+                    align-items: center;
+                      min-width: 86.5px;">
                         <input ng-value="'LOAD'" ng-change="newTaskCtrl.taskModeChange(true)" 
                         name="operationMode"   type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
-                        <label>Load</label>
+                        <label style="margin-top: 5px;margin-left: 6px;" >Load</label>
                     </div>
-                    <div>
+                    <div
+                    style="display: flex;
+                   align-items: center;
+                      min-width: 86.5px;">
                         <input ng-value="'EXTRACT'" ng-change="newTaskCtrl.taskModeChange(true)" 
                          name="operationMode"   type="radio" ng-model="newTaskCtrl.taskData.task_type"/>
-                        <label>Extract</label>
+                        <label style="margin-top: 5px;margin-left: 6px;">Extract</label>
                     </div>
                 </div>    
                 <div class="form-group col-lg-4">
-                    <label>Entity Versioning</label>
+                    <label style="max-width: 72px;"> Entity Versioning</label>
                     <div>
                         <input ng-disabled="!(newTaskCtrl.userRoleType == 'admin' || newTaskCtrl.sourceEnvOwner && newTaskCtrl.targetEnvOwner) && 
-                            !newTaskCtrl.allowed_entity_versioning" ng-change="newTaskCtrl.taskModeChange()" style="width: 100%" icheck type="checkbox" ng-model="newTaskCtrl.taskData.version_ind"/>
+                            !newTaskCtrl.allowed_entity_versioning" ng-change="newTaskCtrl.taskModeChange()"  type="checkbox" ng-model="newTaskCtrl.taskData.version_ind"/>
                     </div>
                 </div>    
                 <div class="form-group col-lg-4">
                     <label>Set Global Variables</label>
                     <div>
-                        <input  style="width: 100%" icheck type="checkbox" ng-model="newTaskCtrl.taskData.task_globals"/>
+                        <input   type="checkbox" ng-model="newTaskCtrl.taskData.task_globals"/>
                     </div>
                 </div>    
             </div>
@@ -54,17 +67,17 @@
             </select>
         </div>
         <div ng-show="newTaskCtrl.userRoleType == 'admin' || newTaskCtrl.sourceEnvOwner && newTaskCtrl.targetEnvOwner" class="form-group col-lg-1" ng-if="!(newTaskCtrl.taskData.task_type == 'LOAD' && !newTaskCtrl.taskData.version_ind)"> 
-            <label>Select All Entities</label>
+            <label style="max-width: 72px;"> Select All Entities</label>
             <div>
-                <input ng-disabled="newTaskCtrl.taskData.reference == 'refernceOnly'" style="width: 100%" icheck type="checkbox"class="form-control" ng-model="newTaskCtrl.taskData.selectAllEntites">
+                <input ng-disabled="newTaskCtrl.taskData.reference == 'refernceOnly'"   type="checkbox"class="form-control" ng-model="newTaskCtrl.taskData.selectAllEntites">
             </div>
         </div>
         <div class="form-group" 
             ng-class="{'col-lg-4' : !newTaskCtrl.adi_only, 'col-lg-6' : newTaskCtrl.adi_only}" 
             ng-if="newTaskCtrl.taskData.task_type == 'LOAD' && !newTaskCtrl.taskData.version_ind && newTaskCtrl.taskData.reference !== 'refernceOnly'"> 
             <label>{{"NUMBER_OF_ENTITIES" |  translate}} <span style="color: red">*</span></label>
-            <input tabindex="2" ng-blur="newTaskCtrl.updateEntitiesPattern();" name="numberOfEntities" required type="number" class="form-control" min="0"
-                   max="{{newTaskCtrl.maxToCopy}}" ng-model="newTaskCtrl.taskData.number_of_entities_to_copy">
+            <input  min="1"  max="{{newTaskCtrl.maxToCopy}}" tabindex="2" ng-blur="newTaskCtrl.updateEntitiesPattern();" name="numberOfEntities" required type="number" class="form-control"
+                    ng-model="newTaskCtrl.taskData.number_of_entities_to_copy">
             <div class="m-t-xs" ng-show="generalForm.numberOfEntities.$invalid && generalForm.submitted">
                 <small class="text-danger" ng-show="generalForm.numberOfEntities.$error.required">Please input Number of entities</small>
                 <small class="text-danger" ng-show="generalForm.numberOfEntities.$error.max">Maximum Entites to Copy is {{newTaskCtrl.maxToCopy}}</small>
@@ -117,7 +130,7 @@
             <label>Retention Period<span style="color: red">*</span></label>
             <div class="row">
                 <div class="col-lg-6">
-                    <select tabindex="4" width="'200px'" name="RETENTION_PERIOD_TYPE" required class="form-control" chosen
+                    <select tabindex="4" width="'100%'" name="RETENTION_PERIOD_TYPE" required class="form-control" chosen
                             ng-model="newTaskCtrl.retention_period_type" ng-change="newTaskCtrl.retentionPeriodTypeChanged()" ng-size="4"
                             ng-options="period as period.name for period in newTaskCtrl.retentionPeriod.availableOptions">
                         <option></option>
@@ -128,7 +141,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <input tabindex="2" style="width: 200px" name="RETENTION_PERIOD_VALUE" ng-required="newTaskCtrl.taskData.version_ind" type="number" 
+                    <input tabindex="2" style="width: 100%" name="RETENTION_PERIOD_VALUE" ng-required="newTaskCtrl.taskData.version_ind" type="number" 
                         class="form-control" ng-min="newTaskCtrl.taskData.version_ind ? 1 : 0" ng-max="newTaskCtrl.retentionPeriod.maxRetentionPeriod / newTaskCtrl.retention_period_type.units" ng-model="newTaskCtrl.taskData.retention_period_value">
                     <div class="m-t-xs" ng-show="generalForm.submitted">
                         <small class="text-danger" ng-show="generalForm.RETENTION_PERIOD_VALUE.$error.required">Please input Retention Period Value</small>
@@ -163,9 +176,16 @@
             </div>
         </div>
         <div class="form-group col-lg-6">
-            <label>Logical Units <span style="color: red">*</span></label>
-            <a ng-if="(newTaskCtrl.taskData.task_type == 'EXTRACT' && newTaskCtrl.isFluxMode) || (newTaskCtrl.taskData.task_type == 'LOAD' && (!newTaskCtrl.taskData.version_ind || (newTaskCtrl.taskData.version_ind && newTaskCtrl.isFluxMode)))" style="margin-left: 10px" ng-click="newTaskCtrl.logicalUnits = newTaskCtrl.allLogicalUnits">Add all</a>
-            <a ng-if="(newTaskCtrl.taskData.task_type == 'EXTRACT' && newTaskCtrl.isFluxMode) || (newTaskCtrl.taskData.task_type == 'LOAD' && (!newTaskCtrl.taskData.version_ind || (newTaskCtrl.taskData.version_ind && newTaskCtrl.isFluxMode)))" style="margin-left: 10px"  ng-click="newTaskCtrl.logicalUnits = []">Clear all</a>
+            <div style="display: flex; justify-content: space-between;">
+            
+                <label>Logical Units <span style="color: red">*</span></label>
+                <span>
+                    <a ng-if="(newTaskCtrl.taskData.task_type == 'EXTRACT' && newTaskCtrl.isFluxMode) || (newTaskCtrl.taskData.task_type == 'LOAD' && (!newTaskCtrl.taskData.version_ind || (newTaskCtrl.taskData.version_ind && newTaskCtrl.isFluxMode)))"
+                        style="margin-left: 10px" ng-click="newTaskCtrl.logicalUnits = newTaskCtrl.allLogicalUnits">Add all</a>
+                    <a ng-if="(newTaskCtrl.taskData.task_type == 'EXTRACT' && newTaskCtrl.isFluxMode) || (newTaskCtrl.taskData.task_type == 'LOAD' && (!newTaskCtrl.taskData.version_ind || (newTaskCtrl.taskData.version_ind && newTaskCtrl.isFluxMode)))"
+                        style="margin-left: 10px" ng-click="newTaskCtrl.logicalUnits = []">Clear all</a>
+                </span>
+            </div>
             <select ng-if="(newTaskCtrl.taskData.task_type == 'EXTRACT' && newTaskCtrl.isFluxMode) || (newTaskCtrl.taskData.task_type == 'LOAD' && (!newTaskCtrl.taskData.version_ind || (newTaskCtrl.taskData.version_ind && newTaskCtrl.isFluxMode)))" tabindex="6" width="'100%'" name="taskLogicalUnit" ng-required="true" chosen multiple class="chosen-select form-control" tabindex="4"
                     ng-model="newTaskCtrl.logicalUnits"
                     ng-options="logicalUnit as logicalUnit.lu_name for logicalUnit in newTaskCtrl.allLogicalUnits | orderBy:'lu_name'">
@@ -186,10 +206,15 @@
                 <small class="text-danger">Root LU missing, Please add  <strong ng-repeat="missing in newTaskCtrl.missingRootLU">{{missing}}{{$index < newTaskCtrl.missingRootLU.length - 1  ? ', ' : ''}}</strong>.</small>
             </div>
         </div>
-        <div class="form-group col-lg-6">
-            <label>Post Execution Processes</label>
-            <a style="margin-left: 10px" ng-click="newTaskCtrl.postExecutionProcesses = newTaskCtrl.allPostExecutionProcessIds">Add all</a>
-            <a style="margin-left: 10px"  ng-click="newTaskCtrl.postExecutionProcesses = []">Clear all</a>
+        <div class="form-group col-lg-6" >
+            <div style="display: flex; justify-content: space-between;">
+                <label>Post Execution Processes</label>
+                <span>
+                    <a style="margin-left: 10px"
+                        ng-click="newTaskCtrl.postExecutionProcesses = newTaskCtrl.allPostExecutionProcessIds">Add all</a>
+                    <a style="margin-left: 10px" ng-click="newTaskCtrl.postExecutionProcesses = []">Clear all</a>
+                </span>
+            </div>
             <select tabindex="6" width="'100%'" name="taskPostExecutionProcess" chosen multiple class="chosen-select form-control" tabindex="4"
                     ng-model="newTaskCtrl.postExecutionProcesses"
                     ng-options="postExecutionProcess.process_id as postExecutionProcess.process_name for postExecutionProcess in newTaskCtrl.allPostExecutionProcess | orderBy:'process_name'">
@@ -197,5 +222,8 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn k2-primary-btn">Next</button>
-</div>
+    <hr>
+    <span style="display: flex; flex-direction: row-reverse;">
+        <button type="submit" class="btn k2-primary-btn">Next</button>
+    </span>
+    </div>

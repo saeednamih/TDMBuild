@@ -54,7 +54,7 @@ function referenceVersionsTaskTable() {
 
 
         var renderSelectionColumn = function(data, type, full, meta){
-            var selectionIcon = '<input icheck type="radio" ng-value="\''+ full.task_execution_id + '\'" name="referenceVersionsTableSelection" ng-model="selectedVersion.selectedRefVersionToLoad">'
+            var selectionIcon = '<input icheck type="radio" ng-value="'+ full.task_execution_id + '" name="referenceVersionsTableSelection" ng-model="selectedVersion.selectedRefVersionToLoad">'
                      if(!referenceVersionsTaskTableCtrl.groupedSelections){
                         referenceVersionsTaskTableCtrl.groupedSelections.add(full.task_execution_id);
             }

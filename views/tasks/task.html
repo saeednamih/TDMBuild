@@ -11,7 +11,8 @@
                        ng-if="!taskCtrl.disableChange" class="pull-right"
                        mwl-confirm message="Are you sure you want to delete Task?"
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
-                       on-confirm="taskCtrl.deleteTask()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i></a>
+                       on-confirm="taskCtrl.deleteTask()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" 
+                       style="color: var(--secondary-text-color)" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

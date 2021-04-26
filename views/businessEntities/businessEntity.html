@@ -12,7 +12,7 @@
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
                        tooltip-placement="left" role-handler role="0" ng-if="!businessEntityCtrl.disableChange" class="pull-right"
                        on-confirm="businessEntityCtrl.deleteBusinessEntity()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default">
-                        <i class="fa fa-trash fa-2x" style="color: #ec4758" aria-hidden="true"></i>
+                        <i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -79,20 +79,24 @@
                     </span>
                     <li ng-class="{'active' : tab == 1}">
                             <a ng-click="tab = 1" ng-init="tab = 1">
+                                <span ng-class="{'tab-title' : tab == 1}">
                                 <i class="fa fa-user"></i>
-                                Logical Units
+                                    Logical Units
+                                </span>
                             </a>
                        
                     </li>
                     <li ng-class=" {'active' : tab == 2}">
-                       
                             <a ng-click="tab = 2">
+                                <span ng-class="{'tab-title' : tab == 2}">
                                 <i class="fa fa-briefcase"></i>
                                 Post Execution Processes
+                                </span>
                             </a>
                      
                     </li>
                 </ul>
+                <hr style="margin:0px">
                 <div class="tab-content">
                     
                     <div id="tab-1" class="tab-pane active" ng-show="tab == 1" style="padding: 15px;">

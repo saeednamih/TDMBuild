@@ -14,29 +14,33 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label>Task Type</label>
-                    <div> 
-                        <input ng-value="'LOAD'" ng-change="taskCtrl.taskModeChange(false,true)" 
-                        name="operationMode"   type="radio" ng-model="taskCtrl.taskData.task_type"/>
-                        <label>Load</label>
+                    <div style="display: flex;
+                                   align-items: center;
+                                   min-width: 86.5px;">
+                        <input ng-value="'LOAD'" ng-change="taskCtrl.taskModeChange(false,true)" name="operationMode" type="radio"
+                            ng-model="taskCtrl.taskData.task_type" />
+                        <label style="margin-top: 5px;margin-left: 6px; ">Load</label>
                     </div>
-                    <div>
-                        <input ng-value="'EXTRACT'" ng-change="taskCtrl.taskModeChange(false,true)" 
-                            name="operationMode"   type="radio" ng-model="taskCtrl.taskData.task_type"/>
-                        <label>Extract</label>
+                    <div style="display: flex;
+                                   align-items: center;
+                                    min-width: 86.5px;">
+                        <input ng-value="'EXTRACT'" ng-change="taskCtrl.taskModeChange(false,true)" name="operationMode" type="radio"
+                            ng-model="taskCtrl.taskData.task_type" />
+                        <label style="margin-top: 5px;margin-left: 6px;">Extract</label>
                     </div>
-                </div>    
+                </div>
                 <div class="form-group col-lg-4">
-                    <label>Entity Versioning</label>
+                    <label style="max-width: 72px;">Entity Versioning</label>
                     <div>
                         <input ng-disabled="!(taskCtrl.userRoleType == 'admin' || taskCtrl.sourceEnvOwner && taskCtrl.targetEnvOwner) && 
-                        !taskCtrl.allowed_entity_versioning" ng-change="taskCtrl.taskModeChange()" style="width: 100%"  type="checkbox" 
+                        !taskCtrl.allowed_entity_versioning" ng-change="taskCtrl.taskModeChange()"   type="checkbox" 
                         ng-model="taskCtrl.taskData.version_ind"/>
                     </div>
                 </div>   
                 <div class="form-group col-lg-4">
                     <label>Set Global Variables</label>
                     <div>
-                        <input style="width: 100%"  type="checkbox" ng-model="taskCtrl.taskData.task_globals"/>
+                        <input   type="checkbox" ng-model="taskCtrl.taskData.task_globals"/>
                     </div>
                 </div>     
             </div>
@@ -54,7 +58,7 @@
             </select>
         </div>
         <div ng-show="taskCtrl.userRoleType == 'admin' || taskCtrl.sourceEnvOwner && taskCtrl.targetEnvOwner" class="form-group col-lg-1" ng-if="!(taskCtrl.taskData.task_type == 'LOAD' && !taskCtrl.taskData.version_ind)"> 
-            <label>Select All Entities</label>
+            <label style="max-width: 72px;"> Select All Entities</label>
             <div>   
                 <input ng-disabled="taskCtrl.taskData.reference == 'refernceOnly'"  type="checkbox"class="form-control" ng-model="taskCtrl.taskData.selectAllEntites">
             </div>
@@ -63,8 +67,8 @@
             ng-class="{'col-lg-4' : !taskCtrl.adi_only, 'col-lg-6' : taskCtrl.adi_only}" 
             ng-if="taskCtrl.taskData.task_type == 'LOAD' && !taskCtrl.taskData.version_ind && taskCtrl.taskData.reference !== 'refernceOnly'">
             <label>{{"NUMBER_OF_ENTITIES" |  translate}} <span style="color: red">*</span></label>
-            <input tabindex="2" name="numberOfEntities" ng-blur="taskCtrl.updateEntitiesPattern();"  required type="number" class="form-control" min="0"
-                   ng-disabled="taskCtrl.disableChange"  max="{{taskCtrl.maxToCopy}}" ng-model="taskCtrl.taskData.number_of_entities_to_copy">
+            <input min="1"  max="{{taskCtrl.maxToCopy}}" tabindex="2" name="numberOfEntities" ng-blur="taskCtrl.updateEntitiesPattern();"  required type="number" class="form-control" 
+                   ng-disabled="taskCtrl.disableChange"  ng-model="taskCtrl.taskData.number_of_entities_to_copy">
             <div class="m-t-xs" ng-show="generalForm.numberOfEntities.$invalid && generalForm.submitted">
                 <small class="text-danger" ng-show="generalForm.numberOfEntities.$error.required">Please input Number of entities</small>
                 <small class="text-danger" ng-show="generalForm.numberOfEntities.$error.max">Maximum Entites to Copy is {{taskCtrl.maxToCopy}}</small>
@@ -168,10 +172,15 @@
             </div>
         </div>
         <div class="form-group col-lg-6">
-            <label>Logical Units <span style="color: red">*</span></label>
-            <a ng-if="(taskCtrl.taskData.task_type == 'EXTRACT' && taskCtrl.isFluxMode) || (taskCtrl.taskData.task_type == 'LOAD' && (!taskCtrl.taskData.version_ind || (taskCtrl.taskData.version_ind && taskCtrl.isFluxMode)))" style="margin-left: 10px" ng-click="taskCtrl.logicalUnits = taskCtrl.allLogicalUnits">Add all</a>
-            <a ng-if="(taskCtrl.taskData.task_type == 'EXTRACT' && taskCtrl.isFluxMode) || (taskCtrl.taskData.task_type == 'LOAD' && (!taskCtrl.taskData.version_ind || (taskCtrl.taskData.version_ind && taskCtrl.isFluxMode)))" style="margin-left: 10px"  ng-click="taskCtrl.logicalUnits = []">Clear all</a>
-
+            <div style="display: flex; justify-content: space-between;">
+                <label>Logical Units <span style="color: red">*</span></label>
+                <span>
+                    <a ng-if="(taskCtrl.taskData.task_type == 'EXTRACT' && taskCtrl.isFluxMode) || (taskCtrl.taskData.task_type == 'LOAD' && (!taskCtrl.taskData.version_ind || (taskCtrl.taskData.version_ind && taskCtrl.isFluxMode)))"
+                        style="margin-left: 10px" ng-click="taskCtrl.logicalUnits = taskCtrl.allLogicalUnits">Add all</a>
+                    <a ng-if="(taskCtrl.taskData.task_type == 'EXTRACT' && taskCtrl.isFluxMode) || (taskCtrl.taskData.task_type == 'LOAD' && (!taskCtrl.taskData.version_ind || (taskCtrl.taskData.version_ind && taskCtrl.isFluxMode)))"
+                        style="margin-left: 10px" ng-click="taskCtrl.logicalUnits = []">Clear all</a>
+                </span>
+            </div>
             <select ng-if="(taskCtrl.taskData.task_type == 'EXTRACT' && taskCtrl.isFluxMode) || (taskCtrl.taskData.task_type == 'LOAD' && (!taskCtrl.taskData.version_ind || (taskCtrl.taskData.version_ind && taskCtrl.isFluxMode)))"
                     tabindex="6" width="'100%'" name="taskLogicalUnit" ng-required="true" chosen multiple class="chosen-select form-control" tabindex="4"
                     ng-model="taskCtrl.logicalUnits"
@@ -193,9 +202,14 @@
             </div>
         </div>
         <div class="form-group col-lg-6">
-            <label>Post Execution Processes</label>
-            <a style="margin-left: 10px" ng-click="taskCtrl.postExecutionProcesses = taskCtrl.allPostExecutionProcessIds">Add all</a>
-            <a style="margin-left: 10px"  ng-click="taskCtrl.postExecutionProcesses = []">Clear all</a>
+            <div style="display: flex; justify-content: space-between;">
+                <label>Post Execution Processes</label>
+                <span>
+                    <a style="margin-left: 10px"
+                        ng-click="taskCtrl.postExecutionProcesses = taskCtrl.allPostExecutionProcessIds">Add all</a>
+                    <a style="margin-left: 10px" ng-click="taskCtrl.postExecutionProcesses = []">Clear all</a>
+                </span>
+            </div>
             <select tabindex="6" width="'100%'" name="taskPostExecutionProcess" chosen multiple class="chosen-select form-control" tabindex="4"
                     ng-model="taskCtrl.postExecutionProcesses"
                     ng-options="postExecutionProcess.process_id as postExecutionProcess.process_name for postExecutionProcess in taskCtrl.allPostExecutionProcess | orderBy:'process_name'">
@@ -203,5 +217,8 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn k2-primary-btn">Next</button>
+    <hr>    
+    <span>
+        <button type="submit" class="btn k2-primary-btn">Next</button>
+    </span>
 </div>
