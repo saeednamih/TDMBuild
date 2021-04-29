@@ -2,17 +2,11 @@ function permissionGroupsTableDirective(){
 
     var template = "views/permissionGroups/permissionGroupsTable.html";
 
-    var controller = function ($scope,$compile,TDMService,DTColumnBuilder,DTOptionsBuilder,$q, $timeout) {
+    var controller = function ($scope,$compile,TDMService,DTColumnBuilder,DTOptionsBuilder,$q, $timeout, toastr, $uibModal) {
         var permissionGroupsTableCtrl = this;
 
         permissionGroupsTableCtrl.loadingTable = true;
-
-        TDMService.getPermissionGroups().then(function(response){
-            if (response.errorCode != 'SUCCESS'){
-                //TODO show Error
-                return;
-            }
-            permissionGroupsTableCtrl.permissionGroupsData = response.result;
+        permissionGroupsTableCtrl.initTable = () => {
             permissionGroupsTableCtrl.dtInstance = {};
             permissionGroupsTableCtrl.dtColumns = [];
             permissionGroupsTableCtrl.dtColumnDefs = [];
@@ -60,6 +54,30 @@ function permissionGroupsTableDirective(){
                 return moment(data).format('DD MMM YYYY, HH:mm')
             };
 
+            var permissionGruopActions = function (data, type, full, meta) {
+                const deleteAction = `
+                    <button type="button"
+                        uib-tooltip="Delete Role" 
+                        tooltip-placement="top" 
+                        class="btn btn-circle btn-danger" 
+                        mwl-confirm="" 
+                        message="Role ${full.fabric_role} will be removed. Users which associated to ${full.fabric_role} will not be able to login To TDM. Are you sure you want to delete the this Role?" 
+                        confirm-text="Yes <i class='glyphicon glyphicon-ok'</i>" 
+                        cancel-text="No <i class='glyphicon glyphicon-remove'></i>" 
+                        placement="right" 
+                        on-confirm="permissionGroupsTableCtrl.deletePermisionGroup('${full.fabric_role}')" 
+                        on-cancel="cancelClicked = true" 
+                        confirm-button-type="danger" 
+                        cancel-button-type="default" 
+                        role-handler="" 
+                        role="0">
+                            <i class="fa fa-trash" aria-hidden="true">
+                            </i>
+                    </button>
+                `
+                return deleteAction;
+            };
+
             for (var i = 0; i <  permissionGroupsTableCtrl.headers.length ; i++) {
                 if (permissionGroupsTableCtrl.headers[i].type == 'date'){
                     permissionGroupsTableCtrl.dtColumns.push(DTColumnBuilder.newColumn(permissionGroupsTableCtrl.headers[i].column).withTitle(permissionGroupsTableCtrl.headers[i].name).renderWith(changeToLocalDate));
@@ -69,6 +87,8 @@ function permissionGroupsTableDirective(){
                 }
             }
 
+            permissionGroupsTableCtrl.dtColumns.unshift(DTColumnBuilder.newColumn('permissionGruopActions').withTitle('').renderWith(permissionGruopActions));
+            
             var getTableData = function () {
                 var deferred = $q.defer();
                 deferred.resolve(permissionGroupsTableCtrl.permissionGroupsData);
@@ -136,27 +156,107 @@ function permissionGroupsTableDirective(){
                     permissionGroupsTableCtrl.loadingTable = false;
                   });
        
-        });
-
-
-        permissionGroupsTableCtrl.openProduct = function(productID){
-            if ($scope.content.openProduct) {
-                var productData = _.find(permissionGroupsTableCtrl.productsData, {product_id: productID});
-                if (productData) {
-                    $scope.content.openProduct(productData);
-                    return;
-                }
-            }
-            //TODO show error ??
         };
 
-        permissionGroupsTableCtrl.openNewProduct = function(){
-            if ($scope.content.openNewProduct) {
-                $scope.content.openNewProduct(permissionGroupsTableCtrl.productsData);
-                return;
-            }
-            //TODO show error ??
-        }
+        permissionGroupsTableCtrl.getData = () => {
+            TDMService.getPermissionGroups().then((response) => {
+                if (response.errorCode != 'SUCCESS'){
+                    //TODO show Error
+                    return;
+                }
+                permissionGroupsTableCtrl.permissionGroupsData = response.result;
+                if (permissionGroupsTableCtrl.dtInstance) {
+                    permissionGroupsTableCtrl.dtInstance.reloadData(function(data){}, true);
+                }
+                else {
+                    permissionGroupsTableCtrl.initTable();
+                }
+            });
+        };
+
+        permissionGroupsTableCtrl.getData();
+
+        permissionGroupsTableCtrl.deletePermisionGroup = (fabric_role) => {
+            console.log('delete permission group,' +  fabric_role);
+            TDMService.deleteRoleFromPermissionGroup(fabric_role).then((response) => {
+                if (response.errorCode == "SUCCESS") {
+                    const index = _.findIndex(permissionGroupsTableCtrl.permissionGroupsData,{fabric_role: fabric_role});
+                    if (index >= 0){
+                        permissionGroupsTableCtrl.permissionGroupsData.splice(index, 1);
+                        permissionGroupsTableCtrl.dtInstance.reloadData(function(data){}, true);
+                    }
+                }
+                else {
+                    toastr.error(`Unable to remove Role ${fabric_role}, err=[${response.message}]`);
+
+                }
+            });
+        };
+
+        permissionGroupsTableCtrl.openNewPermissionGroupModal = () => {
+            $uibModal.open({
+                templateUrl: 'views/permissionGroups/newPermissionGroup.html',
+                resolve : {
+                    attachedRoles : () => {
+                        return _.map(permissionGroupsTableCtrl.permissionGroupsData,'fabric_role') || [];
+                    },
+                },
+                controller: function ($scope, $uibModalInstance,TDMService, toastr, attachedRoles) {
+
+                    var newPermisionGroupCtrl = this;
+                    newPermisionGroupCtrl.permissionGroups = [
+                        {
+                            name: 'Admin',
+                            value: 'admin',
+                        },
+                        {
+                            name: 'Owner',
+                            value: 'owner',
+                        },
+                        {
+                            name: 'Tester',
+                            value: 'tester',
+                        }
+                    ];
+
+                    TDMService.getFabricRoles().then(response => {
+                        if (response.errorCode === 'SUCCESS') {
+                            newPermisionGroupCtrl.fabricRoles = _.filter(response.result,role => {
+                                return attachedRoles.indexOf(role) < 0;
+                            });
+                        }else {
+                            toastr.error(`Unable to get Fabric Roles, err=[${err.message}]`);
+                        }
+                    }).catch(err => {
+                        toastr.error(`Unable to get Fabric Roles, err=[${err.message}]`);
+                    });
+
+                    newPermisionGroupCtrl.attachRoleToPermissionGroup = () => {
+                        TDMService.attachRoleToPermissionGroup(
+                            newPermisionGroupCtrl.permissionGroup,
+                            newPermisionGroupCtrl.fabricRole,
+                            newPermisionGroupCtrl.description).then((response) => {
+                                if (response.errorCode === 'SUCCESS') {
+                                    $uibModalInstance.close(true);
+                                }else {
+                                    toastr.error(`Unable to attach Fabric Role to Permission Group, err=[${err.message}]`);
+                                }
+                            }).catch(err => {
+                                toastr.error(`Unable to attach Fabric Role to Permission Group, err=[${err.message}]`);
+                            });
+                    };
+
+                    newPermisionGroupCtrl.close = function (){
+                        $uibModalInstance.close();
+                    };
+                },
+                controllerAs: 'newPermisionGroupCtrl'
+            }).result.then(function (result) {
+                if (result){
+                    permissionGroupsTableCtrl.getData();
+                }
+            });
+        };
     };
 
     return {

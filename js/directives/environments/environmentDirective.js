@@ -232,7 +232,7 @@ function environmentDirective() {
             }
         });
 
-        TDMService.getOwners().then(function (response) {
+        TDMService.getUsersByPermssionGroups('owner').then(function (response) {
             if (response.errorCode == "SUCCESS") {
                 environmentCtrl.allOwners = response.result;
             }

@@ -53,7 +53,7 @@ function newEnvironmentDirective() {
             toastr.error("New Environment", "Unable to get available Source Environment");
         });
 
-        TDMService.getOwners().then(function (response) {
+        TDMService.getUsersByPermssionGroups('owner').then(function (response) {
             if (response.errorCode == "SUCCESS") {
                 newEnvironmentCtrl.allOwners = response.result;
             } else {

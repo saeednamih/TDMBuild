@@ -24,14 +24,68 @@ angular
       });
     };
 
-    var getUserRole = () => {
+    var deleteRoleFromPermissionGroup = (role) => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return invokeFabricWebServiceWrapper(
+          "wsDeletePermissionGroupMapping",
+          {role: role},
+          "DELETE"
+        );
+      }
+    }
+
+    var getUsersByPermssionGroups = (permissionGroup) => {
       if (window.k2api && window.k2api.invokeFabricWebService) {
         return new Promise((resolve, reject) => {
-          resolve({
-            result:  'admin',
-            errorCode: "SUCCESS",
-          });
+          invokeFabricWebServiceWrapper(
+            "/wsGetUsersByPermissionGroup",
+            {
+              permissionGroup
+            },
+            "GET"
+          ).then(response => {
+            response.result = _.map(response.result || [],user => {
+              return {
+                "uid": user,
+                "user_id": user,
+                "displayName": user,
+                "username": user,
+              }; 
+            });
+            resolve(response);
+          }).catch(err => {
+            reject(err);
         });
+      });
+    }
+  }
+
+    var attachRoleToPermissionGroup = (permission_group, role ,description) => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return invokeFabricWebServiceWrapper(
+          "wsAddPermissionGroupMapping",
+          {
+            permission_group,
+            role,
+            description,
+          },
+          "POST"
+        );
+      }
+    }
+
+    var getFabricRoles = (role) => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return invokeFabricWebServiceWrapper(
+          "wsGetFabricRoles",
+          {role: role},
+          "GET"
+        );
+      }
+    }
+
+    var getUserRole = () => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
         return invokeFabricWebServiceWrapper(
           "wsGetUserPermissionGroup",
           null,
@@ -1754,6 +1808,10 @@ angular
       deleteExecutionProcess: deleteExecutionProcess,
       getBEPostExecutionProcess: getBEPostExecutionProcess,
       getUserRole: getUserRole,
+      deleteRoleFromPermissionGroup: deleteRoleFromPermissionGroup,
+      getUsersByPermssionGroups: getUsersByPermssionGroups,
+      getFabricRoles: getFabricRoles,
+      attachRoleToPermissionGroup: attachRoleToPermissionGroup,
       getPermissionGroups: getPermissionGroups,
     };
   })
