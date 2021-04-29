@@ -325,7 +325,7 @@ function taskHistoryDirective($interval) {
                 }
                 if (migrateId != "null"){
                     TDMService.postGenericAPI('migrateStatusWs',{
-                        migrateId : migrateId,
+                        migrateIds : migrateId,
                         runModes : types
                     }).then(function(response){
                         if (type == 'S'){
@@ -548,7 +548,7 @@ function taskHistoryDirective($interval) {
 
             $scope.getMigrateStatusWs = function(){
                 TDMService.postGenericAPI('migrateStatusWs',{
-                    migrateId : _.map(taskHistoryTableCtrl.executionIds, 'fabric_execution_id'),
+                    migrateIds : _.map(taskHistoryTableCtrl.executionIds, 'fabric_execution_id'),
                     runModes : ['H','S']
                 }).then(function(response){
                     taskHistoryTableCtrl.executionData = [];

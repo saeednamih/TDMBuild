@@ -1,6 +1,10 @@
-<div class="animated fadeInRightBig">
-    <h2>General</h2>
-    <div style="min-height: 95px" class="row">
+<div class=" k2-card"   style="margin-top: 35px;">
+    <div class="k2-header">
+        <span class="k2-card-title" style="color:var(--secondary-text-color)">General</span>
+
+    </div>
+    <hr >
+    <div style="min-height: 95px" class="row k2-body">
         <div class="form-group"
                 ng-class="{'col-lg-6' : !taskCtrl.isFluxMode,'col-lg-3' : taskCtrl.isFluxMode}">
             <label>{{"TASK_TITLE" |  translate}} <span style="color: red">*</span></label>
@@ -218,7 +222,7 @@
         </div>
     </div>
     <hr>    
-    <span>
-        <button type="submit" class="btn k2-primary-btn">Next</button>
+    <span style="display: flex; flex-direction: row-reverse;">
+        <button type="submit" style="width:80px" class="btn k2-primary-btn">Next</button>
     </span>
 </div>

@@ -35,6 +35,18 @@ function tasksTableDirective($interval, TASK) {
                     visible: true
                 },
                 {
+                    column: 'task_status',
+                    name: 'Task Status',
+                    clickAble: false,
+                    visible: true
+                },
+                {
+                    column: 'task_execution_status',
+                    name: 'Task Execution Status',
+                    clickAble: false,
+                    visible: true
+                },
+                {
                     column: 'version_ind',
                     name: 'Entity Versioning',
                     clickAble: false,
@@ -81,18 +93,6 @@ function tasksTableDirective($interval, TASK) {
                     name: 'Update Date',
                     clickAble: false,
                     type: 'date',
-                    visible: true
-                },
-                {
-                    column: 'task_status',
-                    name: 'Task Status',
-                    clickAble: false,
-                    visible: true
-                },
-                {
-                    column: 'task_execution_status',
-                    name: 'Task Execution Status',
-                    clickAble: false,
                     visible: true
                 },
                 {
@@ -268,15 +268,108 @@ function tasksTableDirective($interval, TASK) {
                     canByRunByOtherTester)) {
                     tasksTableCtrl.tasksData[meta.row].disabled = false;
                     tasksTableCtrl.tasksData[meta.row].onHold = full.task_execution_status == 'onHold';
-                    taskActions = taskActions + '<button style="margin-left: 3px;"  ng-class="(tasksTableCtrl.tasksData[' + meta.row + '].disabled == true || (tasksTableCtrl.tasksData[' + meta.row + '].onHold == true || tasksTableCtrl.tasksData[' + meta.row + '].executioncount !== 0)) ? \'executeStatesWhiteIcon\':\'executeStatesBlueIcon\'" title="Execute Task" ng-disabled="tasksTableCtrl.tasksData[' + meta.row + '].disabled == true || (tasksTableCtrl.tasksData[' + meta.row + '].onHold==true || tasksTableCtrl.tasksData[' + meta.row + '].executioncount !== 0)" class="btn buttonTaskAction btn-circle" type="button" ng-click="tasksTableCtrl.executeTask(' + meta.row +')"><i class="fa fa-play taskExecutionButton"></i> </button>';
-                    taskActions = taskActions + '<button   ng-class="tasksTableCtrl.tasksData[' + meta.row + '].onHold==true ? \'executeStatsRedIcon\':\'executeStatsGreenIcon\'" style="margin-left: 3px;" title="{{tasksTableCtrl.tasksData[' + meta.row + '].onHold == false ?\'Hold Task\':\'Activate Task\'}}"  class="btn btn-circle buttonTaskAction" type="button" ng-click="tasksTableCtrl.chooseHoldActivate(' + meta.row + ')" ><i  class="fa fa-eject rotateEjectAwesome taskExecutionHoldButton" ></i> </button>';
-                    // taskActions = taskActions +  '<a ng-if="tasksTableCtrl.tasksData[' + meta.row + '].onHold == true" style="margin-left: 3px;"  title="Activate Task" ng-click="tasksTableCtrl.activateTask(' + meta.row + ')"><span class="fa-stack fa-lg"><i style="color: green;" class="fa fa-circle-o fa-stack-2x"></i><i style="color: green;" class="fa fa-play fa-stack-1x"></i></span></a>';
+                    taskActions = taskActions + `
+                    <span style="margin-left: 3px; cursor: pointer;" ng-click="tasksTableCtrl.executeTask(${meta.row})" >
+                        <img ng-show="(tasksTableCtrl.tasksData[${meta.row}].disabled == true 
+                            || (tasksTableCtrl.tasksData[${meta.row}].onHold == true || 
+                            tasksTableCtrl.tasksData[${meta.row}].executioncount !== 0))" 
+                            src="icons/play-off.svg">
+                        </img>
+                        <img ng-show="!(tasksTableCtrl.tasksData[${meta.row}].disabled == true 
+                        || (tasksTableCtrl.tasksData[${meta.row}].onHold == true || 
+                        tasksTableCtrl.tasksData[${meta.row}].executioncount !== 0))"
+                            src="icons/play.svg">
+                        </img>
+                        
+                    </span>
+                `;
+                   
+                   
+                    // taskActions = taskActions + 
+                    // '<button style="margin-left: 3px;" 
+                    //  ng-class="(tasksTableCtrl.tasksData[' + meta.row + '].disabled == true || (tasksTableCtrl.tasksData[' + meta.row + '].onHold == true || tasksTableCtrl.tasksData[' + meta.row + '].executioncount !== 0)) ? \'executeStatesWhiteIcon\':\'executeStatesBlueIcon\'" 
+                    //  title="Execute Task" 
+                    //  ng-disabled=
+                    //  "tasksTableCtrl.tasksData[' + meta.row + '].disabled == true || (tasksTableCtrl.tasksData[' + meta.row + '].onHold==true || tasksTableCtrl.tasksData[' + meta.row + '].executioncount !== 0)" 
+                    //  class="btn buttonTaskAction btn-circle" 
+                    //  type="button"
+                    //   ng-click="tasksTableCtrl.executeTask(' + meta.row +')">
+                    //   <i class="fa fa-play taskExecutionButton"></i> 
+                    //   </button>';
+                    
+                                        taskActions = taskActions + `
+                    <span style="margin-left: 3px;cursor: pointer;" ng-click="tasksTableCtrl.chooseHoldActivate(${meta.row })" >
+                        <img ng-show="tasksTableCtrl.tasksData[${meta.row}].onHold==true"
+                            src="icons/puse-on.svg">
+                        </img>
+                        <img ng-show="tasksTableCtrl.tasksData[${meta.row}].onHold==false" ng-click="tasksTableCtrl.chooseHoldActivate(${meta.row })"
+                            src="icons/puse.svg">
+                        </img>
+                        
+                    </span>
+                `;
+
+                    
+                    
+                    
+                    /* taskActions = taskActions + 
+                     '<button 
+                     ng-class="tasksTableCtrl.tasksData[' + meta.row + '].onHold==true ? \'executeStatsRedIcon\':\'executeStatsGreenIcon\'" 
+                     style="margin-left: 3px;" 
+                     title="{{tasksTableCtrl.tasksData[' + meta.row + '].onHold == false ?\'Hold Task\':\'Activate Task\'}}"  
+                     class="btn btn-circle buttonTaskAction"
+                    type="button"
+                    ng-click="tasksTableCtrl.chooseHoldActivate(' + meta.row + ')" >
+                       <i  class="fa fa-eject rotateEjectAwesome taskExecutionHoldButton" >
+                       </i> 
+                 </button>';
+                */
                 }
                 if (full.task_status == "Active"){
-                    taskActions = taskActions + '<button  style="margin-left: 3px;" title="Save As"  class="btn btn-circle buttonTaskAction" type="button" ng-click="tasksTableCtrl.saveAs(\'' + full.task_id + '\')" ><i  class="fa fa-floppy-o taskExecutionHoldButton" ></i> </button>';
-                }
-                taskActions = taskActions + '<button style="margin-left: 3px;" title="Task Execution History" class="btn btn-primary btn-circle buttonTaskAction" type="button" ng-click="tasksTableCtrl.taskExecutionSummary(\'' + full.task_id + '\')"><i class="fa fa-copy taskExecutionHistoryButton"></i></button>';
+                    taskActions = taskActions + ` 
+                    <span
+                     style="margin-left: 3px;
+                     cursor: pointer;
+                     " 
+                    ng-click="tasksTableCtrl.saveAs(${full.task_id})"  
+                 >
+                    <img src="icons/floppy.svg"> </img>
+                </span>`;
+                    /* taskActions = taskActions +
+                     '<button  style="margin-left: 3px;" 
+                     title="Save As"  
+                     class="btn btn-circle buttonTaskAction" 
+                     type="button" 
+                     ng-click="tasksTableCtrl.saveAs(\'' + full.task_id + '\')" >
+                     <i  class="fa fa-floppy-o taskExecutionHoldButton" >
+                     </i> </button>';
+                  */
+                    }
 
+
+                    taskActions = taskActions + ` 
+                    <span
+                     style="margin-left: 3px;
+                     cursor: pointer;
+                     " 
+                     ng-click="tasksTableCtrl.taskExecutionSummary(${full.task_id})">
+                    <img src="icons/history.svg"> </img>
+                </span>`;
+
+                /*taskActions = 
+                taskActions + 
+                '<button 
+                style="margin-left: 3px;"
+                 title="Task Execution History" 
+                 class="btn btn-primary btn-circle buttonTaskAction"
+                  type="button" ng-click="tasksTableCtrl.taskExecutionSummary(\'' + full.task_id + '\')"
+                  
+                  >
+                  
+                  <i class="fa fa-copy taskExecutionHistoryButton">
+                  </i>
+                  </button>';
+                */
                 return taskActions;
             };
 
@@ -329,12 +422,12 @@ function tasksTableDirective($interval, TASK) {
                     $compile(angular.element(row).contents())($scope);
                 })
                 .withOption('scrollX', false)
-                .withOption('aaSorting', [[11,'asc']])
+                .withOption('aaSorting', [[3,'asc']])
                 .withButtons([
                     {
                         extend: 'colvis',
                         text: 'Show/Hide columns',
-                        columns: [7, 8, 9, 10, 11, 12, 13, 14, 15,16,17,18,19,20,21,22,23, 24, 25],
+                        columns: [ 9, 10, 11, 12, 13, 14, 15,16,17,18,19,20,21,22,23, 24, 25],
                         callback: function (columnIdx, visible) {
                             if (visible == true) {
                                 var index = tasksTableCtrl.hideColumns.indexOf(columnIdx);
@@ -372,33 +465,61 @@ function tasksTableDirective($interval, TASK) {
                         },
                         3: {
                             type: 'select',
+                            values: [
+                                {
+                                    value: "Inactive",
+                                    label: "Inactive"
+                                },
+                                {
+                                    value: "Active",
+                                    label: "Active"
+                                }
+                            ],
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(11) >= 0 ? true : false)
+                        },
+                        4: {
+                            type: 'select',
+                            values: [
+                                {
+                                    value: "Active",
+                                    label: "Active"
+                                },
+                                {
+                                    value: "onHold",
+                                    label: "onHold"
+                                }
+                            ],
+                            hidden: (tasksTableCtrl.hideColumns.indexOf(12) >= 0 ? true : false)
+                        },
+                        5: {
+                            type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'version_ind')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(3) >= 0 ? true : false)
                         },
-                        4: {
+                        6: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'be_name')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(4) >= 0 ? true : false)
                         },
-                        5: {
+                        7: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'source_env_name')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(5) >= 0 ? true : false)
                         },
-                        6: {
+                        8: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'environment_name')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(6) >= 0 ? true : false)
                         },
-                        7: {
+                        9: {
                             type: 'select',
                             values: [
                                 {
@@ -428,48 +549,20 @@ function tasksTableDirective($interval, TASK) {
                             ],
                             hidden: (tasksTableCtrl.hideColumns.indexOf(7) >= 0 ? true : false)
                         },
-                        8: {
+                        10: {
                             type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(8) >= 0 ? true : false)
                         },
-                        9: {
+                        11: {
                             type: 'select',
                             values: _.map(_.unique(_.map(tasksTableCtrl.tasksData, 'task_last_updated_by')), function (el) {
                                 return {value: el, label: el}
                             }),
                             hidden: (tasksTableCtrl.hideColumns.indexOf(9) >= 0 ? true : false)
                         },
-                        10: {
+                        12: {
                             type: 'text',
                             hidden: (tasksTableCtrl.hideColumns.indexOf(10) >= 0 ? true : false)
-                        },
-                        11: {
-                            type: 'select',
-                            values: [
-                                {
-                                    value: "Inactive",
-                                    label: "Inactive"
-                                },
-                                {
-                                    value: "Active",
-                                    label: "Active"
-                                }
-                            ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(11) >= 0 ? true : false)
-                        },
-                        12: {
-                            type: 'select',
-                            values: [
-                                {
-                                    value: "Active",
-                                    label: "Active"
-                                },
-                                {
-                                    value: "onHold",
-                                    label: "onHold"
-                                }
-                            ],
-                            hidden: (tasksTableCtrl.hideColumns.indexOf(12) >= 0 ? true : false)
                         },
                         13: {
                             type: 'text',
