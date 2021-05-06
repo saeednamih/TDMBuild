@@ -22,10 +22,9 @@
               <a
                 class="btn-default"
                 ng-class="{
-                                activestep:
-                                 !generalForm.$submitted && newTaskCtrl.step == 1 ,
-                                 finishedstep: generalForm.$submitted ,
-                                  disabledstep: !generalForm.$submitted && newTaskCtrl.step !== 1 }"
+                          activestep:newTaskCtrl.step == 1 ,
+                          finishedstep:  generalForm.$submitted && newTaskCtrl.step !== 1 ,
+                          disabledstep: !generalForm.$submitted && newTaskCtrl.step !== 1 }"
                 ng-click="newTaskCtrl.openStep(1)"
               >
                 <span class="wizard-step">
@@ -35,11 +34,14 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !generalForm.$submitted && newTaskCtrl.step == 1 ,
-                 finishedsteptitle: generalForm.$submitted ,
+                activesteptitle:newTaskCtrl.step == 1 ,
+                 finishedsteptitle: generalForm.$submitted && newTaskCtrl.step !== 1 ,
                  disabledsteptitle: !generalForm.$submitted && newTaskCtrl.step !== 1 }"
-                >{{"GENERAL" | translate}}
+                >
+                {{"GENERAL" | translate}}
+                {{generalForm.$submitted}}
+                {{generalForm.$invalid }}
+                {{generalForm.$valid }}
               </span>
             </li>
             <li
@@ -50,7 +52,11 @@
               <a
                 class="btn-default"
                 ng-click="newTaskCtrl.openStep(6)"
-                ng-class="{activestep: !ReferenceForm.$submitted && newTaskCtrl.step == 6 , finishedstep: ReferenceForm.$submitted , disabledstep: !ReferenceForm.$submitted && newTaskCtrl.step !== 6 }"
+                ng-class="{
+                  activestep: newTaskCtrl.step == 6 ,
+                   finishedstep: ReferenceForm.$submitted && newTaskCtrl.step !== 6 , 
+                   disabledstep: !ReferenceForm.$submitted && newTaskCtrl.step !== 6
+                   }"
                 ><span class="wizard-step"
                   >{{newTaskCtrl.viewSteps.indexOf(6) + 1}}</span
                 ></a
@@ -58,9 +64,8 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !ReferenceForm.$submitted && newTaskCtrl.step == 6 ,
-                 finishedsteptitle: ReferenceForm.$submitted ,
+                activesteptitle:newTaskCtrl.step == 6 ,
+                 finishedsteptitle: ReferenceForm.$submitted && newTaskCtrl.step !== 6 , 
                  disabledsteptitle: !ReferenceForm.$submitted && newTaskCtrl.step !== 6 }"
               >
                 Reference
@@ -73,7 +78,10 @@
             >
               <a
                 class="btn-default"
-                ng-class="{activestep: !requestedEntitiesForm.$submitted && newTaskCtrl.step == 2 , finishedstep: requestedEntitiesForm.$submitted , disabledstep: !requestedEntitiesForm.$submitted && newTaskCtrl.step !== 2 }"
+                ng-class="{
+                  activestep: newTaskCtrl.step == 2 ,
+                   finishedstep: requestedEntitiesForm.$submitted  && newTaskCtrl.step !== 2, 
+                   disabledstep: !requestedEntitiesForm.$submitted && newTaskCtrl.step !== 2 }"
                 ><span class="wizard-step"
                   >{{newTaskCtrl.viewSteps.indexOf(2) + 1}}
                 </span></a
@@ -81,9 +89,8 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !requestedEntitiesForm.$submitted && newTaskCtrl.step == 2 ,
-                 finishedsteptitle: requestedEntitiesForm.$submitted ,
+                activesteptitle: newTaskCtrl.step == 2 ,
+                 finishedsteptitle:  requestedEntitiesForm.$submitted  && newTaskCtrl.step !== 2, 
                  disabledsteptitle: !requestedEntitiesForm.$submitted && newTaskCtrl.step !== 2 }"
                 >{{"REQUESTED_ENTITIES" | translate}}
               </span>
@@ -96,7 +103,10 @@
               <a
                 class="btn-default"
                 ng-click="newTaskCtrl.openStep(5)"
-                ng-class="{activestep: !AddGlobalForm.$submitted && newTaskCtrl.step == 5 , finishedstep: AddGlobalForm.$submitted , disabledstep: !AddGlobalForm.$submitted && newTaskCtrl.step !== 5 }"
+                ng-class="{
+                  activestep: newTaskCtrl.step == 5 ,
+                   finishedstep: AddGlobalForm.$submitted &&  newTaskCtrl.step !== 5 ,
+                    disabledstep: !AddGlobalForm.$submitted && newTaskCtrl.step !== 5 }"
                 ><span class="wizard-step"
                   >{{newTaskCtrl.viewSteps.indexOf(5) + 1}}</span
                 >
@@ -104,9 +114,8 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !AddGlobalForm.$submitted && newTaskCtrl.step == 5 ,
-                 finishedsteptitle: AddGlobalForm.$submitted ,
+                activesteptitle: newTaskCtrl.step == 5 ,
+                 finishedsteptitle:AddGlobalForm.$submitted &&  newTaskCtrl.step !== 5 ,
                  disabledsteptitle: !AddGlobalForm.$submitted && newTaskCtrl.step !== 5 }"
                 >{{"TASK_GLOBALS" | translate}}
               </span>
@@ -123,7 +132,10 @@
               <a
                 class="btn-default"
                 ng-click="newTaskCtrl.openStep(3)"
-                ng-class="{activestep: !requestParametersForm.$submitted && newTaskCtrl.step == 3 , finishedstep: requestParametersForm.$submitted , disabledstep: !requestParametersForm.$submitted && newTaskCtrl.step !== 3 }"
+                ng-class="{
+                  activestep:newTaskCtrl.step == 3 ,
+                   finishedstep: requestParametersForm.$submitted && newTaskCtrl.step !== 3 ,
+                    disabledstep: !requestParametersForm.$submitted && newTaskCtrl.step !== 3 }"
                 ><span class="wizard-step"
                   >{{newTaskCtrl.viewSteps.indexOf(3) + 1}}
                 </span>
@@ -131,9 +143,8 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !requestParametersForm.$submitted && newTaskCtrl.step == 3 ,
-                 finishedsteptitle: requestParametersForm.$submitted ,
+                activesteptitle: newTaskCtrl.step == 3 ,
+                 finishedsteptitle:  requestParametersForm.$submitted && newTaskCtrl.step !== 3 ,
                  disabledsteptitle: !requestParametersForm.$submitted && newTaskCtrl.step !== 3 }"
                 >{{"REQUEST_PARAMETERS" | translate}}
               </span>
@@ -142,7 +153,10 @@
               <a
                 class="btn-default"
                 ng-click="newTaskCtrl.openStep(4)"
-                ng-class="{activestep: !executionTimingForm.$submitted && newTaskCtrl.step == 4 , finishedstep: executionTimingForm.$submitted , disabledstep: !executionTimingForm.$submitted && newTaskCtrl.step !== 4 }"
+                ng-class="{
+                  activestep:newTaskCtrl.step == 4 ,
+                   finishedstep: executionTimingForm.$submitted && newTaskCtrl.step !== 4 ,
+                    disabledstep: !executionTimingForm.$submitted && newTaskCtrl.step !== 4 }"
               >
                 <span class="wizard-step"
                   >{{newTaskCtrl.viewSteps.indexOf(4) + 1}}
@@ -151,9 +165,8 @@
               <span
                 class="step-title"
                 ng-class="{
-                activesteptitle:
-                 !executionTimingForm.$submitted && newTaskCtrl.step == 4 ,
-                 finishedsteptitle: executionTimingForm.$submitted ,
+                activesteptitle: newTaskCtrl.step == 4 ,
+                 finishedsteptitle: executionTimingForm.$submitted && newTaskCtrl.step !== 4 ,
                  disabledsteptitle: !executionTimingForm.$submitted && newTaskCtrl.step !== 4 }"
                 >{{"EXECUTION_TIMING" | translate}}
               </span>

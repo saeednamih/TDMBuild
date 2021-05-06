@@ -480,6 +480,26 @@ task-directive ins {
   color: #ffffff !important;
 }
 
+.date-picker-date-time >div >div >div table {
+  /* background: darkred; */
+  background-color: transparent;
+  font-size: 14px;
+}
+.date-picker-date-time >div >div >div table>thead>tr>th {
+  background: transparent;
+  color: black;
+  font-weight: 500;
+}
+.date-picker-date-time >div >div >div table>thead>tr {
+  background: transparent;
+}
+.date-picker-date-time >div >div >div table>thead>tr:hover {
+  background: transparent;
+}
+.date-picker-date-time >div >div >div table>tbody>tr {
+  background: transparent;
+}
+
 .activesteptitle {
 
   color: var(--primary-color) !important;
@@ -506,7 +526,7 @@ task-directive ins {
   background-color: #fff !important;
    border: 3px solid  #cccccc;;
    color:#666666; */
-}
+
 
 
 .modal.taskGlobals .modal-dialog {
