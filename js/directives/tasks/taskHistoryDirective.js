@@ -330,7 +330,7 @@ function taskHistoryDirective($interval) {
                     }).then(function(response){
                         if (type == 'S'){
                             var data = $scope.buildSummaryData(response.result,migrateId,logicalUnit);
-                            var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId.toString(), lu_name: logicalUnit});
+                            var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId, lu_name: logicalUnit});
                             if (taskExecution && (taskExecution.selection_method == "REF" || taskExecution.refcount > 0)){
                                 return taskHistoryTableCtrl.getExtractTaskRefData(taskExecution.task_execution_id, type, logicalUnit).then(function(response){
                                     data = Object.assign(data,response.result);
@@ -344,7 +344,7 @@ function taskHistoryDirective($interval) {
                         }
                         else if (type == 'D'){
                             var data = $scope.buildDetailedData(response.result,migrateId,logicalUnit);
-                            var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId.toString(), lu_name: logicalUnit});
+                            var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId, lu_name: logicalUnit});
                             if (taskExecution && (taskExecution.selection_method == "REF" || taskExecution.refcount > 0)){
                                 return taskHistoryTableCtrl.getExtractTaskRefData(taskExecution.task_execution_id, type, logicalUnit).then(function(response){
                                     data = Object.assign(data,{refData : response.result});
@@ -359,7 +359,7 @@ function taskHistoryDirective($interval) {
                     });
                 } 
                 else{
-                    var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId.toString(), lu_name: logicalUnit})
+                    var taskExecution = _.find(taskHistoryTableCtrl.taskHistoryData,{ task_execution_id:taskExecutionId, lu_name: logicalUnit})
                     if (taskExecution && (taskExecution.selection_method == "REF" || taskExecution.refcount > 0)){
                         return taskHistoryTableCtrl.getExtractTaskRefData(taskExecution.task_execution_id, type, logicalUnit).then(function(response){
                             response.result.reference = true;
@@ -392,7 +392,7 @@ function taskHistoryDirective($interval) {
                     data.migrateCommand = detailedData.H["Migration Command"];
                 }
                 if (detailedData && detailedData.D){
-                    data.columnsNames = ["Entity ID", "Error", "Node id", "Results", "Status"];
+                    data.columns = ["Entity ID", "Error", "Node id", "Results", "Status"];
                     data.rows = _.map(detailedData.D,function(row){
                         var results = JSON.parse(row.Results);
                         if (results && results.Added){
@@ -659,13 +659,13 @@ function taskHistoryDirective($interval) {
             taskHistoryTableCtrl.dtColumnDefs = [];
             taskHistoryTableCtrl.headers = [
                 {
-                    column: 'source_env_name',
-                    name: 'Source Environment Name',
+                    column: 'lu_name',
+                    name: 'Logical Unit Name',
                     clickAble: false
                 },
                 {
-                    column: 'environment_name',
-                    name: 'Target Environment Name',
+                    column: 'lu_parent_name',
+                    name: 'Parent Logical Unit',
                     clickAble: false
                 },
                 {
@@ -674,13 +674,30 @@ function taskHistoryDirective($interval) {
                     clickAble: false
                 },
                 {
-                    column: 'lu_name',
-                    name: 'Logical Unit Name',
+                    column: 'execution_status',
+                    name: 'Execution Status',
                     clickAble: false
                 },
                 {
-                    column: 'lu_parent_name',
-                    name: 'Parent Logical Unit',
+                    column: 'start_execution_time',
+                    name: 'Start Execution Date',
+                    clickAble: false,
+                    date: true
+                },
+                {
+                    column: 'end_execution_time',
+                    name: 'End Execution Date',
+                    clickAble: false,
+                    date: true
+                },
+                {
+                    column: 'source_env_name',
+                    name: 'Source Environment Name',
+                    clickAble: false
+                },
+                {
+                    column: 'environment_name',
+                    name: 'Target Environment Name',
                     clickAble: false
                 },
                 {
@@ -738,23 +755,6 @@ function taskHistoryDirective($interval) {
                     name: 'Version Expiration Date',
                     clickAble: false,
                     date: true
-                },
-                {
-                    column: 'start_execution_time',
-                    name: 'Start Execution Date',
-                    clickAble: false,
-                    date: true
-                },
-                {
-                    column: 'end_execution_time',
-                    name: 'End Execution Date',
-                    clickAble: false,
-                    date: true
-                },
-                {
-                    column: 'execution_status',
-                    name: 'Execution Status',
-                    clickAble: false
                 }
             ];
 
@@ -863,7 +863,7 @@ function taskHistoryDirective($interval) {
                 }
             }
 
-            taskHistoryTableCtrl.dtColumns.push(DTColumnBuilder.newColumn('taskHistoryActions').withTitle('').renderWith(taskHistoryActions).withOption('width', '250'));
+            taskHistoryTableCtrl.dtColumns.unshift(DTColumnBuilder.newColumn('taskHistoryActions').withTitle('').renderWith(taskHistoryActions).withOption('width', '100'));
 
             var getTableData = function () {
                 var deferred = $q.defer();
@@ -885,7 +885,7 @@ function taskHistoryDirective($interval) {
                     {
                         extend: 'colvis',
                         text: 'Show/Hide columns',
-                        columns: [6, 7, 8, 9, 10, 11, 12],
+                        columns: [ 10, 11, 12, 13, 14, 15 ,16],
                         callback: function (columnIdx, visible) {
                             if (visible == true) {
                                 var index = taskHistoryTableCtrl.hideColumns.indexOf(columnIdx);
@@ -909,13 +909,13 @@ function taskHistoryDirective($interval) {
                     const columns = [
                         {
                             type: 'select',
-                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'source_env_name')), function (el) {
+                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'lu_name')), function (el) {
                                 return {value: el, label: el}
                             })
                         },
                         {
                             type: 'select',
-                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'environment_name')), function (el) {
+                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'lu_parent_name')), function (el) {
                                 return {value: el, label: el}
                             })
                         },
@@ -927,13 +927,25 @@ function taskHistoryDirective($interval) {
                         },
                         {
                             type: 'select',
-                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'lu_name')), function (el) {
+                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'execution_status')), function (el) {
+                                return {value: el, label: el}
+                            })
+                        },
+                        {
+                            type: 'text'
+                        },
+                        {
+                            type: 'text'
+                        },
+                        {
+                            type: 'select',
+                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'source_env_name')), function (el) {
                                 return {value: el, label: el}
                             })
                         },
                         {
                             type: 'select',
-                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'lu_parent_name')), function (el) {
+                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'environment_name')), function (el) {
                                 return {value: el, label: el}
                             })
                         },
@@ -979,24 +991,13 @@ function taskHistoryDirective($interval) {
                         {
                             type: 'text'
                         },
-                        {
-                            type: 'text'
-                        },
-                        {
-                            type: 'text'
-                        },
-                        {
-                            type: 'select',
-                            values: _.map(_.unique(_.map(taskHistoryTableCtrl.taskHistoryData, 'execution_status')), function (el) {
-                                return {value: el, label: el}
-                            })
-                        }
+                        
                     ]
                     const lightColumnFilter = {};
                     columns.forEach((column, index) => {
                         let temp=angular.copy(column)
-                        temp.hidden=taskHistoryTableCtrl.hideColumns.indexOf(index) >= 0 ? true : false
-                        lightColumnFilter[index] = temp
+                        temp.hidden=taskHistoryTableCtrl.hideColumns.indexOf(index +  1) >= 0 ? true : false
+                        lightColumnFilter[index + 1] = temp
                     });
                     taskHistoryTableCtrl.dtOptions.withLightColumnFilter(lightColumnFilter)
                 }

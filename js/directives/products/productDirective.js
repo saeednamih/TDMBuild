@@ -305,6 +305,11 @@ function productDirective() {
                         productCtrl.dtColumnDefsLUs = [];
                         productCtrl.headersLUs = [
                             {
+                                column : 'actions',
+                                name : '',
+                                clickAble : false
+                            },
+                            {
                                 column : 'lu_name',
                                 name : 'Name',
                                 clickAble : true
@@ -322,11 +327,6 @@ function productDirective() {
                             {
                                 column : 'be_name',
                                 name : 'Business Entity',
-                                clickAble : false
-                            },
-                            {
-                                column : 'actions',
-                                name : '',
                                 clickAble : false
                             }
                         ];
@@ -348,9 +348,9 @@ function productDirective() {
                             }
 
                             return '<div class="row">' +
-                                '<div class="col-lg-6"><button type="button" uib-tooltip="Remove Logical Unit" tooltip-placement="top" ' +
+                                '<div class="col-lg-6"><button type="button" uib-tooltip="Remove Logical Unit" tooltip-placement="right" ' +
                                 'class="btn btn-circle btn-danger" mwl-confirm message="' + message + '" ' +
-                                'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="" ' +
+                                'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="right" ' +
                                 'on-confirm="productCtrl.removeLogicalUnit('+meta.row+')" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"' +
                                 'role-handler="" role="0" ng-if="!productCtrl.disableChange" ><i class="fa fa-trash" aria-hidden="true"></i></button></div>' +
                                 '</div>';

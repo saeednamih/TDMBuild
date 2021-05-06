@@ -39,7 +39,7 @@ function newEnvironmentDirective() {
         };
 
 
-        TDMService.getGenericAPI('getFabricEnvs').then(function (response) {
+        TDMService.getGenericAPI('wsGetAllEnvs').then(function (response) {
             newEnvironmentCtrl.availableSourceEnvironments = _.filter(response.result, function (env) {
                 if (_.findIndex(newEnvironmentCtrl.environments, {
                     fabric_environment_name: env,

@@ -57,7 +57,7 @@ function environmentDirective() {
             }
         };
 
-        TDMService.getGenericAPI('getFabricEnvs').then(function(response){
+        TDMService.getGenericAPI('wsGetAllEnvs').then(function(response){
             environmentCtrl.availableSourceEnvironments = _.filter(response.result,function(env){
                 if (env == environmentCtrl.environmentData.fabric_environment_name){
                     return true;

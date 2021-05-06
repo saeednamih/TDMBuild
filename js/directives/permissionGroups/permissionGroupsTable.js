@@ -18,7 +18,7 @@ function permissionGroupsTableDirective(){
                 },
                 {
                     column : 'fabric_role',
-                    name : 'Role',
+                    name : 'Fabric Role',
                     clickAble : false
                 },
                 {
@@ -55,27 +55,39 @@ function permissionGroupsTableDirective(){
             };
 
             var permissionGruopActions = function (data, type, full, meta) {
-                const deleteAction = `
-                    <button type="button"
-                        uib-tooltip="Delete Role" 
-                        tooltip-placement="top" 
-                        class="btn btn-circle btn-danger" 
-                        mwl-confirm="" 
-                        message="Role ${full.fabric_role} will be removed. Users which associated to ${full.fabric_role} will not be able to login To TDM. Are you sure you want to delete the this Role?" 
-                        confirm-text="Yes <i class='glyphicon glyphicon-ok'</i>" 
-                        cancel-text="No <i class='glyphicon glyphicon-remove'></i>" 
-                        placement="right" 
-                        on-confirm="permissionGroupsTableCtrl.deletePermisionGroup('${full.fabric_role}')" 
-                        on-cancel="cancelClicked = true" 
-                        confirm-button-type="danger" 
-                        cancel-button-type="default" 
-                        role-handler="" 
-                        role="0">
-                            <i class="fa fa-trash" aria-hidden="true">
-                            </i>
-                    </button>
+                const actions = `
+                    <div class="col-lg-6">
+                        <button type="button"
+                            uib-tooltip="Delete Role" 
+                            tooltip-placement="top" 
+                            class="btn btn-circle btn-danger" 
+                            mwl-confirm="" 
+                            message="Role ${full.fabric_role} will be removed. Users which are associated to ${full.fabric_role} will not be able to login To TDM. Are you sure you want to remove this Role from the Permission Group ?" 
+                            confirm-text="Yes <i class='glyphicon glyphicon-ok'</i>" 
+                            cancel-text="No <i class='glyphicon glyphicon-remove'></i>" 
+                            placement="right" 
+                            on-confirm="permissionGroupsTableCtrl.deletePermisionGroup('${full.fabric_role}')" 
+                            on-cancel="cancelClicked = true" 
+                            confirm-button-type="danger" 
+                            cancel-button-type="default" 
+                            role-handler="" 
+                            role="0">
+                                <i class="fa fa-trash" aria-hidden="true">
+                                </i>
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="button" 
+                            uib-tooltip="Edit Permission Group Mapping" 
+                            tooltip-placement="top" 
+                            class="btn btn-circle btn-primary" 
+                            role-handler="" role="0" 
+                            ng-click="permissionGroupsTableCtrl.openNewPermissionGroupModal('${full.fabric_role}')">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 `
-                return deleteAction;
+                return actions;
             };
 
             for (var i = 0; i <  permissionGroupsTableCtrl.headers.length ; i++) {
@@ -193,17 +205,31 @@ function permissionGroupsTableDirective(){
             });
         };
 
-        permissionGroupsTableCtrl.openNewPermissionGroupModal = () => {
+
+        permissionGroupsTableCtrl.openNewPermissionGroupModal = (fabric_role) => {
+            let row = null;
+            if (fabric_role){
+                row = _.find(permissionGroupsTableCtrl.permissionGroupsData , {fabric_role : fabric_role})
+            }
             $uibModal.open({
                 templateUrl: 'views/permissionGroups/newPermissionGroup.html',
                 resolve : {
                     attachedRoles : () => {
                         return _.map(permissionGroupsTableCtrl.permissionGroupsData,'fabric_role') || [];
                     },
+                    oldRecord : () => {
+                        return row;
+                    },
                 },
-                controller: function ($scope, $uibModalInstance,TDMService, toastr, attachedRoles) {
+                controller: function ($scope, $uibModalInstance,TDMService, toastr, attachedRoles, oldRecord) {
 
                     var newPermisionGroupCtrl = this;
+                    if (oldRecord) {
+                        newPermisionGroupCtrl.edit = true;
+                        newPermisionGroupCtrl.permissionGroup = oldRecord.permission_group;
+                        newPermisionGroupCtrl.fabricRole = oldRecord.fabric_role;
+                        newPermisionGroupCtrl.description = oldRecord.description;
+                    }
                     newPermisionGroupCtrl.permissionGroups = [
                         {
                             name: 'Admin',
@@ -222,7 +248,7 @@ function permissionGroupsTableDirective(){
                     TDMService.getFabricRoles().then(response => {
                         if (response.errorCode === 'SUCCESS') {
                             newPermisionGroupCtrl.fabricRoles = _.filter(response.result,role => {
-                                return attachedRoles.indexOf(role) < 0;
+                                return attachedRoles.indexOf(role) < 0 || (newPermisionGroupCtrl.edit && role === oldRecord.fabric_role);
                             });
                         }else {
                             toastr.error(`Unable to get Fabric Roles, err=[${err.message}]`);
@@ -232,18 +258,37 @@ function permissionGroupsTableDirective(){
                     });
 
                     newPermisionGroupCtrl.attachRoleToPermissionGroup = () => {
-                        TDMService.attachRoleToPermissionGroup(
-                            newPermisionGroupCtrl.permissionGroup,
-                            newPermisionGroupCtrl.fabricRole,
-                            newPermisionGroupCtrl.description).then((response) => {
-                                if (response.errorCode === 'SUCCESS') {
-                                    $uibModalInstance.close(true);
-                                }else {
+                        if (newPermisionGroupCtrl.edit) {
+                            TDMService.updateRoleToPermissionGroup(
+                                newPermisionGroupCtrl.permissionGroup,
+                                oldRecord.fabric_role,
+                                newPermisionGroupCtrl.fabricRole,
+                                newPermisionGroupCtrl.description || '').then((response) => {
+                                    if (response.errorCode === 'SUCCESS') {
+                                        $uibModalInstance.close(true);
+                                        toastr.success(`Updated Mapping Fabric Role and Permission Group Successfully`);
+                                    }else {
+                                        toastr.error(`Unable to update Fabric Role to Permission Group, err=[${err.message}]`);
+                                    }
+                                }).catch(err => {
+                                    toastr.error(`Unable to update Fabric Role to Permission Group, err=[${err.message}]`);
+                                });
+                        }
+                        else {
+                            TDMService.attachRoleToPermissionGroup(
+                                newPermisionGroupCtrl.permissionGroup,
+                                newPermisionGroupCtrl.fabricRole,
+                                newPermisionGroupCtrl.description || '').then((response) => {
+                                    if (response.errorCode === 'SUCCESS') {
+                                        $uibModalInstance.close(true);
+                                        toastr.success(`Successfully Added new Mapping`);
+                                    }else {
+                                        toastr.error(`Unable to attach Fabric Role to Permission Group, err=[${err.message}]`);
+                                    }
+                                }).catch(err => {
                                     toastr.error(`Unable to attach Fabric Role to Permission Group, err=[${err.message}]`);
-                                }
-                            }).catch(err => {
-                                toastr.error(`Unable to attach Fabric Role to Permission Group, err=[${err.message}]`);
-                            });
+                                });
+                        }
                     };
 
                     newPermisionGroupCtrl.close = function (){

@@ -128,6 +128,11 @@ function taskSummaryDirective() {
                     clickable: true
                 },
                 {
+                    column: 'execution_status',
+                    name: 'Execution Status',
+                    clickable: false
+                },
+                {
                     column: 'source_env_name',
                     name: 'Source Environment Name',
                     clickable: false
@@ -191,11 +196,6 @@ function taskSummaryDirective() {
                     column: 'tot_num_of_failed_post_executions',
                     name: 'Total Number Of Failed Post Executions',
                     clickable: false
-                },
-                {
-                    column: 'execution_status',
-                    name: 'Execution Status',
-                    clickable: false
                 }
             ];
 
@@ -238,7 +238,7 @@ function taskSummaryDirective() {
                 }
             }
 
-            taskSummaryCtrl.dtColumns.push(DTColumnBuilder.newColumn('taskHistoryActions').withTitle('').renderWith(taskHistoryActions).withOption('width', '250'));
+            taskSummaryCtrl.dtColumns.unshift(DTColumnBuilder.newColumn('taskHistoryActions').withTitle('').renderWith(taskHistoryActions).withOption('width', '50'));
 
             var getTableData = function () {
                 var deferred = $q.defer();
@@ -261,7 +261,7 @@ function taskSummaryDirective() {
                     {
                         extend: 'colvis',
                         text: 'Show/Hide columns',
-                        columns: [8, 9, 10, 11, 12, 13],
+                        columns: [ 10, 11, 12, 13, 14, 15],
                         callback: function (columnIdx, visible) {
                             if (visible == true) {
                                 var index = taskSummaryCtrl.hideColumns.indexOf(columnIdx);

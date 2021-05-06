@@ -1,150 +1,54 @@
-<div class="col-lg-12">
-    <!-- <div class="ibox float-e-margins"
-         ng-if="taskHistoryTableCtrl.executionIds.length > 0 && taskHistoryTableCtrl.taskType != 'EXTRACT'">
-        <div class="ibox-title">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>{{'RUNNING_EXECUTION' | translate}}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="project-list">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr class="row"
-                                    ng-if="luExecution.data != null"
-                                    ng-repeat="luExecution in taskHistoryTableCtrl.runningExecutionsData">
-                                    <td class="col-lg-1">
-                                        {{luExecution.data.luName}}
-                                    </td>
-                                    <td class="col-lg-1">
-                                        <div ng-if="taskHistoryTableCtrl.taskData.selection_method != 'REF'"
-                                            style="{{luExecution.data.numberOfTotalRefTables === 0 ?  '' : 'margin-bottom: 10px'}}">Entities</div>
-                                        <div ng-if="luExecution.data.numberOfTotalRefTables > 0 && taskHistoryTableCtrl.taskData.refcount > 0">Reference</div>
-                                    </td>
-                                    <td class="col-lg-7" ng-if="luExecution.data.status.toUpperCase() == 'RUNNING'">
-                                        <uib-progressbar ng-if="taskHistoryTableCtrl.taskData.selection_method != 'REF'" class="progress-striped active" value="luExecution.data.percentageOfCompletedEntities" type="success">{{luExecution.data.percentageOfCompletedEntities}}%</uib-progressbar>
-                                        <uib-progressbar ng-if="luExecution.data.numberOfTotalRefTables > 0 && taskHistoryTableCtrl.taskData.refcount > 0" class="progress-striped active" value="luExecution.data.percentageOfCompletedEntitiesRef" type="success">{{luExecution.data.percentageOfCompletedEntitiesRef.toFixed(2)}}%</uib-progressbar>
-                                    </td>
-                                    <td class="col-lg-7" ng-if="luExecution.data.status.toUpperCase() != 'RUNNING'">
-                                        <uib-progressbar ng-if="taskHistoryTableCtrl.taskData.selection_method != 'REF'" class="progress-striped active" value="luExecution.data.percentageOfCompletedEntities" type="success">{{luExecution.data.status.toUpperCase()}}</uib-progressbar>
-                                        <uib-progressbar ng-if="luExecution.data.numberOfTotalRefTables > 0 && taskHistoryTableCtrl.taskData.refcount > 0" class="progress-striped active" value="luExecution.data.percentageOfCompletedEntitiesRef" type="success">{{luExecution.data.status.toUpperCase()}}</uib-progressbar>
-                                    </td>
-                                    <td class="col-lg-3" ng-if="luExecution.data.status.toUpperCase() == 'RUNNING'">
-                                        <div class="row task-summary copied-failed">
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <span ng-if="taskHistoryTableCtrl.taskData.selection_method != 'REF'">Copied : {{luExecution.data.numberOfCopiedEntites}}</span>
-                                                    <span ng-if="taskHistoryTableCtrl.taskData.selection_method != 'REF'">Failed : {{luExecution.data.numberOfFailedEntites}}</span>
-                                                </div>
-                                                <div>
-                                                    <span ng-if="luExecution.data.numberOfTotalRefTables > 0 && taskHistoryTableCtrl.taskData.refcount > 0">Copied : {{luExecution.data.numberOfCopiedRefTables}}</span>
-                                                    <span ng-if="luExecution.data.numberOfTotalRefTables > 0 && taskHistoryTableCtrl.taskData.refcount > 0">Failed : {{luExecution.data.numberOfFailedRefTables}}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4" ng-if="taskHistoryTableCtrl.enableStopExecution == true">
-                                                <button uib-tooltip="Stop execution" ng-click="taskHistoryTableCtrl.stopExecution(luExecution.executionID)" class="btn btn-danger btn-circle stop-execution" type="button"><i class="fa fa-stop" style="color:red"></i></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="ibox float-e-margins"
-    ng-if="taskHistoryTableCtrl.executionIds.length > 0 &&
-        taskHistoryTableCtrl.executionData &&
-        taskHistoryTableCtrl.taskData.selection_method != 'REF'">
-        <div class="ibox-title">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>{{'RUNNING_EXECUTION' | translate}}</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4" ng-if="taskHistoryTableCtrl.executionData.length && taskHistoryTableCtrl.enableStopExecution == true" style="margin-top: 20px;">
-           <button uib-tooltip="Stop execution" ng-click="taskHistoryTableCtrl.stopExecution()" class="btn btn-danger btn-circle"
-                    type="button" style="background-color: white;float: right;    position: fixed; top: 37px; right: 20px;"><i class="fa fa-stop" style="color:red;"></i></button>
-        </div>
-        <div class="ibox-content" ng-repeat="luExecution in taskHistoryTableCtrl.executionData">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="project-list">
-                        <div>
-                            <div class="row">
-                                <!-- <div class="col-lg-12">
-                                    Migrate Id : {{luExecution.migrateID}}
-                                </div> -->
-
-                                <div class="col-lg-12" style="margin-top: 10px;">
-                                    {{luExecution.name}}
-                                </div>
-                                <div class="col-lg-12" style="margin-top: 20px;">
-                                    <uib-progressbar class="progress-striped active" value="luExecution.percentageOfCompleted || 0" type="success">
-                                        ({{luExecution.percentageOfCompleted || 0}}%)
-                                    </uib-progressbar>
-                                </div>
-                                <div class="col-lg-8" style="margin-top: 20px;">
-                                    <p>
-                                        <span ng-show="taskHistoryTableCtrl.taskType === 'EXTRACT'">
-                                                Updated : {{luExecution.Updated}}</br>
-                                        </span> 
-                                        <span ng-show="taskHistoryTableCtrl.taskType === 'EXTRACT'">
-                                                Unchanged : {{luExecution.Unchanged}}</br>
-                                        </span> 
-                                        Added : {{luExecution.added}} </br>
-                                        Failed : {{luExecution.failed}} </br>
-                                        <b>Processed : {{luExecution.processed}}</b>
-                                    </p>
-                                </div>
-
-                            </div>
+<div>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins k2-card"
+        ng-show="taskHistoryTableCtrl.executionIds.length > 0 &&
+            taskHistoryTableCtrl.executionData &&
+            taskHistoryTableCtrl.taskData.selection_method != 'REF'">
+            <div class="k2-header">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <div class="k2-card-title">{{'RUNNING_EXECUTION' | translate}}</div>
+                        </div>
+                        <div class="col-lg-6" style="display:flex;justify-content: flex-end" ng-if="taskHistoryTableCtrl.executionData.length && taskHistoryTableCtrl.enableStopExecution == true">
+                                <img src="icons/play.svg" uib-tooltip="Stop execution" ng-click="taskHistoryTableCtrl.stopExecution()" />        
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="ibox float-e-margins" ng-if="taskHistoryTableCtrl.executionIds.length > 0 && 
-        (taskHistoryTableCtrl.taskData.selection_method == 'REF'  || taskHistoryTableCtrl.taskData.refcount > 0)">
-        <div class="ibox-title">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Reference Tables Process</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4" ng-if="taskHistoryTableCtrl.enableStopExecution == true" style="margin-top: 20px;">
-            <button uib-tooltip="Stop execution" ng-click="taskHistoryTableCtrl.stopExecution()" class="btn btn-danger btn-circle"
-                    type="button" style="background-color: white;float: right;  position: fixed; top: 37px; right: 20px"><i class="fa fa-stop" style="color:red;"></i></button>
-        </div>
-        <div class="ibox-content" ng-repeat="lu in taskHistoryTableCtrl.executionRefData">
-            <div class="row">
-                <div class="col-lg-12">
-                    {{lu.lu_name}}
-                    <div class="project-list">
-                        <div>
-                            <div class="row">
-                                <div class="col-lg-12" style="margin-top: 20px;">
-                                    <uib-progressbar class="progress-striped active" value="lu.percentageOfCompleted || 0" type="success">
-                                        {{lu.percentageOfCompleted || 0}}%
-                                    </uib-progressbar>
-                                </div>
-                                <div class="col-lg-8" style="margin-top: 20px;">
-                                    <p>
-                                        Copied : {{lu.numOfCopiedRefTables}} </br>
-                                        <span ng-click="taskHistoryTableCtrl.startExtractRefStatsDetailed('failed', lu.lu_name)" style="cursor: pointer">+</span> Failed : {{lu.numOfFailedRefTables}} </br>
-                                        <span ng-click="taskHistoryTableCtrl.startExtractRefStatsDetailed('in process', lu.lu_name)" style="cursor: pointer">+</span> In Process : {{lu.numOfProcessingRefTables}} </br>
-                                        Not Started : {{lu.numberOfNotStartedRefTables}} </br>
-                                        <b>Processed : {{lu.numOfProcessedRefTables}}</b>
-                                    </p>
+            <hr />
+            <div class="k2-body" ng-repeat="luExecution in taskHistoryTableCtrl.executionData">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="project-list">
+                            <div>
+                                <div class="row">
+                                    <!-- <div class="col-lg-12">
+                                        Migrate Id : {{luExecution.migrateID}}
+                                    </div> -->
+    
+                                    <div class="col-lg-12" style="margin-top: 10px;">
+                                        {{luExecution.name}}
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 20px;">
+                                        <uib-progressbar class="progress-striped active" value="luExecution.percentageOfCompleted || 0" type="success">
+                                            ({{luExecution.percentageOfCompleted || 0}}%)
+                                        </uib-progressbar>
+                                    </div>
+                                    <div class="col-lg-8" style="margin-top: 20px;">
+                                        <p>
+                                            <span ng-show="taskHistoryTableCtrl.taskType === 'EXTRACT'">
+                                                    Updated : {{luExecution.Updated}}</br>
+                                            </span> 
+                                            <span ng-show="taskHistoryTableCtrl.taskType === 'EXTRACT'">
+                                                    Unchanged : {{luExecution.Unchanged}}</br>
+                                            </span> 
+                                            Added : {{luExecution.added}} </br>
+                                            Failed : {{luExecution.failed}} </br>
+                                            <b>Processed : {{luExecution.processed}}</b>
+                                        </p>
+                                    </div>
+    
                                 </div>
                             </div>
                         </div>
@@ -152,47 +56,88 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <div class="row">
-                <div class="col-lg-12" style="display: flex;justify-content: space-between">
-                    <h2>Execution ID {{content.exec_id}} - Logical Units Execution Summary</h2>
-                    <div ng-show="!taskHistoryTableCtrl.adi_only">
-                        <a style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;"  type="button" title="List of entities" ng-style="taskHistoryTableCtrl.disableAccessingStatistics && {'cursor':'not-allowed'}" ng-click="taskHistoryTableCtrl.openEntitiesExecStats(content.exec_id)"><i class="fa fa-bars"></i> </a>
+        <div class="ibox float-e-margins" ng-if="taskHistoryTableCtrl.executionIds.length > 0 && 
+            (taskHistoryTableCtrl.taskData.selection_method == 'REF'  || taskHistoryTableCtrl.taskData.refcount > 0)">
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Reference Tables Process</h2>
                     </div>
-					<!-- <div class="reload_wrap"> -->
-                      <!-- <p> Reload interval: </p> -->
-                      <!-- <div class="btn-group"> -->
-
-                        <!-- <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-                          <!-- {{ taskHistoryTableCtrl.reload_interval / 1000 }} seconds<span class="caret"></span> -->
-                        <!-- </button> -->
-
-                        <!-- <ul class="dropdown-menu"> -->
-                          <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(5)"> -->
-                            <!-- <a href="">5 seconds</a> -->
-                          <!-- </li> -->
-                          <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(10)"> -->
-                            <!-- <a href="">10 seconds</a> -->
-                          <!-- </li> -->
-                          <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(30)"> -->
-                            <!-- <a href="">30 seconds</a> -->
-                          <!-- </li> -->
-                          <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(60)"> -->
-                            <!-- <a href="">60 seconds</a> -->
-                          <!-- </li> -->
-                        <!-- </ul> -->
-
-                      <!-- </div> -->
-                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="col-lg-4" ng-if="taskHistoryTableCtrl.enableStopExecution == true" style="margin-top: 20px;">
+                <button uib-tooltip="Stop execution" ng-click="taskHistoryTableCtrl.stopExecution()" class="btn btn-danger btn-circle"
+                        type="button" style="background-color: white;float: right;  position: fixed; top: 37px; right: 20px"><i class="fa fa-stop" style="color:red;"></i></button>
+            </div>
+            <div class="ibox-content" ng-repeat="lu in taskHistoryTableCtrl.executionRefData">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{lu.lu_name}}
+                        <div class="project-list">
+                            <div>
+                                <div class="row">
+                                    <div class="col-lg-12" style="margin-top: 20px;">
+                                        <uib-progressbar class="progress-striped active" value="lu.percentageOfCompleted || 0" type="success">
+                                            {{lu.percentageOfCompleted || 0}}%
+                                        </uib-progressbar>
+                                    </div>
+                                    <div class="col-lg-8" style="margin-top: 20px;">
+                                        <p>
+                                            Copied : {{lu.numOfCopiedRefTables}} </br>
+                                            <span ng-click="taskHistoryTableCtrl.startExtractRefStatsDetailed('failed', lu.lu_name)" style="cursor: pointer">+</span> Failed : {{lu.numOfFailedRefTables}} </br>
+                                            <span ng-click="taskHistoryTableCtrl.startExtractRefStatsDetailed('in process', lu.lu_name)" style="cursor: pointer">+</span> In Process : {{lu.numOfProcessingRefTables}} </br>
+                                            Not Started : {{lu.numberOfNotStartedRefTables}} </br>
+                                            <b>Processed : {{lu.numOfProcessedRefTables}}</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <table ng-if="taskHistoryTableCtrl.loadingTable === false" style="display: table; width: 100%" datatable="" dt-options="taskHistoryTableCtrl.dtOptions" dt-column-defs="taskHistoryTableCtrl.dtColumnDefs" dt-columns="taskHistoryTableCtrl.dtColumns"  dt-instance="taskHistoryTableCtrl.dtInstanceCallback" class="table tasksTableHistory table-striped table-bordered table-hover"></table>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-lg-12" style="display: flex;justify-content: space-between">
+                        <h2>Execution ID {{content.exec_id}} - Logical Units Execution Summary</h2>
+                        <div ng-show="!taskHistoryTableCtrl.adi_only">
+                            <a style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;"  type="button" title="List of entities" ng-style="taskHistoryTableCtrl.disableAccessingStatistics && {'cursor':'not-allowed'}" ng-click="taskHistoryTableCtrl.openEntitiesExecStats(content.exec_id)"><i class="fa fa-bars"></i> </a>
+                        </div>
+                        <!-- <div class="reload_wrap"> -->
+                          <!-- <p> Reload interval: </p> -->
+                          <!-- <div class="btn-group"> -->
+    
+                            <!-- <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+                              <!-- {{ taskHistoryTableCtrl.reload_interval / 1000 }} seconds<span class="caret"></span> -->
+                            <!-- </button> -->
+    
+                            <!-- <ul class="dropdown-menu"> -->
+                              <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(5)"> -->
+                                <!-- <a href="">5 seconds</a> -->
+                              <!-- </li> -->
+                              <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(10)"> -->
+                                <!-- <a href="">10 seconds</a> -->
+                              <!-- </li> -->
+                              <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(30)"> -->
+                                <!-- <a href="">30 seconds</a> -->
+                              <!-- </li> -->
+                              <!-- <li ng-click="taskHistoryTableCtrl.setReloadInterval(60)"> -->
+                                <!-- <a href="">60 seconds</a> -->
+                              <!-- </li> -->
+                            <!-- </ul> -->
+    
+                          <!-- </div> -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table ng-if="taskHistoryTableCtrl.loadingTable === false" style="display: table; width: 100%" datatable="" dt-options="taskHistoryTableCtrl.dtOptions" dt-column-defs="taskHistoryTableCtrl.dtColumnDefs" dt-columns="taskHistoryTableCtrl.dtColumns"  dt-instance="taskHistoryTableCtrl.dtInstanceCallback" class="table tasksTableHistory table-striped table-bordered table-hover"></table>
+                    </div>
                 </div>
             </div>
         </div>
