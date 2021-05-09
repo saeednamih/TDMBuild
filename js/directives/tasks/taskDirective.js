@@ -1089,6 +1089,9 @@ function taskDirective() {
             } else if (taskCtrl.step == 6) {
                 taskCtrl.referenceNext(nextStep);
                 return;
+            } else if (taskCtrl.step == 5) {
+                taskCtrl.globalsNext(nextStep);
+                return;
             }
             taskCtrl.step = nextStep;
 
@@ -1210,6 +1213,44 @@ function taskDirective() {
             }
             taskCtrl.generalForm = form;
         };
+
+        
+        taskCtrl.submitForm=function(step,nextStep){
+            const steps = taskCtrl.getStepsArray();
+            if (step === nextStep){
+                return;
+            }
+            if (steps.indexOf(step) > steps.indexOf(nextStep)){
+                taskCtrl.openStep(nextStep);
+                return;
+            }
+            switch(step){
+                case 1:
+                    $scope.generalForm.$setSubmitted();
+                    taskCtrl.generalNext($scope.generalForm,nextStep);
+                break;
+                case 2:
+                    $scope.requestedEntitiesForm.$setSubmitted();
+                    taskCtrl.requestedEntitiesNext($scope.requestedEntitiesForm, undefined, nextStep);
+                break;
+                case 3:
+                    $scope.requestParametersForm.$setSubmitted();
+                    taskCtrl.requestParametersNext($scope.requestParametersForm);
+                break;
+                case 4:
+                    $scope.executionTimingForm.$setSubmitted();
+                    taskCtrl.executionTimingFinish($scope.executionTimingForm)
+                break;
+                case 5:
+                    $scope.AddGlobalForm.$setSubmitted();
+                    taskCtrl.globalsNext(nextStep)
+                break;
+                case 6:
+                    $scope.ReferenceForm.$setSubmitted();
+                    taskCtrl.referenceNext(nextStep)
+                break;
+            }
+        }
 
         taskCtrl.referenceNext = function (nextStep) {
             if (_.filter(taskCtrl.taskData.refList, {selected: true}).length == 0) {
@@ -1381,18 +1422,18 @@ function taskDirective() {
                 taskCtrl.errorList = false;
                 if (form.$valid || taskCtrl.disableChange == true) {
                     if (taskCtrl.taskData.task_globals) {
-                        taskCtrl.step = 5;
+                        taskCtrl.step = nextStep || 5;
                     } else if ((taskCtrl.taskData.task_type == "EXTRACT" ||
                         taskCtrl.taskData.task_type == "LOAD") && taskCtrl.taskData.version_ind) {
-                        taskCtrl.step = 4;
+                        taskCtrl.step = nextStep || 4;
                     }  else if (taskCtrl.taskData.task_type == "EXTRACT" && 
                                 !taskCtrl.taskData.version_ind && (
                                     (!taskCtrl.userRole ||!taskCtrl.userRole.allowed_request_of_fresh_data) &&
                                     (!taskCtrl.sourceUserRole || !taskCtrl.sourceUserRole.allowed_request_of_fresh_data )
                             )) {
-                        taskCtrl.step = 4;
+                        taskCtrl.step = nextStep || 4;
                     } else {
-                        taskCtrl.step = 3;
+                        taskCtrl.step = nextStep || 3;
                     }
                 } else {
                     form.submitted = true;
@@ -1403,14 +1444,18 @@ function taskDirective() {
             
         };
 
-        taskCtrl.globalsNext = function () {
+        taskCtrl.globalsNext = function (nextStep) {
             if (taskCtrl.taskData.task_type == 'LOAD' && taskCtrl.taskData.version_ind || taskCtrl.taskData.task_type == 'EXTRACT') {
-                taskCtrl.openStep(4, 'next');
+                taskCtrl.step = nextStep || 4;
             } else {
-                taskCtrl.openStep(3, 'next');
+                taskCtrl.step = nextStep || 3;
             }
         };
 
+        
+        taskCtrl.initReferenceForm = (ReferenceForm) => {
+            $scope.ReferenceForm = ReferenceForm;
+        }
         taskCtrl.requestParametersNext = function (form) {
             if (form.$valid || taskCtrl.disableChange == true) {
                 taskCtrl.step = 4;

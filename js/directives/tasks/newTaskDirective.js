@@ -820,6 +820,42 @@ function newTaskDirective() {
             return stepsArray;
         }
 
+        newTaskCtrl.submitForm=function(step,nextStep){
+            const steps = newTaskCtrl.getStepsArray();
+            if (step === nextStep){
+                return;
+            }
+            if (steps.indexOf(step) > steps.indexOf(nextStep)){
+                newTaskCtrl.openStep(nextStep);
+                return;
+            }
+            switch(step){
+                case 1:
+                    $scope.generalForm.$setSubmitted();
+                    newTaskCtrl.generalNext($scope.generalForm,nextStep);
+                break;
+                case 2:
+                    $scope.requestedEntitiesForm.$setSubmitted();
+                    newTaskCtrl.requestedEntitiesNext($scope.requestedEntitiesForm, undefined, nextStep);
+                break;
+                case 3:
+                    $scope.requestParametersForm.$setSubmitted();
+                    newTaskCtrl.requestParametersNext($scope.requestParametersForm);
+                break;
+                case 4:
+                    $scope.executionTimingForm.$setSubmitted();
+                    newTaskCtrl.executionTimingFinish($scope.executionTimingForm)
+                break;
+                case 5:
+                    $scope.AddGlobalForm.$setSubmitted();
+                    newTaskCtrl.globalsNext(nextStep)
+                break;
+                case 6:
+                    $scope.ReferenceForm.$setSubmitted();
+                    newTaskCtrl.referenceNext(nextStep)
+                break;
+            }
+        }
         newTaskCtrl.openStep = function (step, type) {
             if (!(newTaskCtrl.userRoleType == 'admin' || newTaskCtrl.sourceEnvOwner && newTaskCtrl.targetEnvOwner)) {
                 newTaskCtrl.taskData.selectAllEntites = false;
@@ -881,6 +917,7 @@ function newTaskDirective() {
             //         return newTaskCtrl.step = 1;
             //     }
             // }
+            debugger
             if (newTaskCtrl.step == 1) {
                 if (!$scope.generalForm.$valid){
                     newTaskCtrl.generalForm = $scope.generalForm;
@@ -908,6 +945,9 @@ function newTaskDirective() {
                 return;
             } else if (newTaskCtrl.step == 6) {
                 newTaskCtrl.referenceNext(nextStep);
+                return;
+            } else if (newTaskCtrl.step == 5) {
+                newTaskCtrl.globalsNext(nextStep);
                 return;
             }
             newTaskCtrl.step = nextStep;
@@ -1144,10 +1184,10 @@ function newTaskDirective() {
                         newTaskCtrl.errorList = false;
                         if (form.$valid || newTaskCtrl.disableChange == true) {
                             if (newTaskCtrl.taskData.task_globals) {
-                                newTaskCtrl.step = 5;
+                                newTaskCtrl.step = nextStep || 5;
                             }  else if ((newTaskCtrl.taskData.task_type == "EXTRACT" ||
                                 newTaskCtrl.taskData.task_type == "LOAD") && newTaskCtrl.taskData.version_ind) {
-                                newTaskCtrl.step = 4;
+                                newTaskCtrl.step = nextStep || 4;
                             }  else if (newTaskCtrl.taskData.task_type == "EXTRACT" && 
                                         !newTaskCtrl.taskData.version_ind && (
                                             (!newTaskCtrl.userRole ||!newTaskCtrl.userRole.allowed_request_of_fresh_data) &&
@@ -1199,10 +1239,10 @@ function newTaskDirective() {
                 newTaskCtrl.errorList = false;
                 if (form.$valid || newTaskCtrl.disableChange == true) {
                     if (newTaskCtrl.taskData.task_globals) {
-                        newTaskCtrl.step = 5;
+                        newTaskCtrl.step = nextStep || 5;
                     } else if ((newTaskCtrl.taskData.task_type == "EXTRACT" ||
                         newTaskCtrl.taskData.task_type == "LOAD") && newTaskCtrl.taskData.version_ind) {
-                        newTaskCtrl.step = 4;
+                        newTaskCtrl.step = nextStep || 4;
                     }  else if (newTaskCtrl.taskData.task_type == "EXTRACT" && 
                                 !newTaskCtrl.taskData.version_ind && (
                                     (!newTaskCtrl.userRole ||!newTaskCtrl.userRole.allowed_request_of_fresh_data) &&
@@ -1220,11 +1260,11 @@ function newTaskDirective() {
 
         };
 
-        newTaskCtrl.globalsNext = function () {
+        newTaskCtrl.globalsNext = function (nextStep) {
             if (newTaskCtrl.taskData.task_type == 'LOAD' && newTaskCtrl.taskData.version_ind || newTaskCtrl.taskData.task_type == 'EXTRACT') {
-                newTaskCtrl.openStep(4, 'next');
+                newTaskCtrl.openStep(nextStep || 4, 'next');
             } else {
-                newTaskCtrl.openStep(3, 'next');
+                newTaskCtrl.openStep(nextStep || 3, 'next');
             }
         };
 
@@ -1551,6 +1591,10 @@ function newTaskDirective() {
             }
         };
 
+
+        newTaskCtrl.initReferenceForm = (ReferenceForm) => {
+            $scope.ReferenceForm = ReferenceForm;
+        }
 
         newTaskCtrl.requestParametersPrev = function () {
             if (newTaskCtrl.taskData.task_globals) {

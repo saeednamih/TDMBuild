@@ -26,7 +26,7 @@
                           activestep:newTaskCtrl.step == 1 ,
                           finishedstep:  generalForm.$submitted && newTaskCtrl.step !== 1 ,
                           disabledstep: !generalForm.$submitted && newTaskCtrl.step !== 1 }"
-                ng-click="newTaskCtrl.openStep(1)"
+                          ng-click="submitForm(newTaskCtrl.step,1)"
               >
                 <span class="wizard-step">
                   {{newTaskCtrl.viewSteps.indexOf(1) + 1}}
@@ -40,9 +40,6 @@
                  disabledsteptitle: !generalForm.$submitted && newTaskCtrl.step !== 1 }"
                 >
                 {{"GENERAL" | translate}}
-                {{generalForm.$submitted}}
-                {{generalForm.$invalid }}
-                {{generalForm.$valid }}
               </span>
             </li>
             <li
@@ -52,7 +49,7 @@
             >
               <a
                 class="btn-default"
-                ng-click="newTaskCtrl.openStep(6)"
+                ng-click="newTaskCtrl.submitForm(newTaskCtrl.step,6)"
                 ng-class="{
                   activestep: newTaskCtrl.step == 6 ,
                    finishedstep: ReferenceForm.$submitted && newTaskCtrl.step !== 6 , 
@@ -79,6 +76,7 @@
             >
               <a
                 class="btn-default"
+                ng-click="newTaskCtrl.submitForm(newTaskCtrl.step,2)"
                 ng-class="{
                   activestep: newTaskCtrl.step == 2 ,
                    finishedstep: requestedEntitiesForm.$submitted  && newTaskCtrl.step !== 2, 
@@ -103,7 +101,7 @@
             >
               <a
                 class="btn-default"
-                ng-click="newTaskCtrl.openStep(5)"
+                ng-click="newTaskCtrl.submitForm(newTaskCtrl.step,5)"
                 ng-class="{
                   activestep: newTaskCtrl.step == 5 ,
                    finishedstep: AddGlobalForm.$submitted &&  newTaskCtrl.step !== 5 ,
@@ -132,7 +130,7 @@
             >
               <a
                 class="btn-default"
-                ng-click="newTaskCtrl.openStep(3)"
+                ng-click="newTaskCtrl.submitForm(newTaskCtrl.step,3)"
                 ng-class="{
                   activestep:newTaskCtrl.step == 3 ,
                    finishedstep: requestParametersForm.$submitted && newTaskCtrl.step !== 3 ,
@@ -153,7 +151,7 @@
             <li class="pull-left" ng-class="{current : newTaskCtrl.step == 4}">
               <a
                 class="btn-default"
-                ng-click="newTaskCtrl.openStep(4)"
+                ng-click="newTaskCtrl.submitForm(newTaskCtrl.step,4)"
                 ng-class="{
                   activestep:newTaskCtrl.step == 4 ,
                    finishedstep: executionTimingForm.$submitted && newTaskCtrl.step !== 4 ,

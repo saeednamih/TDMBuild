@@ -74,6 +74,22 @@ angular
       }
     }
 
+
+    var updateRoleToPermissionGroup = (permission_group, old_role, new_role ,description) => {
+      if (window.k2api && window.k2api.invokeFabricWebService) {
+        return invokeFabricWebServiceWrapper(
+          "wsUpdatePermissionGroupMapping",
+          {
+            permission_group,
+            old_role,
+            new_role,
+            description,
+          },
+          "POST"
+        );
+      }
+    }
+
     var getFabricRoles = (role) => {
       if (window.k2api && window.k2api.invokeFabricWebService) {
         return invokeFabricWebServiceWrapper(
@@ -803,7 +819,7 @@ angular
     var getAllGlobals = function (envId, envName, data) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
         return invokeFabricWebServiceWrapper(
-          `environment/${envId}/getAllGlobals`,
+          `environment/getAllGlobals`,
           null,
           "GET"
         );
@@ -1648,12 +1664,9 @@ angular
     var getSummaryReport = function (executionId, luName) {
       if (window.k2api && window.k2api.invokeFabricWebService) {
         return invokeFabricWebServiceWrapper(
-          `wsExecutionSummaryReport`,
-          {
-            i_taskExecutionId: executionId,
-            i_luName: luName,
-          },
-          "GET"
+          `taskSummaryReport/${executionId}/luName/${luName}`,
+          null,
+          "POST"
         );
       } else {
         return Restangular.one("taskSummaryReport", executionId)
@@ -1819,6 +1832,7 @@ angular
       getUsersByPermssionGroups: getUsersByPermssionGroups,
       getFabricRoles: getFabricRoles,
       attachRoleToPermissionGroup: attachRoleToPermissionGroup,
+      updateRoleToPermissionGroup: updateRoleToPermissionGroup,
       getPermissionGroups: getPermissionGroups,
     };
   })
