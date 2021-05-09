@@ -221,7 +221,7 @@ function environmentNewProductDirective() {
             ];
 
             var updateCell = function (data, type, full, meta) {
-                return '<button class="btn btn-primary btn-circle" type="button" ng-click="envNewProductCtrl.openDBInterfaceModal(\'' + full.interface_id + '\')"><i class="fa fa-pencil"></i></button>';
+                return '<img src="icons/edit.svg" alt="edit" ng-click="envNewProductCtrl.openDBInterfaceModal(\'' + full.interface_id + '\')">';
             };
 
             for (var i = 0; i < environmentNewProductCtrl.headers.length; i++) {
@@ -648,7 +648,7 @@ function environmentProductDirective() {
             }
 
             var updateCell = function (data, type, full, meta) {
-                return '<button class="btn btn-primary btn-circle" type="button" ng-click="envProductCtrl.openDBInterfaceModal(\'' + full.interface_id + '\')"><i class="fa fa-pencil"></i></button>';
+                return '<img src="icons/edit.svg" alt="edit"  ng-click="envProductCtrl.openDBInterfaceModal(\'' + full.interface_id + '\')">';
             };
 
 

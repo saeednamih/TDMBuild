@@ -1,9 +1,9 @@
 <div class="col-lg-12" style="min-height: 590px">
-  <div class="ibox float-e-margins">
-    <div class="ibox-title">
+  <div class="ibox float-e-margins k2-card">
+    <div class="k2-header">
       <div class="row">
         <div class="col-lg-6">
-          <h5>{{ 'TASK' | translate }} {{taskCtrl.taskData.task_title}}</h5>
+          <div class="k2-card-title">{{ 'TASK' | translate }} {{taskCtrl.taskData.task_title}}</div>
           <h5 style="padding-left: 1em; font-weight: 300" ng-if="taskCtrl.taskData.task_status == 'Inactive'">
             {{ 'INACTIVE' | translate }}
           </h5>
@@ -14,12 +14,14 @@
             confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>"
             cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
             on-confirm="taskCtrl.deleteTask()" on-cancel="cancelClicked = true" confirm-button-type="danger"
-            cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)"
-              aria-hidden="true"></i></a>
+            cancel-button-type="default">
+              <img src="icons/delete-icon-2.svg">
+            </a>
         </div>
       </div>
     </div>
-    <div class="ibox-content">
+    <hr>
+    <div class="k2-body">
       <div class="wizard">
         <div class="steps clearfix custom-ul">
           <span style="display: none">

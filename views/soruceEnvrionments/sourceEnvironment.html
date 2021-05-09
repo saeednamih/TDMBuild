@@ -13,7 +13,9 @@
                        ng-if="!sourceEnvironmentCtrl.disableChange" class="pull-right"
                        mwl-confirm message="{{sourceEnvironmentCtrl.tasksCount == true ? 'The deleted source environment is attached to active tasks. The delete of the source environment will set those tasks to be inactive. Are you sure you want to delete the source environment ? ' : ''}} Are you sure you want to delete source Environment?"
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
-                       on-confirm="sourceEnvironmentCtrl.deleteEnvironment()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i></a>
+                       on-confirm="sourceEnvironmentCtrl.deleteEnvironment()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default">
+                       <img src="icons/delete-icon-2.svg">
+                    </a>
                 </div>
             </div>
         </div>

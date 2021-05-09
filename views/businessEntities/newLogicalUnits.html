@@ -1,5 +1,5 @@
-<div class="k2-card">
-    <div class=k2-header">
+<div>
+    <div class="k2-header">
         <button type="button" ng-click="newLogicalUnitsCtrl.close();" class="close" data-dismiss="modal"><span
                 aria-hidden="true">×</span><span class="sr-only">Close</span></button>
         <div class="k2-card-title">{{"ADD_LOGICAL_UNITS" | translate}}</div>
@@ -114,16 +114,15 @@
 
                         </div>
                     </div>
-                    <hr>
                     <div class="row" style="margin-top: 15px;">
-                        <div class="col-lg-10">
+                        <div class="col-lg-8">
                             <uib-alert ng-if="newLogicalUnitsCtrl.logicalUnitAlert"
                                 type="{{newLogicalUnitsCtrl.logicalUnitAlert.type}}"
                                 close="newLogicalUnitsCtrl.closeAlert()">{{newLogicalUnitsCtrl.logicalUnitAlert.msg}}
                             </uib-alert>
                         </div>
-                        <div class="col-lg-2">
-                            <button class="k2-primary-btn pull-right" type="submit">{{"ADD_LOGICAL_UNITS" |
+                        <div class="col-lg-4" style="display: flex;flex-direction: row;justify-content: flex-end;">
+                            <button class="k2-card-ok-cancel-btn custom-hover" pull-right" type="submit">{{"ADD_LOGICAL_UNITS" |
                                 translate}}
                             </button>
                         </div>  

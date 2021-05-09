@@ -272,19 +272,19 @@ function businessEntityDirective() {
 
                 var actionsColumn = function(data, type, full, meta){
                     return '' +
-                        '<div class="col-lg-6"><button type="button" uib-tooltip="Edit Logical Unit" tooltip-placement="right"' +
-                        'class="btn btn-circle btn-primary" role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ng-click="businessEntityCtrl.updateLogicalUnit('+meta.row+')"><i class="fa fa-pencil" aria-hidden="true"></i></button></div>' +
+                        '<div class="col-lg-6"><img src="icons/edit.svg" uib-tooltip="Edit Logical Unit" tooltip-placement="top" tooltip-append-to-body="true"' +
+                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ng-click="businessEntityCtrl.updateLogicalUnit('+meta.row+')"></div>' +
                         '<div class="col-lg-6">' +
-                        '<button type="button" ng-show="!(businessEntityCtrl.logicalUnitsData | checkIfLogicalUnitIsParent:' + meta.row + ')" uib-tooltip="Delete Logical Unit" tooltip-placement="right"' +
-                        'class="btn btn-circle btn-danger" ng-click="businessEntityCtrl.removeLogicalUnitErrorMessage('+ meta.row +')"' +
-                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ><i class="fa fa-trash" aria-hidden="true"></i></button>'+
-                        '<button type="button" ng-show="businessEntityCtrl.logicalUnitsData | checkIfLogicalUnitIsParent:' + meta.row + '" uib-tooltip="Delete Logical Unit" tooltip-placement="right"' +
-                        'class="btn btn-circle btn-danger" mwl-confirm ' +
+                        '<img src="icons/delete-icon.svg" ng-show="!(businessEntityCtrl.logicalUnitsData | checkIfLogicalUnitIsParent:' + meta.row + ')" uib-tooltip="Delete Logical Unit" tooltip-placement="top" tooltip-append-to-body="true"' +
+                        'ng-click="businessEntityCtrl.removeLogicalUnitErrorMessage('+ meta.row +')"' +
+                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ></img>'+
+                        '<img  src="icons/delete-icon.svg" ng-show="businessEntityCtrl.logicalUnitsData | checkIfLogicalUnitIsParent:' + meta.row + '" uib-tooltip="Delete Logical Unit" tooltip-placement="top" tooltip-append-to-body="true"' +
+                        'mwl-confirm ' +
                         'message="{{businessEntityCtrl.logicalUnitsData['+ meta.row +'].product_id == \'-1\' ? \' LU must be linked to a BE to enable its execution using the TDM GUI. Are you sure you want to delete this LU?\' : ' +
                         '\'Logical unit '+ businessEntityCtrl.logicalUnitsData[meta.row].lu_name + ' will be removed from related products. Active tasks which associated to '+ businessEntityCtrl.logicalUnitsData[meta.row].lu_name+ ' may be set to Inactive. Are you sure you want to delete the this LU?\'}}" ' +
-                        'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="right" ' +
+                        'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="top"  tooltip-append-to-body="true" ' +
                         'on-confirm="businessEntityCtrl.removeLogicalUnit('+meta.row+')" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"' +
-                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ><i class="fa fa-trash" aria-hidden="true"></i></button></div>' +
+                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ></img></div>' +
                         '';
                 };
 
@@ -435,15 +435,15 @@ function businessEntityDirective() {
 
                 var actionsColumnPE = function(data, type, full, meta){
                     return '' +
-                        '<div class="col-lg-6"><button type="button" uib-tooltip="Edit Post Execution Process" tooltip-placement="top"' +
-                        'class="btn btn-circle btn-primary" role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ng-click="businessEntityCtrl.PostExecutionProcessActions(false, ' + meta.row + ')"><i class="fa fa-pencil" aria-hidden="true"></i></button></div>' +
+                        '<div class="col-lg-6"><img src="icons/edit.svg" alt="edit" uib-tooltip="Edit Post Execution Process" tooltip-placement="top" tooltip-append-to-body="true"' +
+                        ' role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange" ng-click="businessEntityCtrl.PostExecutionProcessActions(false, ' + meta.row + ')"></div>' +
                         '<div class="col-lg-6">' +
-                        '<button type="button" uib-tooltip="Delete Entity Group Query" tooltip-placement="right"' +
-                        'class="btn btn-circle btn-danger" mwl-confirm ' +
+                        '<img src="icons/delete-icon.svg" uib-tooltip="Delete Entity Group Query" tooltip-placement="top" tooltip-append-to-body="true"' +
+                        'mwl-confirm ' +
                         'message="Process name '+ businessEntityCtrl.postExecutionData[meta.row].process_name + ' will be removed from the Business Entity. Active tasks which associated to '+ businessEntityCtrl.postExecutionData[meta.row].process_name + ' will be set to Inactive. Are you sure that you want to delete this process?" ' +
                         'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="right" ' +
                         'on-confirm="businessEntityCtrl.removePostExecutionProcess('+ meta.row +')" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"' +
-                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange"><i class="fa fa-trash" aria-hidden="true"></i></button><div>' +
+                        'role-handler="" role="0" ng-if="!businessEntityCtrl.disableChange"></img><div>' +
                         '';
                 };
 

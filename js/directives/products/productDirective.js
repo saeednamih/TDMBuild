@@ -348,11 +348,11 @@ function productDirective() {
                             }
 
                             return '<div class="row">' +
-                                '<div class="col-lg-6"><button type="button" uib-tooltip="Remove Logical Unit" tooltip-placement="right" ' +
-                                'class="btn btn-circle btn-danger" mwl-confirm message="' + message + '" ' +
+                                '<div class="col-lg-6"><img  src="icons/delete-icon.svg" alt="delete"  uib-tooltip="Remove Logical Unit" tooltip-placement="right"  tooltip-append-to-body="true"' +
+                                'mwl-confirm message="' + message + '" ' +
                                 'confirm-text="Yes <i class=\'glyphicon glyphicon-ok\'</i>" cancel-text="No <i class=\'glyphicon glyphicon-remove\'></i>"  placement="right" ' +
                                 'on-confirm="productCtrl.removeLogicalUnit('+meta.row+')" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"' +
-                                'role-handler="" role="0" ng-if="!productCtrl.disableChange" ><i class="fa fa-trash" aria-hidden="true"></i></button></div>' +
+                                'role-handler="" role="0" ng-if="!productCtrl.disableChange"></div>' +
                                 '</div>';
                         };
 

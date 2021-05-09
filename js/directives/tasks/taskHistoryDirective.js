@@ -838,18 +838,18 @@ function taskHistoryDirective($interval) {
                 }
                 if (taskHistoryTableCtrl.taskType != "EXTRACT"){
                     if (taskHistoryTableCtrl.runningExecution == full.task_execution_id) {
-                        taskHistoryActions = taskHistoryActions = '<a  style="margin-left: 3px;border-color: transparent;background-color: transparent; color: grey;cursor: not-allowed;"  type="button" title="Download Statistics File"><i class="fa fa-download"></i> </a>';
+                        taskHistoryActions = taskHistoryActions = '<a  style="margin-left: 3px;border-color: transparent;background-color: transparent; color: grey;cursor: not-allowed;"  type="button" title="Download Statistics File"><img src="icons/summary-report.svg"></img> </a>';
                     }
                     else {
                         // taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'S\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')"  target="_blank"  style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;" type="button" title="Download Statistics File"><i class="fa fa-download"></i> </a>';
                         // taskHistoryActions = taskHistoryActions + '<a href="' + taskHistoryTableCtrl.seqFile + '"  target="_blank" style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;" title="Download Sequence Report"><img style="width: 13px;" src="img/download_seq.jpg"> </a>';
-                        taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadErrorReport(\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;" title="Download Summary Report"><i class="fa fa-file-excel-o"> </i></a>';
+                        taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadErrorReport(\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 3px;border-color: transparent;background-color: transparent; color: black;" title="Download Summary Report"><img src="icons/summary-report.svg"></img> </a>';
                     }
 
                 }
                 else{
-                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'S\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')" style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" type="button" title="Download Summary Report"><i class="fa fa-download"></i> </a>';
-                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'D\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Detailed Report"><img style="width: 13px;" src="img/download_seq.jpg"> </a>';
+                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'S\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')" style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" type="button" title="Download Summary Report"><img src="icons/summary-report.svg"></img></a>';
+                    taskHistoryActions = taskHistoryActions + '<a ng-click="taskHistoryTableCtrl.downloadExtractReport(\'D\',\'' + full.fabric_execution_id+'\',\'' + full.lu_name + '\',' + full.task_execution_id + ')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Detailed Report"><img src="icons/detaild-report.svg"> </a>';
                 }
                 return taskHistoryActions;
             }

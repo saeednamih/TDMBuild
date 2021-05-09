@@ -12,7 +12,9 @@
                        mwl-confirm
                        message="{{productCtrl.hasActiveEnvironment.length > 0 ? 'Product ' + productCtrl.productData.product_name + ' is attached to testing environments. If you remove this product,  product will be removed from environments. Tasks for this product will be also deleted. Are you sure you want to delete it ?' : 'Are you sure you want to delete Product ?'}}"
                        confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>" cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
-                       on-confirm="productCtrl.deleteProduct()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x" style="color: var(--secondary-text-color)" aria-hidden="true"></i></a>
+                       on-confirm="productCtrl.deleteProduct()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="default">
+                       <img src="icons/delete-icon-2.svg">
+                    </a>
                 </div>
             </div>
         </div>

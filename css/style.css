@@ -1813,7 +1813,7 @@ table.dataTable thead .sorting_desc_disabled {
   background-color: transparent;
 }
 .tab-title {
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
 }
 .table-hover > tbody > tr:hover {
   background-color: rgba(20, 131, 243, 0.3);
@@ -2075,6 +2075,11 @@ div.dt-button-info {
   width: 100%;
   font-size: 14px;
   appearance: auto;
+}
+.form-buttons{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 .form-control:focus,
 .single-line:focus {
@@ -3737,13 +3742,22 @@ video {
 }
 /* MODAL */
 .modal-content {
-  background-clip: padding-box;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  outline: 0 none;
-  position: relative;
+  background: white;
+  border: 1px solid #ebebeb;
+  padding: 22px;
+  font-size: 14px;
+  border-radius: 9px;
+  box-shadow:none;
+}
+hr{
+  margin: 15px 0px;
+   border: 1px solid #EAEAEA; 
+  color: #EAEAEA;
+}
+.custom-hover:hover{
+  color:  var(--primary-color-hover);;
+  background-color:transparent;
+  border-color: transparent;
 }
 .modal-dialog {
   z-index: 2200;
@@ -4307,6 +4321,11 @@ table.table-mail tr td {
 .progress-bar {
   background-color: #1ab394;
 }
+.running-execution-row{
+ padding-top:5px ;
+ padding-bottom:10px ;
+ border-top: 1px solid var(--light-border-color);
+}
 .progress-small,
 .progress-small .progress-bar {
   height: 10px;
@@ -4347,7 +4366,7 @@ table.table-mail tr td {
 }
 /* COLORS */
 .text-navy {
-  color: #1ab394;
+  color:var(--secondary-text-color);
 }
 .text-primary {
   color: inherit;
@@ -5525,6 +5544,15 @@ dd.project-people {
 }
 .jstree-default .jstree-icon.none {
   width: 0;
+}
+tree > ul > li  {
+  padding: 0;
+}
+tree > ul > li:hover  {
+  background-color: transparent;
+}
+tree > ul > li:active  {
+  background-color: transparent;
 }
 /* CLIENTS */
 .clients-list {

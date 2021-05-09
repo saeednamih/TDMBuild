@@ -25,11 +25,11 @@ function taskGlobals() {
 
         var renderSelectionColumn = function(data, type, full, meta){
             return '<div class="col-lg-6">' + 
-            '<button type="button" uib-tooltip="Edit Global" tooltip-placement="top" class="btn btn-circle btn-primary" ' + 
-            'ng-click="taskGlobals.editGlobal(taskGlobals.globals[' + meta.row + '])"><i class="fa fa-pencil" aria-hidden="true"></i></button>' +
+            '<img src="icons/edit.svg"  alt="edit" uib-tooltip="Edit Global" tooltip-placement="top"' + 
+            'ng-click="taskGlobals.editGlobal(taskGlobals.globals[' + meta.row + '])">' +
             '</div>' + 
-            '<div class="col-lg-6"><button type="button" uib-tooltip="Delete Global" tooltip-placement="top" class="btn btn-circle btn-danger" ' + 
-            'ng-click="taskGlobals.removeGlobal(\'' + full.global_name +'\')"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+            '<div class="col-lg-6"><img  src="icons/delete-icon.svg" alt="edit" uib-tooltip="Delete Global" tooltip-placement="top" ' + 
+            'ng-click="taskGlobals.removeGlobal(\'' + full.global_name +'\')">' +
             '</div>'; 
             
         };

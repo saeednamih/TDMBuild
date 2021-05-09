@@ -1,8 +1,8 @@
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
+<div class="ibox float-e-margins k2-card">
+    <div class="k2-header" style="border: none;">
         <div class="row">
             <div class="col-lg-8">
-                <h5>{{ 'ROLE' | translate }} {{environmentCtrl.roleData.role_name}}</h5>
+                <div class="k2-card-title">{{ 'ROLE' | translate }} {{environmentCtrl.roleData.role_name}}</div>
                 <h5 style="padding-left:1em;font-weight: 300;"
                     ng-if="environmentCtrl.roleData.role_status == 'Inactive'">{{ 'INACTIVE' | translate }}</h5>
             </div>
@@ -13,13 +13,14 @@
                    confirm-text="Yes <i class='glyphicon glyphicon-ok'></i>"
                    cancel-text="No <i class='glyphicon glyphicon-remove'></i>" placement="left"
                    on-confirm="environmentCtrl.deleteRole()" on-cancel="cancelClicked = true"
-                   confirm-button-type="danger" cancel-button-type="default"><i class="fa fa-trash fa-2x"
-                                                                                style="color: var(--secondary-text-color)"
-                                                                                aria-hidden="true"></i></a>
+                   confirm-button-type="danger" cancel-button-type="default">
+                   <img src="icons/delete-icon-2.svg">
+                 </a>
             </div>
         </div>
     </div>
-    <div class="ibox-content">
+    <hr>
+    <div class="k2-body">
         <form role="form" name="environmentCtrl.roleForm" ng-submit="environmentCtrl.saveRoleChanges()">
             <div class="row">
                 <div class="col-lg-12">
@@ -162,7 +163,7 @@
                     
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 form-buttons">
                             <button class="btn k2-primary-btn pull-left" ng-if="!environmentCtrl.disableChangeRole"
                                     type="submit" role-handler role="1">{{"SAVE_CHANGES" | translate}}
                             </button>

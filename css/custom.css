@@ -51,7 +51,7 @@ body.mini-navbar .nav-header {
 }
 
 .progress-bar {
-  background-color: #51b3c3;
+  background-color: #3c97f3;
 }
 
 .localytics-chosen {
@@ -554,4 +554,15 @@ a.toggleVersions > .fa.arrow {
 
 a.active.toggleVersions > .fa.arrow {
   transform: rotate(90deg);
+}
+
+
+[date-picker] td, [date-picker] th{
+  background-color: unset;
+  font-weight: inherit;
+  color: black;
+}
+
+[date-picker] tr:hover {
+  background-color: var(--bg-color);
 }

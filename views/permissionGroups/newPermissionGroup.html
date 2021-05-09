@@ -1,11 +1,9 @@
-<div class="modal-header k2-card">
-    <div class="k2-header">
-        <div class="k2-card-title modal-title">
+<div>
+        <div class="k2-card-title">
             Attach Role to Permission Group
         </div>
-    </div>
     <hr>
-    <div class="modal-body k2-body">
+    <div class="k2-body">
         <div class="row">
             <form role="form" name="attachRoleToPermissionGroupForm"
                 ng-submit="newPermisionGroupCtrl.attachRoleToPermissionGroup()">
@@ -30,15 +28,14 @@
                         <label>Description</label>
                         <input required type="text" ng-model="newPermisionGroupCtrl.description" class="form-control">
                     </div>
+                    <div style="display: flex;flex-direction: row;justify-content: flex-end;">
+                        <button class="k2-card-ok-cancel-btn custom-hover" type="button" ng-click="newPermisionGroupCtrl.close()">{{"CANCEL" |
+                            translate}}</button>
+                        <button class="k2-card-ok-cancel-btn custom-hover" type="submit">{{"SAVE" | translate}}</button>
+                    </div>
                 </div>
-
             </form>
         </div>
-    </div>
-    <hr>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-        <button class="btn btn-success btn-w-m" type="button" ng-click="newPermisionGroupCtrl.close()">{{"CANCEL" |
-            translate}}</button>
-        <button class="btn btn-success btn-w-m" type="submit">{{"SAVE" | translate}}</button>
-    </div>
+
+</div>
 </div>

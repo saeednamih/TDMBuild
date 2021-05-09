@@ -1,8 +1,9 @@
 <div class="ibox float-e-margins k2-card">
-    <div class="ibox-title" style="border: none;">
-        <h5>{{ 'NEW_PRODUCT' | translate }}</h5>
+    <div class="k2-header" style="border: none;">
+        <div class="k2-card-title">{{ 'NEW_PRODUCT' | translate }}</div>
     </div>
-    <div class="ibox-content">
+    <hr>
+    <div class="k2-body">
         <form role="form" ng-submit="environmentCtrl.addProduct()">
             <div class="row">
                 <div class="col-lg-12">
@@ -48,11 +49,11 @@
                                     uib-tooltip="{{'DELETE_INTERFACE' | translate}}" 
                                     style="margin-top: -2px;margin-left: 10px;" 
                                     ng-if="(environmentCtrl.productData.interfaces | atLeastOneInterface ) && !interface.deleted || environmentCtrl.adi_only" class="pull-right">
-                                    <i class="fa fa-trash fa-2x"  style="color: var(--secondary-text-color)" aria-hidden="true"></i>
+                                    <img src="icons/delete-icon-2.svg">
                                 </a>
                                 <a tooltip-class="editIcon" uib-tooltip="{{interface.status == false ? 'ADD_INTERFACE' : 'EDIT_INTERFACE' | translate}}" ng-click="environmentCtrl.openEnvProductInterfaceEdit($index)" 
                                     class="pull-right btn btn-xs k2-primary-btn btn-circle" style="width: 22px;height: 22px;padding: 1px 0;">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <img src="icons/edit.svg" alt="edit">
                                 </a>
                                 <input ng-if="interface.status == false && !interface.deleted" ng-model="interface.myTest" class="form-control" style="height:0px; padding: 0" ng-required="!environmentCtrl.adi_only">
                                 <input ng-if="interface.status == true && !interface.deleted" ng-model="environmentCtrl.dummyInput" class="form-control" style="height:0px; padding: 0" ng-required="!environmentCtrl.adi_only">
@@ -63,7 +64,7 @@
                         <h4 style="color: #ec4758">Product does not have Logical Units. Please add a Logical Unit to the product before you can add it to environment</h4>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 form-buttons">
                             <a ng-if="environmentCtrl.addProductWarning"
                             uib-tooltip="Add Product Editor"
                             tooltip-placement="left"

@@ -222,7 +222,7 @@ function taskSummaryDirective() {
             };
 
             var taskHistoryActions = function (data, type, full, meta) {
-                return '<a ng-click="taskSummaryCtrl.downloadSummaryReport(\'' + full.task_execution_id + '\')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Summary Report"><i class="fa fa-file-excel-o"></i> </a>';
+                return '<a ng-click="taskSummaryCtrl.downloadSummaryReport(\'' + full.task_execution_id + '\')"  style="margin-left: 5px;border-color: transparent;background-color: transparent; color: black;" title="Download Summary Report"><img src="icons/summary-report.svg"></img> </a>';
             };
 
 

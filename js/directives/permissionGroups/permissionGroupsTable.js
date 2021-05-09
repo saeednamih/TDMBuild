@@ -57,36 +57,37 @@ function permissionGroupsTableDirective(){
             var permissionGruopActions = function (data, type, full, meta) {
                 const actions = `
                     <div class="col-lg-6">
-                        <button type="button"
-                            uib-tooltip="Delete Role" 
-                            tooltip-placement="top" 
-                            class="btn btn-circle btn-danger" 
-                            mwl-confirm="" 
-                            message="Role ${full.fabric_role} will be removed. Users which are associated to ${full.fabric_role} will not be able to login To TDM. Are you sure you want to remove this Role from the Permission Group ?" 
-                            confirm-text="Yes <i class='glyphicon glyphicon-ok'</i>" 
-                            cancel-text="No <i class='glyphicon glyphicon-remove'></i>" 
-                            placement="right" 
-                            on-confirm="permissionGroupsTableCtrl.deletePermisionGroup('${full.fabric_role}')" 
-                            on-cancel="cancelClicked = true" 
-                            confirm-button-type="danger" 
-                            cancel-button-type="default" 
-                            role-handler="" 
-                            role="0">
-                                <i class="fa fa-trash" aria-hidden="true">
-                                </i>
-                        </button>
+                    <img "
+                    style="cursor:pointer"
+                    uib-tooltip="Delete Role" 
+                    tooltip-placement="top" 
+                    tooltip-append-to-body="true"
+                    mwl-confirm="" 
+                    message="Role ${full.fabric_role} will be removed. Users which associated to ${full.fabric_role} will not be able to login To TDM. Are you sure you want to delete the this Role?" 
+                    confirm-text="Yes <i class='glyphicon glyphicon-ok'</i>" 
+                    cancel-text="No <i class='glyphicon glyphicon-remove'></i>" 
+                    placement="right" 
+                    on-confirm="permissionGroupsTableCtrl.deletePermisionGroup('${full.fabric_role}')" 
+                    on-cancel="cancelClicked = true" 
+                    confirm-button-type="danger" 
+                    cancel-button-type="default" 
+                    role-handler="" 
+                    role="0"
+                    src="icons/delete-icon.svg"
+                    alt="delete"
+                </img>
                     </div>
                     <div class="col-lg-6">
-                        <button type="button" 
+                        <img
+                             src="icons/edit.svg"
+                             alt="edit"
                             uib-tooltip="Edit Permission Group Mapping" 
+                            tooltip-append-to-body="true"
                             tooltip-placement="top" 
-                            class="btn btn-circle btn-primary" 
                             role-handler="" role="0" 
                             ng-click="permissionGroupsTableCtrl.openNewPermissionGroupModal('${full.fabric_role}')">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
                     </div>
-                `
+                    `;
                 return actions;
             };
 
